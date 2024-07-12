@@ -11,20 +11,25 @@ class PrimaryButton extends StatelessWidget {
     this.backgroundColor = seedColor,
     this.onPressed,
     this.sideColor,
+    this.labelColor = scaffoldBgColor,
   })  : assert(label != null || child != null,
             'Either label or child must be provided.'),
         assert(label == null || child == null,
-            'Only one of label or child can be provided.');
+            'Only one of label or child can be provided.'),
+        assert(labelColor != null || child == null,
+            'Only one of labelColor or child can be provided.');
 
   // PrimaryButton with label
   PrimaryButton.label({
-    double? height,
+    double? height = 48.0,
     required String label,
+    Color? labelColor,
     Color? backgroundColor,
     void Function()? onPressed,
   }) : this._(
           height: height,
           label: label,
+          labelColor: labelColor,
           backgroundColor: backgroundColor ?? seedColor,
           sideColor: backgroundColor ?? seedColor,
           onPressed: onPressed,
@@ -32,7 +37,7 @@ class PrimaryButton extends StatelessWidget {
 
   // PrimaryButton with child
   PrimaryButton.child({
-    double? height,
+    double? height = 48.0,
     required Widget child,
     Color? backgroundColor,
     Color? sideColor,
@@ -48,13 +53,13 @@ class PrimaryButton extends StatelessWidget {
   final double? height;
   final String? label;
   final Widget? child;
-  final Color? backgroundColor, sideColor;
+  final Color? backgroundColor, sideColor, labelColor;
   final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: Get.width,
+      width: mediaWidth(context),
       height: height,
       child: ElevatedButton(
         onPressed: onPressed,
@@ -69,9 +74,9 @@ class PrimaryButton extends StatelessWidget {
         child: child ??
             Text(
               label!,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 16.0,
-                color: scaffoldBgColor,
+                color: labelColor ?? scaffoldBgColor,
                 fontWeight: FontWeight.w500,
               ),
             ),

@@ -1,8 +1,7 @@
 import 'package:clezigov/utils/app_theme.dart';
+import 'package:clezigov/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'views/screens/onboarding.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,14 +12,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return GetMaterialApp.router(
       title: 'CleziGov',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      initialRoute: OnboardPage.routeName,
-      routes: {
-        OnboardPage.routeName: (context) => const OnboardPage(),
-      },
+      routerDelegate: router.routerDelegate,
+      routeInformationParser: router.routeInformationParser,
+      routeInformationProvider: router.routeInformationProvider,
     );
   }
 }

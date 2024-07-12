@@ -6,7 +6,7 @@ import 'constants.dart';
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
     colorScheme: ColorScheme.fromSeed(seedColor: seedColor),
-    primarySwatch: primaryPalette,
+    primarySwatch: seedColorPalette,
     useMaterial3: true,
     scaffoldBackgroundColor: scaffoldBgColor,
     textTheme: GoogleFonts.dmSansTextTheme().apply(
@@ -15,6 +15,8 @@ class AppTheme {
     ),
     fontFamily: GoogleFonts.dmSans(
       color: darkColor,
+      fontSize: 16.0,
+      height: 24.0 / 16.0
     ).fontFamily,
     brightness: Brightness.light,
     elevatedButtonTheme: ElevatedButtonThemeData(
@@ -26,6 +28,7 @@ class AppTheme {
             color: seedColor,
           ),
         ),
+        elevation: 0.0,
         padding: EdgeInsets.symmetric(horizontal: 16.0),
       ),
     ),
@@ -37,7 +40,9 @@ class AppTheme {
             color: seedColor,
           ),
         ),
+        elevation: 0.0,
         padding: EdgeInsets.symmetric(horizontal: 16.0),
+        overlayColor: seedColorPalette.shade50,
       ),
     ),
     textButtonTheme: TextButtonThemeData(
@@ -48,7 +53,9 @@ class AppTheme {
             color: Colors.transparent,
           ),
         ),
+        elevation: 0.0,
         padding: EdgeInsets.symmetric(horizontal: 16.0),
+        overlayColor: seedColorPalette.shade50,
       ),
     ),
   );

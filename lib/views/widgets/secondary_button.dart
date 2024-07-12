@@ -17,7 +17,7 @@ class SecondaryButton extends StatelessWidget {
 
   // PrimaryButton with label
   SecondaryButton.label({
-    double? height,
+    double? height = 48.0,
     required String label,
     Color? sideColor,
     void Function()? onPressed,
@@ -30,7 +30,7 @@ class SecondaryButton extends StatelessWidget {
 
   // PrimaryButton with child
   SecondaryButton.child({
-    double? height,
+    double? height = 48.0,
     required Widget child,
     Color? sideColor,
     void Function()? onPressed,
@@ -50,7 +50,7 @@ class SecondaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: Get.width,
+      width: mediaWidth(context),
       height: height,
       child: OutlinedButton(
         onPressed: onPressed,
@@ -59,6 +59,9 @@ class SecondaryButton extends StatelessWidget {
             BorderSide(
               color: sideColor ?? seedColor,
             ),
+          ),
+          overlayColor: WidgetStateProperty.all<Color>(
+            sideColor?.withOpacity(0.1) ?? seedColorPalette.shade50,
           ),
         ),
         child: child ??
