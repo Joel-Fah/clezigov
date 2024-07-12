@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
@@ -75,6 +77,9 @@ const Duration duration = Duration(milliseconds: 300);
 double mediaWidth(BuildContext context) => MediaQuery.sizeOf(context).width;
 
 double mediaHeight(BuildContext context) => MediaQuery.sizeOf(context).height;
+
+// Filters
+ImageFilter blurFilter = ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0);
 
 // TextStyles
 class AppTextStyles {

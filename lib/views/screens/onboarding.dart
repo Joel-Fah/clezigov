@@ -1,6 +1,6 @@
 import 'package:clezigov/models/onboarding.dart';
 import 'package:clezigov/utils/constants.dart';
-import 'package:clezigov/views/screens/auth/login.dart';
+import 'package:clezigov/views/screens/auth/login/login.dart';
 import 'package:clezigov/views/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';

@@ -1,4 +1,4 @@
-import 'package:clezigov/views/screens/auth/login.dart';
+import 'package:clezigov/views/screens/auth/login/login.dart';
 import 'package:clezigov/views/screens/home.dart';
 import 'package:clezigov/views/screens/onboarding.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +7,7 @@ import 'package:go_router/go_router.dart';
 final rootNavigatorKey = GlobalKey<NavigatorState>();
 
 final GoRouter router = GoRouter(
-  initialLocation: OnboardPage.routeName,
+  initialLocation: LoginPage.routeName,
   navigatorKey: rootNavigatorKey,
   routes: [
     GoRoute(

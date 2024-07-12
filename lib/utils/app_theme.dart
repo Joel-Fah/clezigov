@@ -58,5 +58,16 @@ class AppTheme {
         overlayColor: seedColorPalette.shade50,
       ),
     ),
+    dialogBackgroundColor: scaffoldBgColor,
+    bottomSheetTheme: BottomSheetThemeData(
+      backgroundColor: scaffoldBgColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: topRadius * 1.75,
+      ),
+      showDragHandle: true,
+      dragHandleColor: Color(0xFF79747E),
+      dragHandleSize: Size(48.0, 4.0),
+      modalBackgroundColor: scaffoldBgColor,
+    ),
   );
 }
