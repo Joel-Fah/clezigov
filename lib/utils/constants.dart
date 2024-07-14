@@ -125,3 +125,10 @@ class AppTextStyles {
     fontWeight: FontWeight.normal,
   );
 }
+
+// Decoration
+BoxDecoration formFieldDecoration = BoxDecoration(
+  borderRadius: borderRadius * 2,
+  color: Colors.white,
+  boxShadow: [shadow],
+);

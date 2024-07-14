@@ -1,44 +1,29 @@
+import 'package:clezigov/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:lucide_icons/lucide_icons.dart';
 
-import '../../../utils/constants.dart';
-
-class SimpleTextFormField extends StatelessWidget {
-  const SimpleTextFormField({
+class DefaultDropdownFormField extends StatelessWidget {
+  const DefaultDropdownFormField({
     super.key,
-    required this.controller,
-    this.keyboardType = TextInputType.text,
-    this.textCapitalization = TextCapitalization.none,
-    this.inputFormatters,
     required this.hintText,
     required this.prefixIcon,
-    this.suffixIcon,
+    required this.suffixIcon,
     this.onChanged,
-    this.validator,
+    this.validator, this.items,
   });
 
-  final TextEditingController controller;
-  final TextInputType? keyboardType;
-  final TextCapitalization? textCapitalization;
-  final List<TextInputFormatter>? inputFormatters;
   final String hintText;
-  final Icon prefixIcon;
-  final Icon? suffixIcon;
-  final Function(String)? onChanged;
-  final String? Function(String?)? validator;
+  final Icon prefixIcon, suffixIcon;
+  final Function(Object?)? onChanged;
+  final String? Function(Object?)? validator;
+  final List<DropdownMenuItem<Object?>>? items;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: formFieldDecoration,
-      child: TextFormField(
-        controller: controller,
-        style: AppTextStyles.body,
-        keyboardType: keyboardType ?? TextInputType.text,
-        textCapitalization: textCapitalization ?? TextCapitalization.none,
-        inputFormatters: inputFormatters,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
+      child: DropdownButtonFormField<Object?>(
+        isExpanded: true,
+        borderRadius: borderRadius,
         decoration: InputDecoration(
           constraints: BoxConstraints(
             minHeight: 48.0,
@@ -46,7 +31,10 @@ class SimpleTextFormField extends StatelessWidget {
           ),
           fillColor: Colors.white,
           filled: true,
-          contentPadding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0,),
+          contentPadding: EdgeInsets.symmetric(
+            vertical: 16.0,
+            horizontal: 16.0,
+          ),
           hintText: hintText,
           prefixIcon: prefixIcon,
           suffixIcon: suffixIcon,
@@ -93,6 +81,7 @@ class SimpleTextFormField extends StatelessWidget {
             ),
           ),
         ),
+        items: items,
         onChanged: onChanged,
         validator: validator,
       ),

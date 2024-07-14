@@ -1,3 +1,5 @@
+import 'package:clezigov/utils/routes.dart';
+import 'package:clezigov/views/screens/auth/forgot%20password/forgot_password.dart';
 import 'package:clezigov/views/widgets/notification_snackbar.dart';
 import 'package:clezigov/views/widgets/text_button.dart';
 import 'package:flutter/material.dart';
@@ -85,7 +87,10 @@ class _LoginModalState extends State<LoginModal> {
                 alignment: Alignment.centerRight,
                 child: IntrinsicWidth(
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      // Go to forgot password page
+                      context.goPush(ForgotPasswordPage.routeName);
+                    },
                     style: TextButtonTheme.of(context).style?.copyWith(
                           overlayColor: WidgetStateProperty.all<Color>(
                             seedColorPalette.shade50,

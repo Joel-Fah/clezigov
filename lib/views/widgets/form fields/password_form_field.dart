@@ -47,11 +47,7 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        borderRadius: borderRadius * 2,
-        color: Colors.white,
-        boxShadow: [shadow],
-      ),
+      decoration: formFieldDecoration,
       child: TextFormField(
         controller: widget.controller,
         obscureText: _obscureText!,
