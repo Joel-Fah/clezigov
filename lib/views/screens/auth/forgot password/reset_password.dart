@@ -1,26 +1,62 @@
 import 'package:clezigov/utils/constants.dart';
 import 'package:clezigov/views/screens/auth/login/login.dart';
+import 'package:clezigov/views/widgets/form_fields/password_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
-import '../../../widgets/form fields/simple_text_field.dart';
 import '../../../widgets/primary_button.dart';
 
-class ResetPasswordPage extends StatelessWidget {
+class ResetPasswordPage extends StatefulWidget {
   const ResetPasswordPage({super.key});
 
   static const String routeName = '/resetPassword';
 
   @override
-  Widget build(BuildContext context) {
-    final _newPasswordFormKey = GlobalKey<FormState>();
-    final TextEditingController _newPasswordController = TextEditingController();
-    final TextEditingController _newPasswordConfirmController = TextEditingController();
+  State<ResetPasswordPage> createState() => _ResetPasswordPageState();
+}
 
+class _ResetPasswordPageState extends State<ResetPasswordPage> {
+  final _newPasswordFormKey = GlobalKey<FormState>();
+
+  // Controllers
+  final TextEditingController _newPasswordController = TextEditingController();
+  final TextEditingController _confirmNewPasswordController =
+      TextEditingController();
+
+  // Form fields
+  String? _newPassword, _confirmNewPassword;
+
+  // Form validation
+  bool isNewPasswordFilled = false, isConfirmNewPasswordFilled = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _newPasswordController.addListener(() {
+      isNewPasswordFilled = _newPasswordController.text.isNotEmpty;
+    });
+
+    _confirmNewPasswordController.addListener(() {
+      isConfirmNewPasswordFilled =
+          _confirmNewPasswordController.text.isNotEmpty;
+    });
+  }
+
+  @override
+  void dispose() {
+    _newPasswordController.dispose();
+    _confirmNewPasswordController.dispose();
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         appBar: AppBar(
           title: Text("Reset password"),
@@ -42,25 +78,32 @@ class ResetPasswordPage extends StatelessWidget {
               key: _newPasswordFormKey,
               child: Column(
                 children: [
-                  SimpleTextFormField(
+                  PasswordTextFormField(
                     controller: _newPasswordController,
                     hintText: "New password",
                     prefixIcon: Icon(LucideIcons.keySquare),
+                    keyboardType: TextInputType.visiblePassword,
+                    onChanged: (value) => _newPassword = value,
                   ),
                   Gap(16.0),
-                  SimpleTextFormField(
-                    controller: _newPasswordConfirmController,
+                  PasswordTextFormField(
+                    controller: _confirmNewPasswordController,
                     hintText: "Confirm new password",
                     prefixIcon: Icon(LucideIcons.lock),
+                    keyboardType: TextInputType.visiblePassword,
+                    onChanged: (value) => _confirmNewPassword = value,
                   ),
                   Gap(16.0),
                   PrimaryButton.label(
-                    onPressed: () {
-                      // Go to login page
-                      if (_newPasswordFormKey.currentState!.validate()) {
-                        context.go(LoginPage.routeName);
-                      }
-                    },
+                    onPressed: (isNewPasswordFilled &&
+                            isConfirmNewPasswordFilled)
+                        ? () {
+                            // Go to login page
+                            if (_newPasswordFormKey.currentState!.validate()) {
+                              context.go(LoginPage.routeName);
+                            }
+                          }
+                        : null,
                     label: "Set new password",
                   ),
                 ],

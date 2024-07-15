@@ -10,7 +10,6 @@ class PrimaryButton extends StatelessWidget {
     this.child,
     this.backgroundColor = seedColor,
     this.onPressed,
-    this.sideColor,
     this.labelColor = scaffoldBgColor,
   })  : assert(label != null || child != null,
             'Either label or child must be provided.'),
@@ -31,7 +30,6 @@ class PrimaryButton extends StatelessWidget {
           label: label,
           labelColor: labelColor,
           backgroundColor: backgroundColor ?? seedColor,
-          sideColor: backgroundColor ?? seedColor,
           onPressed: onPressed,
         );
 
@@ -46,14 +44,13 @@ class PrimaryButton extends StatelessWidget {
           height: height,
           child: child,
           backgroundColor: backgroundColor ?? seedColor,
-          sideColor: backgroundColor ?? seedColor,
           onPressed: onPressed,
         );
 
   final double? height;
   final String? label;
   final Widget? child;
-  final Color? backgroundColor, sideColor, labelColor;
+  final Color? backgroundColor, labelColor;
   final void Function()? onPressed;
 
   @override
@@ -64,13 +61,22 @@ class PrimaryButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButtonTheme.of(context).style?.copyWith(
-              backgroundColor: WidgetStateProperty.all<Color>(backgroundColor!),
-              side: WidgetStateProperty.all<BorderSide>(
-                BorderSide(
-                  color: sideColor ?? backgroundColor!,
-                ),
-              ),
-            ),
+          backgroundColor: WidgetStateProperty.resolveWith<Color?>(
+              (Set<WidgetState> states) {
+            if (states.contains(WidgetState.disabled)) {
+              return disabledColor;
+            }
+            return backgroundColor ?? seedColor;
+          }),
+          side: WidgetStateProperty.resolveWith<BorderSide?>(
+            (Set<WidgetState> states) {
+              if (states.contains(WidgetState.disabled)) {
+                return BorderSide(color: disabledColor);
+              }
+              return BorderSide(color: backgroundColor ?? seedColor);
+            },
+          ),
+        ),
         child: child ??
             Text(
               label!,

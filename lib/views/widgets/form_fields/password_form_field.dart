@@ -4,9 +4,10 @@ import 'package:lucide_icons/lucide_icons.dart';
 
 import '../../../utils/constants.dart';
 
-class SimpleTextFormField extends StatelessWidget {
-  const SimpleTextFormField({
+class PasswordTextFormField extends StatefulWidget {
+  const PasswordTextFormField({
     super.key,
+    this.obscureText = true,
     required this.controller,
     this.keyboardType = TextInputType.text,
     this.textCapitalization = TextCapitalization.none,
@@ -15,9 +16,10 @@ class SimpleTextFormField extends StatelessWidget {
     required this.prefixIcon,
     this.suffixIcon,
     this.onChanged,
-    this.validator,
+    this.validator, this.onPressed,
   });
 
+  final bool? obscureText;
   final TextEditingController controller;
   final TextInputType? keyboardType;
   final TextCapitalization? textCapitalization;
@@ -26,18 +28,36 @@ class SimpleTextFormField extends StatelessWidget {
   final Icon prefixIcon;
   final Icon? suffixIcon;
   final Function(String)? onChanged;
+  final Function()? onPressed;
   final String? Function(String?)? validator;
+
+  @override
+  State<PasswordTextFormField> createState() => _PasswordTextFormFieldState();
+}
+
+class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
+  bool? _obscureText;
+
+  @override
+  void initState() {
+    _obscureText = widget.obscureText ?? true;
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: formFieldDecoration,
       child: TextFormField(
-        controller: controller,
+        controller: widget.controller,
+        obscureText: _obscureText!,
+        obscuringCharacter: '●',
         style: AppTextStyles.body,
-        keyboardType: keyboardType ?? TextInputType.text,
-        textCapitalization: textCapitalization ?? TextCapitalization.none,
-        inputFormatters: inputFormatters,
+        keyboardType: widget.keyboardType ?? TextInputType.text,
+        textCapitalization:
+            widget.textCapitalization ?? TextCapitalization.none,
+        inputFormatters: widget.inputFormatters,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         decoration: InputDecoration(
           constraints: BoxConstraints(
@@ -47,9 +67,19 @@ class SimpleTextFormField extends StatelessWidget {
           fillColor: Colors.white,
           filled: true,
           contentPadding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0,),
-          hintText: hintText,
-          prefixIcon: prefixIcon,
-          suffixIcon: suffixIcon,
+          hintText: widget.hintText,
+          prefixIcon: widget.prefixIcon,
+          suffixIcon: IconButton(
+            icon: Icon(
+              _obscureText! ? LucideIcons.eyeOff : LucideIcons.eye,
+              // color: seedColor,
+            ),
+            onPressed: widget.onPressed ?? () {
+              setState(() {
+                _obscureText = !_obscureText!;
+              });
+            },
+          ),
           border: OutlineInputBorder(
             borderRadius: borderRadius * 2,
             borderSide: BorderSide(
@@ -93,8 +123,9 @@ class SimpleTextFormField extends StatelessWidget {
             ),
           ),
         ),
-        onChanged: onChanged,
-        validator: validator,
+        onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
+        onChanged: widget.onChanged,
+        validator: widget.validator,
       ),
     );
   }

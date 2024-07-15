@@ -19,6 +19,9 @@ class AppTheme {
       height: 24.0 / 16.0
     ).fontFamily,
     brightness: Brightness.light,
+    appBarTheme: AppBarTheme(
+      backgroundColor: scaffoldBgColor,
+    ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: seedColor,
@@ -30,8 +33,11 @@ class AppTheme {
         ),
         elevation: 0.0,
         padding: EdgeInsets.symmetric(horizontal: 16.0),
+        disabledBackgroundColor: disabledColor,
+        disabledForegroundColor: scaffoldBgColor.withOpacity(0.8),
       ),
     ),
+    disabledColor: disabledColor,
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
         shape: RoundedRectangleBorder(
@@ -43,6 +49,7 @@ class AppTheme {
         elevation: 0.0,
         padding: EdgeInsets.symmetric(horizontal: 16.0),
         overlayColor: seedColorPalette.shade50,
+        disabledForegroundColor: disabledColor,
       ),
     ),
     textButtonTheme: TextButtonThemeData(
@@ -56,6 +63,7 @@ class AppTheme {
         elevation: 0.0,
         padding: EdgeInsets.symmetric(horizontal: 16.0),
         overlayColor: seedColorPalette.shade50,
+        disabledForegroundColor: disabledColor,
       ),
     ),
     dialogBackgroundColor: scaffoldBgColor,
@@ -68,6 +76,9 @@ class AppTheme {
       dragHandleColor: Color(0xFF79747E),
       dragHandleSize: Size(48.0, 4.0),
       modalBackgroundColor: scaffoldBgColor,
+    ),
+    iconTheme: IconThemeData(
+      color: darkColor,
     ),
   );
 }

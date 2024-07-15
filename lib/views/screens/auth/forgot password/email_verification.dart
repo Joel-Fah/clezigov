@@ -5,22 +5,46 @@ import 'package:gap/gap.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 import '../../../../utils/constants.dart';
-import '../../../widgets/form fields/simple_text_field.dart';
+import '../../../widgets/form_fields/simple_text_field.dart';
 import '../../../widgets/primary_button.dart';
 
-class EmailVerificationPage extends StatelessWidget {
+class EmailVerificationPage extends StatefulWidget {
   const EmailVerificationPage({super.key, required this.email});
   static const String routeName = '/emailVerification';
   final String email;
 
   @override
-  Widget build(BuildContext context) {
-    final _codeVerificationFormKey = GlobalKey<FormState>();
-    final TextEditingController _codeVerificationController =
-        TextEditingController();
+  State<EmailVerificationPage> createState() => _EmailVerificationPageState();
+}
 
+class _EmailVerificationPageState extends State<EmailVerificationPage> {
+  final _codeVerificationFormKey = GlobalKey<FormState>();
+
+  // Controllers
+  final TextEditingController _codeVerificationController =
+  TextEditingController();
+
+  // Form fields
+  String? _code;
+
+  // Form validation
+  bool isCodeFilled = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _codeVerificationController.addListener(() {
+      setState(() {
+        isCodeFilled = _codeVerificationController.text.isNotEmpty;
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         appBar: AppBar(
           title: Text("Email verification"),
@@ -37,7 +61,7 @@ class EmailVerificationPage extends StatelessWidget {
               TextSpan(children: [
                 TextSpan(text: "A passcode has been sent to "),
                 TextSpan(
-                    text: email ?? "joelfah2003@gmail.com",
+                    text: widget.email,
                     style: AppTextStyles.body.copyWith(
                       fontWeight: FontWeight.bold,
                     )),
@@ -54,15 +78,17 @@ class EmailVerificationPage extends StatelessWidget {
                     controller: _codeVerificationController,
                     hintText: "Enter verification code",
                     prefixIcon: Icon(LucideIcons.rectangleHorizontal),
+                    onChanged: (value) => _code = value,
                   ),
                   Gap(16.0),
                   PrimaryButton.label(
-                    onPressed: () {
+                    onPressed: isCodeFilled
+                        ? () {
                       // Go to email verification page
                       if (_codeVerificationFormKey.currentState!.validate()) {
                         context.goPush(ResetPasswordPage.routeName);
                       }
-                    },
+                    } : null,
                     label: "Verify code",
                   ),
                 ],

@@ -132,3 +132,7 @@ BoxDecoration formFieldDecoration = BoxDecoration(
   color: Colors.white,
   boxShadow: [shadow],
 );
+
+// Validators
+// email regex that allows abc@domain.com, abc+def@domain.com, abc.def@sub.domain.com
+String emailRegex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';

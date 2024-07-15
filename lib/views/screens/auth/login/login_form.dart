@@ -1,17 +1,17 @@
 import 'package:clezigov/utils/routes.dart';
 import 'package:clezigov/views/screens/auth/forgot%20password/forgot_password.dart';
 import 'package:clezigov/views/widgets/notification_snackbar.dart';
-import 'package:clezigov/views/widgets/text_button.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 import '../../../../utils/constants.dart';
-import '../../../widgets/form fields/password_form_field.dart';
-import '../../../widgets/form fields/simple_text_field.dart';
+import '../../../widgets/form_fields/password_form_field.dart';
+import '../../../widgets/form_fields/simple_text_field.dart';
 import '../../../widgets/primary_button.dart';
 import '../../../widgets/tilt_icon.dart';
+import '../register/user_registration.dart';
 
 class LoginModal extends StatefulWidget {
   const LoginModal({
@@ -36,7 +36,7 @@ class _LoginModalState extends State<LoginModal> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Padding(
         padding: EdgeInsets.only(
           bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -134,7 +134,10 @@ class _LoginModalState extends State<LoginModal> {
               ),
               Gap(8.0),
               PrimaryButton.label(
-                onPressed: () {},
+                onPressed: () {
+                  // Go to register page
+                  context.goPush(UserRegistrationPage.routeName);
+                },
                 label: "Sign up instead",
                 backgroundColor: seedColorPalette.shade50,
                 labelColor: seedColor,

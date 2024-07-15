@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/foundation.dart';
 
+import '../views/screens/auth/register/user_registration.dart';
+
 final rootNavigatorKey = GlobalKey<NavigatorState>();
 
 final GoRouter router = GoRouter(
@@ -40,6 +42,13 @@ final GoRouter router = GoRouter(
       builder: (context, state) => const EmailVerificationPage(
         email: 'joelfah2003@gmail.com',
       ),
+    ),
+    // Registration routes
+    GoRoute(
+      parentNavigatorKey: rootNavigatorKey,
+      path: UserRegistrationPage.routeName,
+      name: 'userRegistration',
+      builder: (context, state) => const UserRegistrationPage(),
     ),
     GoRoute(
       parentNavigatorKey: rootNavigatorKey,
