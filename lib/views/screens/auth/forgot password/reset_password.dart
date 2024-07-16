@@ -36,12 +36,16 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
     // TODO: implement initState
     super.initState();
     _newPasswordController.addListener(() {
-      isNewPasswordFilled = _newPasswordController.text.isNotEmpty;
+      setState(() {
+        isNewPasswordFilled = _newPasswordController.text.isNotEmpty;
+      });
     });
 
     _confirmNewPasswordController.addListener(() {
-      isConfirmNewPasswordFilled =
-          _confirmNewPasswordController.text.isNotEmpty;
+      setState(() {
+        isConfirmNewPasswordFilled =
+            _confirmNewPasswordController.text.isNotEmpty;
+      });
     });
   }
 
