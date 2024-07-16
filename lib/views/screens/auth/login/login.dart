@@ -124,7 +124,7 @@ class LoginPage extends StatelessWidget {
                                             onPressed: () => context.pop(),
                                             icon: Icon(LucideIcons.x),
                                           ),
-                                        )
+                                        ),
                                       ],
                                     ),
                                   );

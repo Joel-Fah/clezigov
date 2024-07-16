@@ -59,6 +59,7 @@ const String onboardImg2 = 'assets/images/onboard_img_2.png';
 const String onboardImg3 = 'assets/images/onboard_img_3.png';
 const String appleLogo = 'assets/images/apple_logo.png';
 const String googleLogo = 'assets/images/google_logo.png';
+const String userAvatars = 'assets/images/user_avatars.png';
 
 // Padding
 const EdgeInsets allPadding = const EdgeInsets.all(8.0);
@@ -75,7 +76,6 @@ const Duration duration = Duration(milliseconds: 300);
 
 // Media sizes
 double mediaWidth(BuildContext context) => MediaQuery.sizeOf(context).width;
-
 double mediaHeight(BuildContext context) => MediaQuery.sizeOf(context).height;
 
 // Filters

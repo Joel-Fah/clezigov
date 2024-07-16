@@ -1,4 +1,6 @@
 import 'package:clezigov/models/occupation.dart';
+import 'package:clezigov/utils/routes.dart';
+import 'package:clezigov/views/screens/auth/register/account_setup.dart';
 import 'package:clezigov/views/widgets/form_fields/gender_selection.dart';
 import 'package:clezigov/views/widgets/form_fields/simple_text_field.dart';
 import 'package:clezigov/views/widgets/primary_button.dart';
@@ -176,9 +178,8 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
                     ? () {
                         if (_userRegistrationFormKey.currentState!.validate()) {
                           // Save and proceed
+                         context.goPush(AccountSetup.routeName);
                         }
-                        debugPrint(
-                            "isNameFilled: $isNameFilled, city: $city, occupation: $occupation, gender: $gender");
                       }
                     : null,
                 label: "Save and proceed",

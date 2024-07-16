@@ -2,6 +2,8 @@ import 'package:clezigov/views/screens/auth/forgot%20password/email_verification
 import 'package:clezigov/views/screens/auth/forgot%20password/forgot_password.dart';
 import 'package:clezigov/views/screens/auth/forgot%20password/reset_password.dart';
 import 'package:clezigov/views/screens/auth/login/login.dart';
+import 'package:clezigov/views/screens/auth/register/account_setup.dart';
+import 'package:clezigov/views/screens/auth/register/points_of_interests.dart';
 import 'package:clezigov/views/screens/home.dart';
 import 'package:clezigov/views/screens/onboarding.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +45,12 @@ final GoRouter router = GoRouter(
         email: 'joelfah2003@gmail.com',
       ),
     ),
+    GoRoute(
+      parentNavigatorKey: rootNavigatorKey,
+      path: ResetPasswordPage.routeName,
+      name: 'resetPassword',
+      builder: (context, state) => const ResetPasswordPage(),
+    ),
     // Registration routes
     GoRoute(
       parentNavigatorKey: rootNavigatorKey,
@@ -52,9 +60,15 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(
       parentNavigatorKey: rootNavigatorKey,
-      path: ResetPasswordPage.routeName,
-      name: 'resetPassword',
-      builder: (context, state) => const ResetPasswordPage(),
+      path: AccountSetup.routeName,
+      name: 'accountSetup',
+      builder: (context, state) => const AccountSetup(),
+    ),
+    GoRoute(
+      parentNavigatorKey: rootNavigatorKey,
+      path: PointsOfInterestsPage.routeName,
+      name: 'pointsOfInterest',
+      builder: (context, state) => const PointsOfInterestsPage(),
     ),
     GoRoute(
       parentNavigatorKey: rootNavigatorKey,

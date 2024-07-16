@@ -1,3 +1,4 @@
+import 'package:clezigov/controllers/select_categories_controller.dart';
 import 'package:clezigov/utils/app_theme.dart';
 import 'package:clezigov/utils/routes.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // GetX Controllers
+    Get.put(InterestsController());
+
     return GetMaterialApp.router(
       title: 'CleziGov',
       debugShowCheckedModeBanner: false,

@@ -80,5 +80,6 @@ class AppTheme {
     iconTheme: IconThemeData(
       color: darkColor,
     ),
+    dividerColor: disabledColor.withOpacity(0.5),
   );
 }
