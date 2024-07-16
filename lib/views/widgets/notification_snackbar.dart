@@ -5,16 +5,18 @@ import 'package:clezigov/views/widgets/tilt_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../utils/constants.dart';
+import 'alert_dialog.dart';
 
 void showNotificationSnackBar(
     {required BuildContext context,
     required String message,
-    Color? backgroundColor = infoColor,
-    IconData? icon = infoIcon,
+    Color? backgroundColor = seedColor,
+    IconData? icon = LucideIcons.badgeInfo,
     Function()? onTap}) {
   return showTopSnackBar(
     Overlay.of(context),
@@ -25,36 +27,20 @@ void showNotificationSnackBar(
     animationDuration: duration * 6,
     onTap: onTap ??
         () {
-          showDialog(
+          showDefaultDialog(
             context: context,
-            barrierDismissible: false,
-            builder: (context) {
-              return BackdropFilter(
-                filter: blurFilter,
-                child: AlertDialog(
-                  title: Text('Notification'),
-                  content: Text(
-                    message,
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                  icon: TiltIcon(
-                    icon: successIcon,
-                    backgroundColor: backgroundColor,
-                  ),
-                  iconColor: backgroundColor ?? infoColor,
-                  actions: [
-                    PrimaryButton.label(
-                      label: 'Close',
-                      backgroundColor: seedColorPalette.shade50,
-                      labelColor: seedColor,
-                      onPressed: () => context.pop(),
-                    ),
-                  ],
-                ),
-              );
-            },
+            message: message,
+            backgroundColor: backgroundColor,
+            title: 'Notification',
+            icon: icon,
+            actions: [
+              PrimaryButton.label(
+                label: 'Close',
+                backgroundColor: seedColorPalette.shade50,
+                labelColor: seedColor,
+                onPressed: () => context.pop(),
+              ),
+            ],
           );
         },
     CustomSnackBar.info(

@@ -1,4 +1,5 @@
 import 'package:clezigov/utils/constants.dart';
+import 'package:clezigov/views/widgets/notification_snackbar.dart';
 import 'package:clezigov/views/widgets/primary_button.dart';
 import 'package:clezigov/views/widgets/tilt_icon.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
+import '../../../widgets/alert_dialog.dart';
 import '../../../widgets/secondary_button.dart';
 import 'login_form.dart';
 
@@ -129,6 +131,29 @@ class LoginPage extends StatelessWidget {
                                     ),
                                   );
                                 },
+                              )..whenComplete(
+                                () => Future.delayed(
+                                  duration * 2,
+                                  () => showDefaultDialog(
+                                    context: context,
+                                    iconWidget: Image.asset(userAvatars, height: 100.0,),
+                                    title: "Happy to have you among us!",
+                                    message: "You are officially a member of of the CleziGov community. Make sure to explore all the features and information you get here.",
+                                    actions: [
+                                      PrimaryButton.label(
+                                        onPressed: () {},
+                                        label: "Explore right away!",
+                                      ),
+                                      // Gap(8.0),
+                                      PrimaryButton.label(
+                                        onPressed: () {},
+                                        label: "Finish setting my profile",
+                                        labelColor: seedColor,
+                                        backgroundColor: seedColorPalette.shade50,
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               );
                             },
                             label: "Sign in with email/password",

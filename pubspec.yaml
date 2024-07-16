@@ -49,6 +49,7 @@ dependencies:
   go_router: ^14.2.0
   dropdown_search: ^5.0.6
   loading_animation_widget: ^1.2.1
+  flutter_expandable_fab: ^2.1.0
 
 dev_dependencies:
   flutter_test:

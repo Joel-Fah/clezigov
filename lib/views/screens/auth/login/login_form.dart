@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:clezigov/utils/routes.dart';
 import 'package:clezigov/views/screens/auth/forgot%20password/forgot_password.dart';
+import 'package:clezigov/views/widgets/alert_dialog.dart';
 import 'package:clezigov/views/widgets/notification_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -118,7 +121,7 @@ class _LoginModalState extends State<LoginModal> {
                     // delayed pop
                     Future.delayed(
                       duration * 4,
-                          () => context.pop(),
+                      () => context.pop(),
                     );
 
                     // show success notification
