@@ -4,7 +4,7 @@ import 'package:clezigov/views/screens/auth/forgot%20password/reset_password.dar
 import 'package:clezigov/views/screens/auth/login/login.dart';
 import 'package:clezigov/views/screens/auth/register/account_setup.dart';
 import 'package:clezigov/views/screens/auth/register/points_of_interests.dart';
-import 'package:clezigov/views/screens/home.dart';
+import 'package:clezigov/views/screens/home/home.dart';
 import 'package:clezigov/views/screens/onboarding.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -15,7 +15,7 @@ import '../views/screens/auth/register/user_registration.dart';
 final rootNavigatorKey = GlobalKey<NavigatorState>();
 
 final GoRouter router = GoRouter(
-  initialLocation: LoginPage.routeName,
+  initialLocation: HomePage.routeName,
   navigatorKey: rootNavigatorKey,
   routes: [
     GoRoute(

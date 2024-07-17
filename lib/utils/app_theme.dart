@@ -89,5 +89,20 @@ class AppTheme {
       color: darkColor,
     ),
     dividerColor: disabledColor.withOpacity(0.5),
+    tabBarTheme: TabBarTheme(
+      tabAlignment: TabAlignment.center,
+      overlayColor: WidgetStateProperty.all(seedColorPalette.shade100),
+      labelStyle: AppTextStyles.body.copyWith(
+          color: scaffoldBgColor,
+      ),
+      dividerColor: Colors.transparent,
+      dividerHeight: 0.0,
+      indicator: BoxDecoration(
+        color: seedColor,
+        borderRadius: borderRadius * 2,
+      ),
+      indicatorColor: seedColor,
+      indicatorSize: TabBarIndicatorSize.tab,
+    ),
   );
 }

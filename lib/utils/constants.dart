@@ -60,6 +60,7 @@ const String onboardImg3 = 'assets/images/onboard_img_3.png';
 const String appleLogo = 'assets/images/apple_logo.png';
 const String googleLogo = 'assets/images/google_logo.png';
 const String userAvatars = 'assets/images/user_avatars.png';
+const String pfp = 'assets/images/pfp.jpg';
 
 // Padding
 const EdgeInsets allPadding = const EdgeInsets.all(8.0);

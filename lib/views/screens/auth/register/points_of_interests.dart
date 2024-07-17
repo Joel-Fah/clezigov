@@ -9,7 +9,7 @@ import 'package:lucide_icons/lucide_icons.dart';
 import '../../../../controllers/select_categories_controller.dart';
 import '../../../../utils/constants.dart';
 import '../../../widgets/primary_button.dart';
-import '../../home.dart';
+import '../../home/home.dart';
 
 class PointsOfInterestsPage extends StatelessWidget {
   const PointsOfInterestsPage({super.key});
