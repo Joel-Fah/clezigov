@@ -1,4 +1,4 @@
-import 'package:clezigov/models/category.dart';
+import 'package:clezigov/models/procedures/category.dart';
 import 'package:clezigov/utils/routes.dart';
 import 'package:clezigov/views/widgets/select_procedures.dart';
 import 'package:flutter/material.dart';

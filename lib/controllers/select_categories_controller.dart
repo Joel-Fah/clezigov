@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../models/category.dart';
+import '../models/procedures/category.dart';
 
 class InterestsController extends GetxController {
   RxList _selectedInterests = [].obs;

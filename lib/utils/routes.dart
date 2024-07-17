@@ -6,6 +6,7 @@ import 'package:clezigov/views/screens/auth/register/account_setup.dart';
 import 'package:clezigov/views/screens/auth/register/points_of_interests.dart';
 import 'package:clezigov/views/screens/home/home.dart';
 import 'package:clezigov/views/screens/onboarding.dart';
+import 'package:clezigov/views/widgets/home_feeds/procedures_feed.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/foundation.dart';
@@ -70,6 +71,7 @@ final GoRouter router = GoRouter(
       name: 'pointsOfInterest',
       builder: (context, state) => const PointsOfInterestsPage(),
     ),
+    // Home page routes
     GoRoute(
       parentNavigatorKey: rootNavigatorKey,
       path: HomePage.routeName,

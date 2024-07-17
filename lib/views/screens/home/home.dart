@@ -134,14 +134,10 @@ class _HomePageState extends State<HomePage>
           duration: duration,
           curve: Curves.decelerate,
           height: tabBarHeight - _offsetAnimation.value,
-          padding: EdgeInsets.symmetric(vertical: 4.0),
-          margin: EdgeInsets.symmetric(
-            horizontal: 20.0,
-            vertical: 24.0
-          ),
           constraints: BoxConstraints(
             maxWidth: mediaWidth(context) - 50,
           ),
+          margin: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 16.0),
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
             color: Colors.white.withOpacity(0.7),
@@ -161,7 +157,9 @@ class _HomePageState extends State<HomePage>
               isScrollable: true,
               physics: const NeverScrollableScrollPhysics(),
               splashBorderRadius: borderRadius * 5,
-              indicatorPadding: EdgeInsets.symmetric(vertical: 2.0),
+              overlayColor: WidgetStateProperty.all<Color>(seedColorPalette.shade100),
+              splashFactory: InkRipple.splashFactory,
+              // indicatorPadding: EdgeInsets.symmetric(vertical: 2.0),
               onTap: (index) {
                 setState(() {
                   currentPage = index;
