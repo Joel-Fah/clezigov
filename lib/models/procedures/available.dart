@@ -41,3 +41,41 @@ class Available {
     return 'Available{id: $id, date: $date, fromTime: $fromTime, toTime: $toTime, isAvailable: $isAvailable}';
   }
 }
+
+final List<Available> availabilities = [
+  Available(
+    id: '1',
+    date: DateTime.now(),
+    fromTime: DateTime.now(),
+    toTime: DateTime.now(),
+    isAvailable: true,
+  ),
+  Available(
+    id: '2',
+    date: DateTime.now(),
+    fromTime: DateTime.now(),
+    toTime: DateTime.now(),
+    isAvailable: true,
+  ),
+  Available(
+    id: '3',
+    date: DateTime.now(),
+    fromTime: DateTime.now(),
+    toTime: DateTime.now(),
+    isAvailable: true,
+  ),
+  Available(
+    id: '4',
+    date: DateTime.now(),
+    fromTime: DateTime.now(),
+    toTime: DateTime.now(),
+    isAvailable: true,
+  ),
+  Available(
+    id: '5',
+    date: DateTime.now(),
+    fromTime: DateTime.now(),
+    toTime: DateTime.now(),
+    isAvailable: true,
+  ),
+];

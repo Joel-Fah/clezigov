@@ -49,3 +49,15 @@ class Document {
     return 'Document{id: $id, name: $name, description: $description, path: $path, type: $type, createdAt: $createdAt, updatedAt: $updatedAt}';
   }
 }
+
+final List<Document> documents = [
+  Document(
+    id: "1",
+    name: "Document 1",
+    description: "This is document about nothing that says abything if you read it careful enough. But I know you won't mind.",
+    path: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwdwv8qFiuivyYPEn3oZN4vvqhkYSoIl-siQ&s",
+    type: "image",
+    createdAt: DateTime.now(),
+    updatedAt: DateTime.now(),
+  ),
+];

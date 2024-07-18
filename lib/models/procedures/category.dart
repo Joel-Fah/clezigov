@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:lucide_icons/lucide_icons.dart';
+
 class Category {
   final String id;
   final String name;
@@ -88,9 +91,21 @@ List<Category> categories = [
     lastUpdatedAt: DateTime.now(),
   ),
   Category(
-    id: "10",
+    id: "9",
     name: "Science",
     createdAt: DateTime.now(),
     lastUpdatedAt: DateTime.now(),
   ),
+];
+
+List<Map<Category, IconData>> categoryIcons = [
+  {categories[0]: LucideIcons.scale},
+  {categories[1]: LucideIcons.heartPulse},
+  {categories[2]: LucideIcons.library},
+  {categories[3]: LucideIcons.sprout},
+  {categories[4]: LucideIcons.swissFranc},
+  {categories[5]: LucideIcons.globe2},
+  {categories[6]: LucideIcons.dumbbell},
+  {categories[7]: LucideIcons.hardHat},
+  {categories[8]: LucideIcons.atom},
 ];

@@ -37,3 +37,37 @@ class ProcedureImage {
     return 'Image{id: $id, path: $path, createdAt: $createdAt, lastUpdatedAt: $lastUpdatedAt}';
   }
 }
+
+// 5 random images of documents online
+final List<ProcedureImage> procedureImages = [
+  ProcedureImage(
+    id: '1',
+    path: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwdwv8qFiuivyYPEn3oZN4vvqhkYSoIl-siQ&s',
+    createdAt: DateTime.now(),
+    lastUpdatedAt: DateTime.now(),
+  ),
+  ProcedureImage(
+    id: '2',
+    path: 'https://www.cameroon-concord.com/images/concord/nat-id.jpeg',
+    createdAt: DateTime.now(),
+    lastUpdatedAt: DateTime.now(),
+  ),
+  ProcedureImage(
+    id: '3',
+    path: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSELkFiGkVCkQX10U0ZuiJCnfsRVUhQ68JTgQ&s',
+    createdAt: DateTime.now(),
+    lastUpdatedAt: DateTime.now(),
+  ),
+  ProcedureImage(
+    id: '4',
+    path: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRafWdUJYCzoUWS-ktn8bIdyvi4hfdxV1btbQ&s',
+    createdAt: DateTime.now(),
+    lastUpdatedAt: DateTime.now(),
+  ),
+  ProcedureImage(
+    id: '5',
+    path: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_OuUnT8gX9yrqeV6Q2x6uKu2DchtJWHNJiymq9K22ngVaRsXshcqB8ngOIYdAHh0KppY&usqp=CAU',
+    createdAt: DateTime.now(),
+    lastUpdatedAt: DateTime.now(),
+  ),
+];

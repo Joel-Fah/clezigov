@@ -36,3 +36,37 @@ class Tag {
     return 'Tag{id: $id, name: $name, createdAt: $createdAt, lastUpdatedAt: $lastUpdatedAt}';
   }
 }
+
+// generate 5 tags about administrative procedures
+final List<Tag> tags = [
+  Tag(
+    id: '1',
+    name: 'Administrative',
+    createdAt: DateTime.now(),
+    lastUpdatedAt: DateTime.now(),
+  ),
+  Tag(
+    id: '2',
+    name: 'University',
+    createdAt: DateTime.now(),
+    lastUpdatedAt: DateTime.now(),
+  ),
+  Tag(
+    id: '3',
+    name: 'Minor',
+    createdAt: DateTime.now(),
+    lastUpdatedAt: DateTime.now(),
+  ),
+  Tag(
+    id: '4',
+    name: 'Bureaucracy',
+    createdAt: DateTime.now(),
+    lastUpdatedAt: DateTime.now(),
+  ),
+  Tag(
+    id: '5',
+    name: 'Paperwork',
+    createdAt: DateTime.now(),
+    lastUpdatedAt: DateTime.now(),
+  ),
+];
