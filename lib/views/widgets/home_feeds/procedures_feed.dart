@@ -1,10 +1,15 @@
 import 'package:card_swiper/card_swiper.dart';
+import 'package:clezigov/controllers/bookmarks_controller.dart';
 import 'package:clezigov/models/procedures/category.dart';
 import 'package:clezigov/views/widgets/home_feeds/procedures/recommended.dart';
+import 'package:clezigov/views/widgets/notification_snackbar.dart';
 import 'package:clezigov/views/widgets/tilt_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
+import 'package:like_button/like_button.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../models/procedures/procedures.dart';
 import '../../../utils/constants.dart';
@@ -19,6 +24,9 @@ class ProceduresFeed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final BookmarksController bookmarksController =
+        Get.find<BookmarksController>();
+
     return Scaffold(
       appBar: AppBar(
         title: Text.rich(
@@ -90,6 +98,75 @@ class ProceduresFeed extends StatelessWidget {
           ),
           Gap(16.0),
           ListHeader(
+            title: "Popular categories",
+          ),
+          Gap(16.0),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Wrap(
+              spacing: 8.0,
+              runSpacing: 8.0,
+              children: List.generate(categories.sublist(0, 5).length, (index) {
+                final Category category = categories.sublist(0, 5)[index];
+                final IconData? categoryIcon = categoryIcons[index][category];
+
+                return Container(
+                  padding: allPadding * 2,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: borderRadius * 2.75,
+                    boxShadow: [shadow],
+                  ),
+                  constraints: BoxConstraints(
+                    minWidth: 112.0,
+                  ),
+                  child: Column(
+                    children: [
+                      TiltIcon(
+                        icon: categoryIcon,
+                        iconSize: 24.0,
+                      ),
+                      Gap(8.0),
+                      Text(
+                        category.name,
+                        style: AppTextStyles.body,
+                      )
+                    ],
+                  ),
+                );
+              },)..add(
+                  GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      padding: allPadding * 2,
+                      decoration: BoxDecoration(
+                        color: backgroundColor,
+                        borderRadius: borderRadius * 2.75,
+                        boxShadow: [shadow],
+                      ),
+                      constraints: BoxConstraints(
+                        minWidth: 112.0,
+                      ),
+                      child: Column(
+                        children: [
+                          TiltIcon(
+                            icon: LucideIcons.arrowUpRight,
+                            iconSize: 24.0,
+                          ),
+                          Gap(8.0),
+                          Text(
+                            "More...",
+                            style: AppTextStyles.body.copyWith(color: scaffoldBgColor),
+                          )
+                        ],
+                      ),
+                    ),
+                  )
+              ),
+            ),
+          ),
+          Gap(16.0),
+          ListHeader(
             title: "Latest Updates",
           ),
           Gap(16.0),
@@ -97,7 +174,9 @@ class ProceduresFeed extends StatelessWidget {
             shrinkWrap: true,
             physics: const ClampingScrollPhysics(),
             itemCount: procedures.length,
-            separatorBuilder: (context, index) => Divider(height: 0,),
+            separatorBuilder: (context, index) => Divider(
+              height: 0,
+            ),
             itemBuilder: (context, index) {
               final Procedure procedure = procedures[index];
 
@@ -192,32 +271,65 @@ class ProceduresFeed extends StatelessWidget {
                           ),
                           Row(
                             children: [
-                              Container(
-                                padding:
-                                EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
-                                decoration: BoxDecoration(
-                                  color: warningColor.withOpacity(0.16),
-                                  borderRadius: borderRadius * 1.75,
-                                ),
-                                child: Row(
-                                  children: [
-                                    Icon(
+                              GetBuilder<BookmarksController>(
+                                  builder: (bookmarksController) {
+                                final int bookmarksCount = bookmarksController
+                                    .bookmarks
+                                    .where(
+                                        (element) => element.id == procedure.id)
+                                    .length;
+
+                                final bool isBookmarked = bookmarksController
+                                    .bookmarks
+                                    .contains(procedure);
+
+                                return LikeButton(
+                                  onTap: (isLiked) {
+                                    if (isLiked) {
+                                      bookmarksController
+                                          .removeBookmark(procedure);
+                                    } else {
+                                      bookmarksController
+                                          .addBookmark(procedure);
+                                    }
+                                    return Future.value(!isLiked);
+                                  },
+                                  likeBuilder: (isLiked) {
+                                    return Icon(
                                       LucideIcons.bookmark,
-                                      color: warningColor,
-                                      size: 16.0,
-                                    ),
-                                    Gap(4.0),
-                                    Text(
-                                      "46",
+                                      color: isLiked ? warningColor : darkColor,
+                                      size: 16,
+                                    );
+                                  },
+                                  isLiked: isBookmarked,
+                                  circleColor: CircleColor(
+                                    start: warningColor.withOpacity(0.16),
+                                    end: warningColor.withOpacity(0.16),
+                                  ),
+                                  countBuilder: (count, isLiked, text) {
+                                    return Text(
+                                      count.toString(),
                                       style: AppTextStyles.body.copyWith(
-                                        color: warningColor,
+                                        color:
+                                            isLiked ? warningColor : darkColor,
                                       ),
-                                    ),
-                                  ],
+                                    );
+                                  },
+                                  countPostion: CountPostion.right,
+                                  likeCount: bookmarksCount > 0
+                                      ? bookmarksCount
+                                      : null,
+                                );
+                              }),
+                              IconButton(
+                                onPressed: () {
+                                  Share.share(procedure.title);
+                                },
+                                icon: Icon(
+                                  LucideIcons.share2,
+                                  size: 16.0,
                                 ),
-                              ),
-                              // Gap(8.0),
-                              IconButton(onPressed: (){}, icon: Icon(LucideIcons.share2, size: 16.0,))
+                              )
                             ],
                           ),
                         ],

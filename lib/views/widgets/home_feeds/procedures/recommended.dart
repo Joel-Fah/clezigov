@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
+import 'package:like_button/like_button.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
+import '../../../../controllers/bookmarks_controller.dart';
 import '../../../../models/procedures/procedures.dart';
 import '../../../../utils/constants.dart';
 import '../../../../utils/utility_functions.dart';
@@ -137,30 +140,53 @@ class RecommendedProcedure extends StatelessWidget {
                     ],
                   ),
                 ),
-                Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
-                  decoration: BoxDecoration(
-                    color: warningColor.withOpacity(0.16),
-                    borderRadius: borderRadius * 1.75,
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(
+                GetBuilder<BookmarksController>(builder: (bookmarksController) {
+                  // count the number of occurrence of the procedure in the bookmarks
+                  // and return the count
+                  final count = bookmarksController.bookmarks
+                      .where((element) => element.id == procedure.id)
+                      .length;
+
+                  final bool isBookmarked = bookmarksController.bookmarks
+                      .contains(procedure);
+
+                  return LikeButton(
+                    onTap: (isLiked) {
+                      if (isLiked) {
+                        bookmarksController.removeBookmark(procedure);
+                      } else {
+                        bookmarksController.addBookmark(procedure);
+                      }
+                      return Future.value(!isLiked);
+                    },
+                    likeBuilder: (isLiked) {
+                      return Icon(
                         LucideIcons.bookmark,
-                        color: warningColor,
-                        size: 16.0,
-                      ),
-                      Gap(4.0),
-                      Text(
-                        "46",
+                        color: isLiked
+                            ? warningColor
+                            : darkColor,
+                        size: 16,
+                      );
+                    },
+                    isLiked: isBookmarked,
+                    circleColor: CircleColor(
+                      start: warningColor.withOpacity(0.16),
+                      end: warningColor.withOpacity(0.16),
+                    ),
+                    countBuilder: (count, isLiked, text) {
+                      return Text(
+                        count.toString(),
                         style: AppTextStyles.body.copyWith(
-                          color: warningColor,
+                          color: isLiked
+                              ? warningColor
+                              : darkColor,
                         ),
-                      ),
-                    ],
-                  ),
-                )
+                      );
+                    },
+                    countPostion: CountPostion.right,
+                    likeCount: count > 0 ? count : null,
+                  );
+                }),
               ],
             )
           ],

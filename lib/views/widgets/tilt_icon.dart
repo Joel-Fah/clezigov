@@ -9,12 +9,13 @@ class TiltIcon extends StatelessWidget {
     super.key,
     this.backgroundColor,
     this.icon,
-    this.angle = 5,
+    this.angle = 5, this.iconSize,
   });
 
   final double? angle;
   final Color? backgroundColor;
   final IconData? icon;
+  final double? iconSize;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class TiltIcon extends StatelessWidget {
           child: Icon(
             icon ?? infoIcon,
             color: backgroundColor ?? seedColor,
-            size: 32.0,
+            size: iconSize ?? 32.0,
           ),
         ),
       ),

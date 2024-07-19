@@ -113,6 +113,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.18.0"
+  cross_file:
+    dependency: transitive
+    description:
+      name: cross_file
+      sha256: "55d7b444feb71301ef6b8838dbc1ae02e63dd48c8773f3810ff53bb1e2945b32"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.4+1"
   crypto:
     dependency: transitive
     description:
@@ -360,6 +368,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.1"
+  like_button:
+    dependency: "direct main"
+    description:
+      name: like_button
+      sha256: "08e6a45b78888412df5d351786c550205ad3a677e72a0820d5bbc0b063c8a463"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.5"
   loading_animation_widget:
     dependency: "direct main"
     description:
@@ -408,6 +424,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.12.0"
+  mime:
+    dependency: transitive
+    description:
+      name: mime
+      sha256: "2e123074287cc9fd6c09de8336dae606d1ddb88d9ac47358826db698c176a1f2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.5"
   octo_image:
     dependency: transitive
     description:
@@ -512,6 +536,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.27.7"
+  share_plus:
+    dependency: "direct main"
+    description:
+      name: share_plus
+      sha256: "3ef39599b00059db0990ca2e30fca0a29d8b37aae924d60063f8e0184cf20900"
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.2.2"
+  share_plus_platform_interface:
+    dependency: transitive
+    description:
+      name: share_plus_platform_interface
+      sha256: "251eb156a8b5fa9ce033747d73535bf53911071f8d3b6f4f0b578505ce0d4496"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.4.0"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -725,6 +765,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.1"
+  win32:
+    dependency: transitive
+    description:
+      name: win32
+      sha256: a79dbe579cb51ecd6d30b17e0cae4e0ea15e2c0e66f69ad4198f22a6789e94f4
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.5.1"
   xdg_directories:
     dependency: transitive
     description:
