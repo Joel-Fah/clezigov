@@ -65,24 +65,24 @@ class _DefaultDropdownFormFieldState extends State<DefaultDropdownFormField> {
                       ? seedColor.withOpacity(0.08)
                       : Colors.transparent,
                 ),
-                child: ClipRRect(
-                  borderRadius: borderRadius * 2,
-                  child: ListTile(
-                    title: Text(
-                      item,
-                      style: AppTextStyles.body.copyWith(
-                        color: isSelected ? seedColor : null,
-                        fontWeight: isSelected ? FontWeight.bold : null,
-                      ),
-                    ),
-                    selected: isSelected,
-                    trailing: isSelected
-                        ? Icon(
-                            LucideIcons.check,
-                            color: seedColor,
-                          )
-                        : null,
+                child: ListTile(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: borderRadius * 2,
                   ),
+                  title: Text(
+                    item,
+                    style: AppTextStyles.body.copyWith(
+                      color: isSelected ? seedColor : null,
+                      fontWeight: isSelected ? FontWeight.bold : null,
+                    ),
+                  ),
+                  selected: isSelected,
+                  trailing: isSelected
+                      ? Icon(
+                          LucideIcons.check,
+                          color: seedColor,
+                        )
+                      : null,
                 ),
               );
             },

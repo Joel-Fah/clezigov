@@ -2,11 +2,11 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:clezigov/controllers/bookmarks_controller.dart';
 import 'package:clezigov/models/procedures/category.dart';
 import 'package:clezigov/views/widgets/home_feeds/procedures/recommended.dart';
-import 'package:clezigov/views/widgets/notification_snackbar.dart';
 import 'package:clezigov/views/widgets/tilt_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:like_button/like_button.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:share_plus/share_plus.dart';
@@ -26,6 +26,8 @@ class ProceduresFeed extends StatelessWidget {
   Widget build(BuildContext context) {
     final BookmarksController bookmarksController =
         Get.find<BookmarksController>();
+
+    final TextEditingController searchController = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(
@@ -106,63 +108,91 @@ class ProceduresFeed extends StatelessWidget {
             child: Wrap(
               spacing: 8.0,
               runSpacing: 8.0,
-              children: List.generate(categories.sublist(0, 5).length, (index) {
-                final Category category = categories.sublist(0, 5)[index];
-                final IconData? categoryIcon = categoryIcons[index][category];
+              children: List.generate(
+                categories.sublist(0, 5).length,
+                (index) {
+                  final Category category = categories.sublist(0, 5)[index];
+                  final IconData? categoryIcon = categoryIcons[index][category];
 
-                return Container(
-                  padding: allPadding * 2,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: borderRadius * 2.75,
-                    boxShadow: [shadow],
-                  ),
-                  constraints: BoxConstraints(
-                    minWidth: 112.0,
-                  ),
-                  child: Column(
-                    children: [
-                      TiltIcon(
-                        icon: categoryIcon,
-                        iconSize: 24.0,
-                      ),
-                      Gap(8.0),
-                      Text(
-                        category.name,
-                        style: AppTextStyles.body,
-                      )
-                    ],
-                  ),
-                );
-              },)..add(
-                  GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      padding: allPadding * 2,
-                      decoration: BoxDecoration(
-                        color: backgroundColor,
-                        borderRadius: borderRadius * 2.75,
-                        boxShadow: [shadow],
-                      ),
-                      constraints: BoxConstraints(
-                        minWidth: 112.0,
-                      ),
-                      child: Column(
-                        children: [
-                          TiltIcon(
-                            icon: LucideIcons.arrowUpRight,
-                            iconSize: 24.0,
-                          ),
-                          Gap(8.0),
-                          Text(
-                            "More...",
-                            style: AppTextStyles.body.copyWith(color: scaffoldBgColor),
-                          )
-                        ],
-                      ),
+                  return Container(
+                    padding: allPadding * 2,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: borderRadius * 2.75,
+                      boxShadow: [shadow],
                     ),
-                  )
-              ),
+                    constraints: BoxConstraints(
+                      minWidth: 112.0,
+                    ),
+                    child: Column(
+                      children: [
+                        TiltIcon(
+                          icon: categoryIcon,
+                          iconSize: 24.0,
+                        ),
+                        Gap(8.0),
+                        Text(
+                          category.name,
+                          style: AppTextStyles.body,
+                        )
+                      ],
+                    ),
+                  );
+                },
+              )..add(GestureDetector(
+                  onTap: () {
+                    // Bottom sheet for categories
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      isDismissible: true,
+                      constraints: BoxConstraints(
+                        maxHeight: mediaHeight(context) / 1.5 ,
+                      ),
+                      builder: (context) {
+                        return Stack(
+                          children: [
+                            CategoriesList(
+                                searchController: searchController),
+                            Positioned(
+                              top: -10.0,
+                              right: 10.0,
+                              child: IconButton(
+                                onPressed: () => context.pop(),
+                                icon: Icon(LucideIcons.x),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                  child: Container(
+                    padding: allPadding * 2,
+                    decoration: BoxDecoration(
+                      color: backgroundColor,
+                      borderRadius: borderRadius * 2.75,
+                      boxShadow: [shadow],
+                    ),
+                    constraints: BoxConstraints(
+                      minWidth: 112.0,
+                    ),
+                    child: Column(
+                      children: [
+                        TiltIcon(
+                          icon: LucideIcons.arrowUpRight,
+                          iconSize: 24.0,
+                        ),
+                        Gap(8.0),
+                        Text(
+                          "More...",
+                          style: AppTextStyles.body
+                              .copyWith(color: scaffoldBgColor),
+                        )
+                      ],
+                    ),
+                  ),
+                )),
             ),
           ),
           Gap(16.0),
@@ -339,9 +369,153 @@ class ProceduresFeed extends StatelessWidget {
                 ),
               );
             },
-          )
+          ),
         ],
       ),
+    );
+  }
+}
+
+class CategoriesList extends StatefulWidget {
+  const CategoriesList({
+    super.key,
+    required this.searchController,
+  });
+
+  final TextEditingController searchController;
+
+  @override
+  State<CategoriesList> createState() => _CategoriesListState();
+}
+
+class _CategoriesListState extends State<CategoriesList> {
+  @override
+  Widget build(BuildContext context) {
+    // function to filter categories base on name
+    // and return the search results
+    final List<Category> allCategories = categories;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: Text(
+            "Categories (${categories.length})",
+            style: AppTextStyles.h2,
+          ),
+        ),
+        Gap(16.0),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: Container(
+            decoration: formFieldDecoration,
+            child: TextField(
+              controller: widget.searchController,
+              style: AppTextStyles.body,
+              decoration: InputDecoration(
+                constraints: BoxConstraints(
+                  minHeight: 48.0,
+                  maxHeight: 56.0,
+                ),
+                hintText: "Search for a category..",
+                prefixIcon: Icon(LucideIcons.search),
+                // show suffix button if search field is not empty
+                suffixIcon: widget.searchController.text.isNotEmpty
+                    ? IconButton(
+                  icon: Icon(LucideIcons.x),
+                  onPressed: () {
+                    setState(() {
+                      widget.searchController.clear();
+                      categories = allCategories;
+                    });
+                  },
+                )
+                    : null,
+                fillColor: Colors.white,
+                filled: true,
+                contentPadding: EdgeInsets.symmetric(
+                  vertical: 16.0,
+                  horizontal: 16.0,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: borderRadius * 2,
+                  borderSide: BorderSide(
+                    color: Colors.transparent,
+                    width: 1.5,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: borderRadius * 2,
+                  borderSide: BorderSide(
+                    color: seedColor,
+                    width: 1.5,
+                  ),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: borderRadius * 2,
+                  borderSide: BorderSide(
+                    color: dangerColor,
+                    width: 1.5,
+                  ),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                  borderRadius: borderRadius * 2,
+                  borderSide: BorderSide(
+                    color: dangerColor,
+                    width: 1.5,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: borderRadius * 2,
+                  borderSide: BorderSide(
+                    color: Colors.transparent,
+                    width: 1.5,
+                  ),
+                ),
+                disabledBorder: OutlineInputBorder(
+                  borderRadius: borderRadius * 2,
+                  borderSide: BorderSide(
+                    color: Colors.transparent,
+                    width: 1.5,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+        Gap(16.0),
+        Expanded(
+          child: ListView.builder(
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            shrinkWrap: true,
+            physics: const BouncingScrollPhysics(),
+            itemCount: categoryIcons.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                onTap: () {},
+                shape: RoundedRectangleBorder(
+                  borderRadius: borderRadius * 2,
+                ),
+                leading: Icon(
+                  categoryIcons[index][categories[index]],
+                  color: seedColor,
+                ),
+                title: Text(
+                  categories[index].name,
+                ),
+                titleTextStyle: AppTextStyles.body.copyWith(color: darkColor,),
+                trailing: Text(
+                  "(#)",
+                  style: AppTextStyles.body.copyWith(
+                    color: disabledColor,
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }

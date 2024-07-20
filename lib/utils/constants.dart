@@ -53,14 +53,18 @@ BorderRadius topRadius = BorderRadius.vertical(
 // Image paths
 const String appIcon = 'assets/images/app_icon.png';
 const String logoDark = 'assets/images/logo_dark.png';
+const String logoDarkSvg = 'assets/images/logo_dark.svg';
 const String logoLight = 'assets/images/logo_light.png';
+const String logoLightSvg = 'assets/images/logo_light.svg';
 const String onboardImg1 = 'assets/images/onboard_img_1.png';
 const String onboardImg2 = 'assets/images/onboard_img_2.png';
 const String onboardImg3 = 'assets/images/onboard_img_3.png';
 const String appleLogo = 'assets/images/apple_logo.png';
-const String googleLogo = 'assets/images/google_logo.png';
-const String userAvatars = 'assets/images/user_avatars.png';
+const String googleLogo = 'assets/images/google_logo.svg';
+const String userAvatars = 'assets/images/user_avatars.svg';
 const String pfp = 'assets/images/pfp.jpg';
+const String mailbox = 'assets/images/mailbox.svg';
+const String cleziChat = 'assets/images/clezi_chat.svg';
 
 // Padding
 const EdgeInsets allPadding = const EdgeInsets.all(8.0);

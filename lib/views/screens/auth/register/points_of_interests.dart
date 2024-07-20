@@ -2,6 +2,7 @@ import 'package:clezigov/models/procedures/category.dart';
 import 'package:clezigov/utils/routes.dart';
 import 'package:clezigov/views/widgets/select_procedures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:lucide_icons/lucide_icons.dart';
@@ -128,7 +129,7 @@ class PointsOfInterestsPage extends StatelessWidget {
                             shrinkWrap: true,
                             padding: allPadding * 1.25,
                             children: [
-                              Image.asset(userAvatars, height: 100.0),
+                              SvgPicture.asset(userAvatars),
                               Gap(8.0),
                               Text(
                                 "Registration successful",

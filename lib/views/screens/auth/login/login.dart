@@ -3,6 +3,8 @@ import 'package:clezigov/views/widgets/notification_snackbar.dart';
 import 'package:clezigov/views/widgets/primary_button.dart';
 import 'package:clezigov/views/widgets/tilt_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons/lucide_icons.dart';
@@ -38,8 +40,8 @@ class LoginPage extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: backgroundColor,
                   ),
-                  child: Image.asset(
-                    logoLight,
+                  child: SvgPicture.asset(
+                    logoLightSvg,
                     width: mediaWidth(context) / 2,
                   ),
                 ),
@@ -73,7 +75,7 @@ class LoginPage extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Image.asset(googleLogo),
+                                SvgPicture.asset(googleLogo),
                                 Gap(16.0),
                                 Text(
                                   "Sign in with Google",
@@ -121,6 +123,7 @@ class LoginPage extends StatelessWidget {
                                       children: [
                                         LoginModal(),
                                         Positioned(
+                                          top: -10.0,
                                           right: 10.0,
                                           child: IconButton(
                                             onPressed: () => context.pop(),
@@ -136,7 +139,7 @@ class LoginPage extends StatelessWidget {
                                   duration * 2,
                                   () => showDefaultDialog(
                                     context: context,
-                                    iconWidget: Image.asset(userAvatars, height: 100.0,),
+                                    iconWidget: SvgPicture.asset(userAvatars),
                                     title: "Happy to have you among us!",
                                     message: "You are officially a member of of the CleziGov community. Make sure to explore all the features and information you get here.",
                                     actions: [
