@@ -1,11 +1,14 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:clezigov/views/widgets/notification_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:palette_generator/palette_generator.dart';
 import 'package:pie_menu/pie_menu.dart';
 
 import '../../../utils/constants.dart';
@@ -34,6 +37,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   final TextEditingController cleziController = TextEditingController();
   bool isCleziMessageFilled = false;
+  final FocusNode cleziFocusNode = FocusNode();
+
+  String image =
+      "https://avatars.githubusercontent.com/u/69576717?v=4";
+  Color _primaryColor = seedColor;
 
   // Tabs names
   final List<String> tabNames = [
@@ -46,6 +54,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    _updatePrimaryColor(image: image);
+
     tabController = TabController(
       length: tabNames.length,
       vsync: this,
@@ -90,6 +100,19 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     super.dispose();
   }
 
+  // Extract primary color from image
+  Future<void> _updatePrimaryColor({required String image}) async {
+    final PaletteGenerator generator = await PaletteGenerator.fromImageProvider(
+      NetworkImage(image),
+      size: Size(200, 200),
+    );
+    if (generator.dominantColor != null) {
+      setState(() {
+        _primaryColor = generator.dominantColor!.color;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // Page widgets
@@ -97,7 +120,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       ProceduresFeed(),
       CommunityFeed(),
       CleziBot(),
-      ProfilePage(),
+      ProfilePage(image: image, imageColor: _primaryColor,),
     ];
 
     final List<Widget> tabIcons = [
@@ -165,7 +188,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             curve: Curves.decelerate,
             height: tabBarHeight - _offsetAnimation.value,
             constraints: BoxConstraints(
-              maxWidth: mediaWidth(context) - 50,
+              maxWidth: mediaWidth(context) - 50.0,
             ),
             margin: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 16.0),
             clipBehavior: Clip.antiAlias,
@@ -185,7 +208,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               child: TabBar(
                 controller: tabController,
                 isScrollable: true,
-                physics: const NeverScrollableScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 splashBorderRadius: borderRadius * 5,
                 overlayColor:
                     WidgetStateProperty.all<Color>(seedColorPalette.shade100),
@@ -214,104 +237,130 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             ),
           ),
         ),
-        floatingActionButtonLocation: currentPage == 2 ? FloatingActionButtonLocation.centerFloat : null,
+        floatingActionButtonLocation:
+            currentPage == 2 ? FloatingActionButtonLocation.centerFloat : null,
         floatingActionButton: Visibility(
           visible: currentPage == 2,
-          child: AnimatedContainer(
-                  duration: duration,
-                  constraints: BoxConstraints(maxWidth: mediaWidth(context) - 80),
-                  decoration: formFieldDecoration.copyWith(
-                      borderRadius: borderRadius * 2.75),
-                  child: Stack(
-                    alignment: Alignment.bottomRight,
-                    children: [
-                      TextField(
-                        controller: cleziController,
-                        maxLines: 5,
-                        minLines: 1,
-                        textInputAction: TextInputAction.send,
-                        textCapitalization: TextCapitalization.sentences,
-                        style: AppTextStyles.body,
-                        decoration: InputDecoration(
-                          hintText: "Ask Clezi...",
-                          suffixIcon: SizedBox(),
-                          constraints: BoxConstraints(
-                            minHeight: 48.0,
-                            // maxHeight: 56.0,
-                          ),
-                          fillColor: Colors.white,
-                          filled: true,
-                          contentPadding: EdgeInsets.symmetric(
-                            vertical: 16.0,
-                            horizontal: 16.0,
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: borderRadius * 2.75,
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1.5,
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: borderRadius * 2.75,
-                            borderSide: BorderSide(
-                              color: seedColor,
-                              width: 1.5,
-                            ),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius: borderRadius * 2.75,
-                            borderSide: BorderSide(
-                              color: dangerColor,
-                              width: 1.5,
-                            ),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderRadius: borderRadius * 2.75,
-                            borderSide: BorderSide(
-                              color: dangerColor,
-                              width: 1.5,
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: borderRadius * 2.75,
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1.5,
-                            ),
-                          ),
-                          disabledBorder: OutlineInputBorder(
-                            borderRadius: borderRadius * 2.75,
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1.5,
-                            ),
-                          ),
+          child: Animate(
+            effects: [
+              FadeEffect(delay: duration),
+              MoveEffect(),
+            ],
+            child: AnimatedContainer(
+              duration: duration,
+              width: cleziFocusNode.hasFocus
+                  ? mediaWidth(context) - 50.0
+                  : mediaWidth(context) - 80.0,
+              constraints: BoxConstraints(
+                maxWidth: cleziFocusNode.hasFocus
+                    ? mediaWidth(context) - 50.0
+                    : mediaWidth(context) - 80.0,
+              ),
+              decoration: formFieldDecoration.copyWith(
+                  borderRadius: borderRadius * 2.75),
+              child: Stack(
+                alignment: Alignment.bottomRight,
+                children: [
+                  TextField(
+                    controller: cleziController,
+                    focusNode: cleziFocusNode,
+                    onTap: () {
+                      setState(() {
+                        cleziFocusNode.requestFocus();
+                      });
+                    },
+                    onTapOutside: (event) {
+                      setState(() {
+                        cleziFocusNode.unfocus();
+                      });
+                    },
+                    maxLines: 5,
+                    minLines: 1,
+                    textInputAction: TextInputAction.send,
+                    textCapitalization: TextCapitalization.sentences,
+                    style: AppTextStyles.body,
+                    decoration: InputDecoration(
+                      hintText: "Ask Clezi...",
+                      suffixIcon: SizedBox(),
+                      constraints: BoxConstraints(
+                        minHeight: 48.0,
+                        // maxHeight: 56.0,
+                      ),
+                      fillColor: Colors.white,
+                      filled: true,
+                      contentPadding: EdgeInsets.symmetric(
+                        vertical: 16.0,
+                        horizontal: 16.0,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: borderRadius * 2.75,
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 1.5,
                         ),
                       ),
-                      IconButton(
-                        padding: allPadding * 2,
-                        onPressed: isCleziMessageFilled
-                            ? () {
-                                showNotificationSnackBar(
-                                  context: context,
-                                  backgroundColor: successColor,
-                                  icon: successIcon,
-                                  message: "Message sent successfully",
-                                );
-                                cleziController.clear();
-                              }
-                            : null,
-                        icon: Icon(
-                          LucideIcons.send,
-                          color: isCleziMessageFilled
-                              ? seedColor
-                              : disabledColor,
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: borderRadius * 2.75,
+                        borderSide: BorderSide(
+                          color: seedColor,
+                          width: 1.5,
                         ),
                       ),
-                    ],
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: borderRadius * 2.75,
+                        borderSide: BorderSide(
+                          color: dangerColor,
+                          width: 1.5,
+                        ),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: borderRadius * 2.75,
+                        borderSide: BorderSide(
+                          color: dangerColor,
+                          width: 1.5,
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: borderRadius * 2.75,
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 1.5,
+                        ),
+                      ),
+                      disabledBorder: OutlineInputBorder(
+                        borderRadius: borderRadius * 2.75,
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 1.5,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                  IconButton(
+                    padding: allPadding * 2,
+                    onPressed: isCleziMessageFilled
+                        ? () {
+                            showNotificationSnackBar(
+                              context: context,
+                              backgroundColor: successColor,
+                              icon: successIcon,
+                              message: "Message sent successfully",
+                            );
+                            cleziController.clear();
+                          }
+                        : null,
+                    icon: Transform.rotate(
+                      angle: cleziFocusNode.hasFocus ? (45.0 * pi / 180.0) : 0,
+                      child: Icon(
+                        LucideIcons.send,
+                        color: isCleziMessageFilled ? seedColor : disabledColor,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );
@@ -368,7 +417,30 @@ class TabBuilder extends StatelessWidget {
               child: const Icon(LucideIcons.lightbulb),
             ),
           ],
-          child: Tab(
+          child: Animate(
+            effects: [FadeEffect()],
+            child: Tab(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  icon,
+                  Gap(8.0),
+                  Text(
+                    title,
+                    style: AppTextStyles.body,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      }
+
+      return Tooltip(
+        message: title,
+        child: Tab(
+          child: Animate(
+            effects: [FadeEffect()],
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -381,23 +453,6 @@ class TabBuilder extends StatelessWidget {
               ],
             ),
           ),
-        );
-      }
-
-      return Tooltip(
-        message: title,
-        child: Tab(
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              icon,
-              Gap(8.0),
-              Text(
-                title,
-                style: AppTextStyles.body,
-              ),
-            ],
-          ),
         ),
       );
     }
@@ -405,7 +460,17 @@ class TabBuilder extends StatelessWidget {
     return Tooltip(
       message: title,
       child: Tab(
-        icon: icon,
+        child: Row(
+          children: [
+            icon,
+            // if (index == currentIndex)
+            Gap(8.0),
+            Text(
+              title,
+              style: AppTextStyles.body,
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:wavy_slider/wavy_slider.dart';
 
 import '../../../utils/constants.dart';
+import '../squiggle_pattern.dart';
 
 class CleziBot extends StatelessWidget {
   const CleziBot({
@@ -22,7 +24,7 @@ class CleziBot extends StatelessWidget {
             TextSpan(children: [
               TextSpan(text: "Hi I'm "),
               TextSpan(
-                text: "Clizy",
+                text: "Clezy",
                 style: AppTextStyles.h2.copyWith(
                   color: seedColor,
                 ),
@@ -58,24 +60,53 @@ class CleziBot extends StatelessWidget {
             )
           ],
         ),
-        body: Center(
-          child: Padding(
-            padding: allPadding * 2,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
+        body: ListView(
+          padding: EdgeInsets.only(top: 16.0),
+          physics: const BouncingScrollPhysics(),
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              child: SvgPicture.asset(cleziChat),
+            ),
+            Gap(8.0),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text(
+                "Your discussion with Clezi is still empty. You can ask anything about your procedures and he will assist with the required information.",
+                style: AppTextStyles.body.copyWith(
+                  color: disabledColor,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Gap(24.0),
+            Row(
               children: [
-                SvgPicture.asset(cleziChat),
-                Gap(16.0),
-                Text(
-                  "Your discussion with Clezi is still empty. You can ask anything about your procedures and he will assist with the required information.",
-                  style: AppTextStyles.body.copyWith(
-                    color: disabledColor,
+                Expanded(
+                  child: SquigglePattern(),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Text(
+                    "Today",
+                    style: AppTextStyles.small.copyWith(
+                      color: disabledColor,
+                    ),
                   ),
-                  textAlign: TextAlign.center,
+                ),
+                Expanded(
+                  child: WavySlider(
+                    onChanged: (value) {},
+                    color: disabledColor,
+                    strokeWidth: 1.5,
+                    value: 1,
+                    waveWidth: 8,
+                    waveHeight: 4,
+                  ),
                 ),
               ],
-            ),
-          ),
+            )
+          ],
         ),
       ),
     );

@@ -4,6 +4,7 @@ import 'package:clezigov/models/procedures/category.dart';
 import 'package:clezigov/views/widgets/home_feeds/procedures/recommended.dart';
 import 'package:clezigov/views/widgets/tilt_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
@@ -77,26 +78,29 @@ class ProceduresFeed extends StatelessWidget {
           ListHeader(
             title: "Recommended",
           ),
-          Swiper(
-            layout: SwiperLayout.CUSTOM,
-            customLayoutOption:
-                CustomLayoutOption(startIndex: -1, stateCount: 3)
-                  ..addRotate([-45.0 / 180, 0.0, 45.0 / 180])
-                  ..addTranslate([
-                    Offset(-368.0, -40.0),
-                    Offset(0.0, 0.0),
-                    Offset(368.0, -40.0),
-                  ]),
-            physics: const BouncingScrollPhysics(),
-            duration: (duration.inMilliseconds * 2).toInt(),
-            curve: Curves.decelerate,
-            itemWidth: mediaWidth(context) - 70,
-            itemHeight: 180,
-            itemCount: procedures.length,
-            itemBuilder: (context, index) {
-              final Procedure procedure = procedures[index];
-              return RecommendedProcedure(procedure: procedure);
-            },
+          Animate(
+            effects: [FadeEffect(), MoveEffect()],
+            child: Swiper(
+              layout: SwiperLayout.CUSTOM,
+              customLayoutOption:
+                  CustomLayoutOption(startIndex: -1, stateCount: 3)
+                    ..addRotate([-45.0 / 180, 0.0, 45.0 / 180])
+                    ..addTranslate([
+                      Offset(-368.0, -40.0),
+                      Offset(0.0, 0.0),
+                      Offset(368.0, -40.0),
+                    ]),
+              physics: const BouncingScrollPhysics(),
+              duration: (duration.inMilliseconds * 2).toInt(),
+              curve: Curves.decelerate,
+              itemWidth: mediaWidth(context) - 70,
+              itemHeight: 180,
+              itemCount: procedures.length,
+              itemBuilder: (context, index) {
+                final Procedure procedure = procedures[index];
+                return RecommendedProcedure(procedure: procedure);
+              },
+            ),
           ),
           Gap(16.0),
           ListHeader(

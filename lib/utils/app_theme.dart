@@ -104,5 +104,18 @@ class AppTheme {
       indicatorColor: seedColor,
       indicatorSize: TabBarIndicatorSize.tab,
     ),
+    tooltipTheme: TooltipThemeData(
+      decoration: BoxDecoration(
+        color: disabledColor,
+        borderRadius: borderRadius * 2,
+      ),
+      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      margin: EdgeInsets.only(bottom: 10.0),
+      enableFeedback: true,
+      textStyle: AppTextStyles.body.copyWith(
+        color: scaffoldBgColor,
+        fontSize: 14.0,
+      ),
+    ),
   );
 }
