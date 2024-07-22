@@ -11,7 +11,7 @@ import '../../../widgets/primary_button.dart';
 
 class AccountSetup extends StatefulWidget {
   const AccountSetup({super.key});
-  static const String routeName = '/accountSetup';
+  static const String routeName = '/account-setup';
 
   @override
   State<AccountSetup> createState() => _AccountSetupState();

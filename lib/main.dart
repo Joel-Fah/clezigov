@@ -1,4 +1,5 @@
 import 'package:clezigov/controllers/bookmarks_controller.dart';
+import 'package:clezigov/controllers/notifications_controller.dart';
 import 'package:clezigov/controllers/select_categories_controller.dart';
 import 'package:clezigov/utils/app_theme.dart';
 import 'package:clezigov/utils/constants.dart';
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
     // GetX Controllers
     Get.put(InterestsController());
     Get.put(BookmarksController());
+    Get.put(NotificationsController());
 
     return GetMaterialApp.router(
       title: 'CleziGov',

@@ -15,7 +15,7 @@ import '../../home/home.dart';
 class PointsOfInterestsPage extends StatelessWidget {
   const PointsOfInterestsPage({super.key});
 
-  static const String routeName = '/pointsOfInterests';
+  static const String routeName = '/points-of-interests';
 
   @override
   Widget build(BuildContext context) {

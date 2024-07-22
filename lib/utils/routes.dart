@@ -5,7 +5,11 @@ import 'package:clezigov/views/screens/auth/login/login.dart';
 import 'package:clezigov/views/screens/auth/register/account_setup.dart';
 import 'package:clezigov/views/screens/auth/register/points_of_interests.dart';
 import 'package:clezigov/views/screens/home/home.dart';
+import 'package:clezigov/views/screens/home/profile_details.dart';
+import 'package:clezigov/views/screens/home/verify_account.dart';
 import 'package:clezigov/views/screens/onboarding.dart';
+import 'package:clezigov/views/screens/settings/appearance.dart';
+import 'package:clezigov/views/screens/settings/notifications.dart';
 import 'package:clezigov/views/widgets/home_feeds/procedures_feed.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -35,13 +39,13 @@ final GoRouter router = GoRouter(
     GoRoute(
       parentNavigatorKey: rootNavigatorKey,
       path: ForgotPasswordPage.routeName,
-      name: 'forgotPassword',
+      name: 'forgot-password',
       builder: (context, state) => const ForgotPasswordPage(),
     ),
     GoRoute(
       parentNavigatorKey: rootNavigatorKey,
       path: EmailVerificationPage.routeName,
-      name: 'emailVerification',
+      name: 'email-verification',
       builder: (context, state) => const EmailVerificationPage(
         email: 'joelfah2003@gmail.com',
       ),
@@ -49,14 +53,14 @@ final GoRouter router = GoRouter(
     GoRoute(
       parentNavigatorKey: rootNavigatorKey,
       path: ResetPasswordPage.routeName,
-      name: 'resetPassword',
+      name: 'reset-password',
       builder: (context, state) => const ResetPasswordPage(),
     ),
     // Registration routes
     GoRoute(
       parentNavigatorKey: rootNavigatorKey,
       path: UserRegistrationPage.routeName,
-      name: 'userRegistration',
+      name: 'user-registration',
       builder: (context, state) => const UserRegistrationPage(),
     ),
     GoRoute(
@@ -77,6 +81,36 @@ final GoRouter router = GoRouter(
       path: HomePage.routeName,
       name: 'home',
       builder: (context, state) => const HomePage(),
+    ),
+    GoRoute(
+      parentNavigatorKey: rootNavigatorKey,
+      path: ProfileDetailsPage.routeName,
+      name: 'profile-details',
+      builder: (context, state) {
+        Map<String, dynamic> extra = state.extra as Map<String, dynamic>;
+        return ProfileDetailsPage(
+          imageColor: extra['imageColor'],
+          image: extra['image'],
+        );
+      },
+    ),
+    GoRoute(
+      parentNavigatorKey: rootNavigatorKey,
+      path: VerifyAccountPage.routeName,
+      name: 'verify-account',
+      builder: (context, state) => const VerifyAccountPage(),
+    ),
+    GoRoute(
+      parentNavigatorKey: rootNavigatorKey,
+      path: AppearancePage.routeName,
+      name: 'appearance',
+      builder: (context, state) => const AppearancePage(),
+    ),
+    GoRoute(
+      parentNavigatorKey: rootNavigatorKey,
+      path: NotificationsPage.routeName,
+      name: 'notifications',
+      builder: (context, state) => const NotificationsPage(),
     ),
   ],
 );

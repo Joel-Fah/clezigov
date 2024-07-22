@@ -1,13 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:clezigov/utils/routes.dart';
+import 'package:clezigov/views/screens/home/verify_account.dart';
+import 'package:clezigov/views/screens/settings/appearance.dart';
+import 'package:clezigov/views/screens/settings/notifications.dart';
 import 'package:clezigov/views/widgets/home_feeds/procedures_feed.dart';
 import 'package:clezigov/views/widgets/home_feeds/profile/profile_image_blur_painter.dart';
 import 'package:clezigov/views/widgets/loading_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 import '../../../utils/constants.dart';
+import '../../screens/home/profile_details.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({
@@ -215,7 +221,15 @@ class ProfilePage extends StatelessWidget {
                   Material(
                     color: Colors.transparent,
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        context.push(
+                          ProfileDetailsPage.routeName,
+                          extra: {
+                            'imageColor': imageColor,
+                            'image': image,
+                          }
+                        );
+                      },
                       borderRadius: borderRadius * 2,
                       highlightColor: Color(0xFFEBEAE9),
                       child: ListTile(
@@ -241,7 +255,9 @@ class ProfilePage extends StatelessWidget {
                   Material(
                     color: Colors.transparent,
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        context.goPush(VerifyAccountPage.routeName);
+                      },
                       borderRadius: borderRadius * 2,
                       highlightColor: Color(0xFFEBEAE9),
                       child: ListTile(
@@ -332,7 +348,9 @@ class ProfilePage extends StatelessWidget {
                 Material(
                   color: Colors.transparent,
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      context.goPush(AppearancePage.routeName);
+                    },
                     borderRadius: borderRadius * 2,
                     highlightColor: Color(0xFFEBEAE9),
                     child: ListTile(
@@ -358,7 +376,9 @@ class ProfilePage extends StatelessWidget {
                 Material(
                   color: Colors.transparent,
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      context.goPush(NotificationsPage.routeName);
+                    },
                     borderRadius: borderRadius * 2,
                     highlightColor: Color(0xFFEBEAE9),
                     child: ListTile(
@@ -392,7 +412,7 @@ class ProfilePage extends StatelessWidget {
                         borderRadius: borderRadius * 2,
                       ),
                       leading: Icon(
-                        LucideIcons.lock,
+                        LucideIcons.shield,
                         color: imageColor,
                       ),
                       title: Text("Privacy"),

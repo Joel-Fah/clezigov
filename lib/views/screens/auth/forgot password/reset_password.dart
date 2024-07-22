@@ -11,7 +11,7 @@ import '../../../widgets/primary_button.dart';
 class ResetPasswordPage extends StatefulWidget {
   const ResetPasswordPage({super.key});
 
-  static const String routeName = '/resetPassword';
+  static const String routeName = '/reset-password';
 
   @override
   State<ResetPasswordPage> createState() => _ResetPasswordPageState();

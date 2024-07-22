@@ -24,7 +24,7 @@ class CleziBot extends StatelessWidget {
             TextSpan(children: [
               TextSpan(text: "Hi I'm "),
               TextSpan(
-                text: "Clezy",
+                text: "Clezi",
                 style: AppTextStyles.h2.copyWith(
                   color: seedColor,
                 ),

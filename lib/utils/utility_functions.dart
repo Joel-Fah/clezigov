@@ -61,7 +61,45 @@ String convertToReadableTime(String hours) {
   }
 }
 
-// a function that takes in a datetime and return month and year only
+/// Returns a string representation of the month and year of a given date.
+///
+/// This function formats a [DateTime] object into a string that only includes
+/// the month and the year, using the format "MMM yyyy" (e.g., "Jan 2023").
+/// It utilizes the `DateFormat` class from the `intl` package to perform
+/// the formatting.
+///
+/// Example:
+/// ```dart
+/// final date = DateTime(2023, 1, 15);
+/// final monthAndYear = getMonthAndYear(date);
+/// print(monthAndYear); // Outputs: Jan 2023
+/// ```
+///
+/// - Parameters:
+///   - date: A [DateTime] object representing the date to be formatted.
+/// - Returns: A [String] representing the formatted month and year.
 String getMonthAndYear(DateTime date) {
   return DateFormat.yMMM().format(date);
+}
+
+/// Formats a given date into a string with the format "Day. Date Month Year".
+///
+/// This function takes a [DateTime] object and formats it into a string that
+/// includes the abbreviated day of the week, the date, the abbreviated month,
+/// and the full year. The format used is "E. d MMM y", where "E" stands for
+/// the abbreviated day of the week (e.g., Mon), "d" for the date, "MMM" for
+/// the abbreviated month (e.g., Jan), and "y" for the year.
+///
+/// Example:
+/// ```dart
+/// final date = DateTime(2023, 5, 15);
+/// final formattedDate = getFormattedDate(date);
+/// print(formattedDate); // Outputs: Mon. 15 May 2023
+/// ```
+///
+/// - Parameters:
+///   - date: A [DateTime] object representing the date to be formatted.
+/// - Returns: A [String] representing the formatted date in the specified format.
+String getFormattedDate(DateTime date) {
+  return DateFormat('E. d MMM y').format(date);
 }

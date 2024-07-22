@@ -11,7 +11,7 @@ import 'email_verification.dart';
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});
 
-  static const String routeName = '/forgotPassword';
+  static const String routeName = '/forgot-password';
 
   @override
   State<ForgotPasswordPage> createState() => _ForgotPasswordPageState();

@@ -15,6 +15,7 @@ class CommunityFeed extends StatelessWidget {
   const CommunityFeed({
     super.key,
   });
+  static const String routeName = '/community-feed';
 
   @override
   Widget build(BuildContext context) {

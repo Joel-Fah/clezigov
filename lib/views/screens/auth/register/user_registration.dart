@@ -15,7 +15,7 @@ import '../../../widgets/form_fields/dropdown_form_field.dart';
 class UserRegistrationPage extends StatefulWidget {
   const UserRegistrationPage({super.key});
 
-  static const String routeName = '/userRegistration';
+  static const String routeName = '/user-registration';
 
   @override
   State<UserRegistrationPage> createState() => _UserRegistrationPageState();

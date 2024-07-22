@@ -14,10 +14,8 @@ class AppTheme {
       displayColor: darkColor,
     ),
     fontFamily: GoogleFonts.dmSans(
-      color: darkColor,
-      fontSize: 16.0,
-      height: 24.0 / 16.0
-    ).fontFamily,
+            color: darkColor, fontSize: 16.0, height: 24.0 / 16.0)
+        .fontFamily,
     brightness: Brightness.light,
     appBarTheme: AppBarTheme(
       backgroundColor: scaffoldBgColor,
@@ -68,13 +66,12 @@ class AppTheme {
     ),
     dialogBackgroundColor: scaffoldBgColor,
     dialogTheme: DialogTheme(
-      backgroundColor: scaffoldBgColor,
-      titleTextStyle: AppTextStyles.h2,
-      insetPadding: EdgeInsets.symmetric(horizontal: 20.0),
-      shape: RoundedRectangleBorder(
-        borderRadius: borderRadius * 3.5,
-      )
-    ),
+        backgroundColor: scaffoldBgColor,
+        titleTextStyle: AppTextStyles.h2,
+        insetPadding: EdgeInsets.symmetric(horizontal: 20.0),
+        shape: RoundedRectangleBorder(
+          borderRadius: borderRadius * 3.5,
+        )),
     bottomSheetTheme: BottomSheetThemeData(
       backgroundColor: scaffoldBgColor,
       shape: RoundedRectangleBorder(
@@ -93,7 +90,7 @@ class AppTheme {
       tabAlignment: TabAlignment.center,
       overlayColor: WidgetStateProperty.all(seedColorPalette.shade100),
       labelStyle: AppTextStyles.body.copyWith(
-          color: scaffoldBgColor,
+        color: scaffoldBgColor,
       ),
       dividerColor: Colors.transparent,
       dividerHeight: 0.0,
@@ -116,6 +113,12 @@ class AppTheme {
         color: scaffoldBgColor,
         fontSize: 14.0,
       ),
+    ),
+    popupMenuTheme: PopupMenuThemeData(
+      shape: RoundedRectangleBorder(
+        borderRadius: borderRadius * 2.75,
+      ),
+      shadowColor: Colors.black45,
     ),
   );
 }

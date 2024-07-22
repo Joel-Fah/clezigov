@@ -10,7 +10,7 @@ import '../../../widgets/primary_button.dart';
 
 class EmailVerificationPage extends StatefulWidget {
   const EmailVerificationPage({super.key, required this.email});
-  static const String routeName = '/emailVerification';
+  static const String routeName = '/email-verification';
   final String email;
 
   @override
