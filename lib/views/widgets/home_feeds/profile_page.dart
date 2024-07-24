@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clezigov/utils/routes.dart';
 import 'package:clezigov/views/screens/home/verify_account.dart';
 import 'package:clezigov/views/screens/settings/appearance.dart';
+import 'package:clezigov/views/screens/settings/community_activity.dart';
 import 'package:clezigov/views/screens/settings/notifications.dart';
 import 'package:clezigov/views/widgets/home_feeds/procedures_feed.dart';
 import 'package:clezigov/views/widgets/home_feeds/profile/profile_image_blur_painter.dart';
@@ -309,7 +310,9 @@ class ProfilePage extends StatelessWidget {
                   Material(
                     color: Colors.transparent,
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        context.goPush(CommunityActivityPage.routeName);
+                      },
                       borderRadius: borderRadius * 2,
                       highlightColor: Color(0xFFEBEAE9),
                       child: ListTile(

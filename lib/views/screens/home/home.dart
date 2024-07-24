@@ -1,12 +1,15 @@
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:clezigov/views/widgets/alert_dialog.dart';
 import 'package:clezigov/views/widgets/notification_snackbar.dart';
+import 'package:clezigov/views/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:palette_generator/palette_generator.dart';
 import 'package:pie_menu/pie_menu.dart';
@@ -39,8 +42,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   bool isCleziMessageFilled = false;
   final FocusNode cleziFocusNode = FocusNode();
 
-  String image =
-      "https://avatars.githubusercontent.com/u/69576717?v=4";
+  String image = "https://avatars.githubusercontent.com/u/69576717?v=4";
   Color _primaryColor = seedColor;
 
   // Tabs names
@@ -120,7 +122,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       ProceduresFeed(),
       CommunityFeed(),
       CleziBot(),
-      ProfilePage(image: image, imageColor: _primaryColor,),
+      ProfilePage(
+        image: image,
+        imageColor: _primaryColor,
+      ),
     ];
 
     final List<Widget> tabIcons = [
@@ -217,6 +222,27 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   setState(() {
                     currentPage = index;
                   });
+
+                  if (index == 2) {
+                    Future.delayed(duration * 1.5, () {
+                      showDefaultDialog(
+                        context: context,
+                        icon: LucideIcons.bot,
+                        title: "Before you proceed...",
+                        message: "Clezi is a bot that can help you with any "
+                            "questions you have. Please do not share any personal "
+                            "information with Clezi.",
+                        actions: [
+                          PrimaryButton.label(
+                            onPressed: () {
+                              context.pop();
+                            },
+                            label: "Agree and continue",
+                          )
+                        ],
+                      );
+                    });
+                  }
                 },
                 tabs: List.generate(
                   _kTabPages.length,

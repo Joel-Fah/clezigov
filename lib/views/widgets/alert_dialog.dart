@@ -1,6 +1,7 @@
 import 'package:clezigov/views/widgets/primary_button.dart';
 import 'package:clezigov/views/widgets/tilt_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
@@ -20,21 +21,24 @@ Future<dynamic> showDefaultDialog({
     builder: (context) {
       return BackdropFilter(
         filter: blurFilter,
-        child: AlertDialog(
-          icon: iconWidget ?? TiltIcon(
-            icon: icon,
-            backgroundColor: backgroundColor ?? seedColor,
+        child: Animate(
+          effects: [FadeEffect(), MoveEffect()],
+          child: AlertDialog(
+            icon: iconWidget ?? TiltIcon(
+              icon: icon,
+              backgroundColor: backgroundColor ?? seedColor,
+            ),
+            title: Text(title),
+            titleTextStyle: AppTextStyles.h2.copyWith(color: darkColor),
+            content: content ?? Text(
+              message,
+              style: AppTextStyles.body.copyWith(color: darkColor),
+            ),
+            iconColor: backgroundColor ?? seedColor,
+            contentTextStyle: AppTextStyles.body.copyWith(color: darkColor),
+            actions: actions,
+            actionsOverflowButtonSpacing: 8.0,
           ),
-          title: Text(title),
-          titleTextStyle: AppTextStyles.h2.copyWith(color: darkColor),
-          content: content ?? Text(
-            message,
-            style: AppTextStyles.body.copyWith(color: darkColor),
-          ),
-          iconColor: backgroundColor ?? seedColor,
-          contentTextStyle: AppTextStyles.body.copyWith(color: darkColor),
-          actions: actions,
-          actionsOverflowButtonSpacing: 8.0,
         ),
       );
     },

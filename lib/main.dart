@@ -8,8 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
+import 'controllers/endorsements_controller.dart';
+
 void main() {
-  // Set color of status bar white
+  // Set color of status bar to scaffold bg
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
       statusBarColor: scaffoldBgColor,
@@ -18,6 +20,12 @@ void main() {
       systemNavigationBarIconBrightness: Brightness.dark,
     ),
   );
+
+  // Lock device orientation to portrait
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
 
   runApp(const MyApp());
 }
@@ -31,6 +39,7 @@ class MyApp extends StatelessWidget {
     Get.put(InterestsController());
     Get.put(BookmarksController());
     Get.put(NotificationsController());
+    Get.put(EndorsementsController());
 
     return GetMaterialApp.router(
       title: 'CleziGov',

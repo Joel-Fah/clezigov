@@ -9,7 +9,9 @@ import 'package:clezigov/views/screens/home/profile_details.dart';
 import 'package:clezigov/views/screens/home/verify_account.dart';
 import 'package:clezigov/views/screens/onboarding.dart';
 import 'package:clezigov/views/screens/settings/appearance.dart';
+import 'package:clezigov/views/screens/settings/community_activity.dart';
 import 'package:clezigov/views/screens/settings/notifications.dart';
+import 'package:clezigov/views/widgets/home_feeds/community_feed.dart';
 import 'package:clezigov/views/widgets/home_feeds/procedures_feed.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -111,6 +113,12 @@ final GoRouter router = GoRouter(
       path: NotificationsPage.routeName,
       name: 'notifications',
       builder: (context, state) => const NotificationsPage(),
+    ),
+    GoRoute(
+      parentNavigatorKey: rootNavigatorKey,
+      path: CommunityActivityPage.routeName,
+      name: 'community-activity',
+      builder: (context, state) => const CommunityActivityPage(),
     ),
   ],
 );

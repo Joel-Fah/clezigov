@@ -3,6 +3,7 @@ import 'package:clezigov/views/screens/settings/language_selection.dart';
 import 'package:clezigov/views/widgets/home_feeds/procedures_feed.dart';
 import 'package:clezigov/views/widgets/home_feeds/profile/profile_image_blur_painter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
@@ -183,24 +184,27 @@ class ThemeCard extends StatelessWidget {
               top: -24.0,
               right: right,
               left: left,
-              child: Stack(
-                children: [
-                  CustomPaint(
-                    painter: CircleBlurPainter(
-                      circleWidth: 4.0,
-                      blurSigma: 8.0,
-                      color: blurColor,
+              child: Animate(
+                effects: [FadeEffect(), MoveEffect()],
+                child: Stack(
+                  children: [
+                    CustomPaint(
+                      painter: CircleBlurPainter(
+                        circleWidth: 4.0,
+                        blurSigma: 8.0,
+                        color: blurColor,
+                      ),
+                      child: Image.asset(
+                        image,
+                        scale: 0.8,
+                      ),
                     ),
-                    child: Image.asset(
+                    Image.asset(
                       image,
                       scale: 0.8,
                     ),
-                  ),
-                  Image.asset(
-                    image,
-                    scale: 0.8,
-                  ),
-                ],
+                  ],
+                ),
               ),
             )
           ],
