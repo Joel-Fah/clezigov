@@ -5,6 +5,7 @@ import 'package:clezigov/views/screens/auth/login/login.dart';
 import 'package:clezigov/views/screens/auth/register/account_setup.dart';
 import 'package:clezigov/views/screens/auth/register/points_of_interests.dart';
 import 'package:clezigov/views/screens/home/home.dart';
+import 'package:clezigov/views/screens/home/procedure_details.dart';
 import 'package:clezigov/views/screens/home/profile_details.dart';
 import 'package:clezigov/views/screens/home/verify_account.dart';
 import 'package:clezigov/views/screens/onboarding.dart';
@@ -119,6 +120,17 @@ final GoRouter router = GoRouter(
       path: CommunityActivityPage.routeName,
       name: 'community-activity',
       builder: (context, state) => const CommunityActivityPage(),
+    ),
+    GoRoute(
+      parentNavigatorKey: rootNavigatorKey,
+      path: ProcedureDetailsPage.routeName,
+      name: 'procedure-details',
+      builder: (context, state) {
+        Map<String, dynamic> extra = state.extra as Map<String, dynamic>;
+        return ProcedureDetailsPage(
+          procedure: extra['procedure'],
+        );
+      },
     ),
   ],
 );

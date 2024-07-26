@@ -1,6 +1,8 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:clezigov/controllers/bookmarks_controller.dart';
 import 'package:clezigov/models/procedures/category.dart';
+import 'package:clezigov/utils/routes.dart';
+import 'package:clezigov/views/screens/home/procedure_details.dart';
 import 'package:clezigov/views/widgets/home_feeds/procedures/recommended.dart';
 import 'package:clezigov/views/widgets/tilt_icon.dart';
 import 'package:flutter/material.dart';
@@ -151,13 +153,12 @@ class ProceduresFeed extends StatelessWidget {
                       isScrollControlled: true,
                       isDismissible: true,
                       constraints: BoxConstraints(
-                        maxHeight: mediaHeight(context) / 1.5 ,
+                        maxHeight: mediaHeight(context) / 1.5,
                       ),
                       builder: (context) {
                         return Stack(
                           children: [
-                            CategoriesList(
-                                searchController: searchController),
+                            CategoriesList(searchController: searchController),
                             Positioned(
                               top: -10.0,
                               right: 10.0,
@@ -215,7 +216,14 @@ class ProceduresFeed extends StatelessWidget {
               final Procedure procedure = procedures[index];
 
               return InkWell(
-                onTap: () {},
+                onTap: () {
+                  context.push(
+                    ProcedureDetailsPage.routeName,
+                    extra: {
+                      "procedure": procedure,
+                    },
+                  );
+                },
                 overlayColor: WidgetStateProperty.all(Color(0xFFEBEAE9)),
                 highlightColor: Color(0xFFEBEAE9),
                 child: Padding(
@@ -229,7 +237,16 @@ class ProceduresFeed extends StatelessWidget {
                           color: disabledColor,
                         ),
                       ),
-                      Text(procedure.title, style: AppTextStyles.h4),
+                      Hero(
+                        tag: procedure.id,
+                        child: Material(
+                          type: MaterialType.transparency,
+                          child: Text(
+                            procedure.title,
+                            style: AppTextStyles.h4,
+                          ),
+                        ),
+                      ),
                       Gap(8.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -427,14 +444,14 @@ class _CategoriesListState extends State<CategoriesList> {
                 // show suffix button if search field is not empty
                 suffixIcon: widget.searchController.text.isNotEmpty
                     ? IconButton(
-                  icon: Icon(LucideIcons.x),
-                  onPressed: () {
-                    setState(() {
-                      widget.searchController.clear();
-                      categories = allCategories;
-                    });
-                  },
-                )
+                        icon: Icon(LucideIcons.x),
+                        onPressed: () {
+                          setState(() {
+                            widget.searchController.clear();
+                            categories = allCategories;
+                          });
+                        },
+                      )
                     : null,
                 fillColor: Colors.white,
                 filled: true,
@@ -508,7 +525,9 @@ class _CategoriesListState extends State<CategoriesList> {
                 title: Text(
                   categories[index].name,
                 ),
-                titleTextStyle: AppTextStyles.body.copyWith(color: darkColor,),
+                titleTextStyle: AppTextStyles.body.copyWith(
+                  color: darkColor,
+                ),
                 trailing: Text(
                   "(#)",
                   style: AppTextStyles.body.copyWith(
