@@ -70,6 +70,13 @@ const String crescentMoon3d = "assets/images/crescent_moon_3d.png";
 const String lightBulb3d = "assets/images/light_bulb_3d.png";
 const String sun3d = "assets/images/sun_3d.png";
 
+// Reactions
+const String angryFace = "assets/images/angry_face.png";
+const String frowningFace = "assets/images/frowning_face.png";
+const String neutralFace = "assets/images/neutral_face.png";
+const String slightlySmilingFace = "assets/images/slightly_smiling_face.png";
+const String grinningFace = "assets/images/grinning_face.png";
+
 // Padding
 const EdgeInsets allPadding = const EdgeInsets.all(8.0);
 

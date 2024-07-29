@@ -61,6 +61,27 @@ String convertToReadableTime(String hours) {
   }
 }
 
+String convertToReadableTimeExtended(String hours) {
+  final int _hours = int.parse(hours);
+  final int _seconds = _hours * 3600;
+  final int _minutes = _hours * 60;
+  final int _days = _hours ~/ 24;
+  final int _weeks = _hours ~/ 168;
+  final int _months = _hours ~/ 720;
+
+  if (_hours < 1) {
+    return "${_minutes} minute(s)";
+  } else if (_hours < 24) {
+    return "${_hours} hour(s)";
+  } else if (_hours < 168) {
+    return "${_days} day(s)";
+  } else if (_hours < 720) {
+    return "${_weeks} week(s)";
+  } else {
+    return "${_months} month(s)";
+  }
+}
+
 /// Returns a string representation of the month and year of a given date.
 ///
 /// This function formats a [DateTime] object into a string that only includes

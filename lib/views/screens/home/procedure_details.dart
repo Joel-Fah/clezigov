@@ -2,15 +2,21 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:clezigov/controllers/reactions_controller.dart';
 import 'package:clezigov/models/procedures/procedures.dart';
 import 'package:clezigov/utils/utility_functions.dart';
+import 'package:clezigov/views/widgets/home_feeds/procedures_feed.dart';
 import 'package:clezigov/views/widgets/loading_builder.dart';
+import 'package:clezigov/views/widgets/text_button.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
+import 'package:like_button/like_button.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
+import '../../../models/procedures/document.dart';
 import '../../../utils/constants.dart';
 
 class ProcedureDetailsPage extends StatefulWidget {
@@ -34,12 +40,29 @@ class _ProcedureDetailsPageState extends State<ProcedureDetailsPage> {
       borderRadius: borderRadius * 2,
     );
 
+    // Reactions
+    final List<String> _reactions = [
+      angryFace,
+      frowningFace,
+      neutralFace,
+      slightlySmilingFace,
+      grinningFace,
+    ];
+
+    // Other info
+    final List<String> otherInfoLabels = [
+      "Bookmarks",
+      "Rating",
+      "Added on",
+      "Last updated",
+    ];
+
     return Scaffold(
       body: NotificationListener<ScrollNotification>(
         onNotification: (scrollNotification) {
           setState(() {
-            _isAppBarExpanded =
-                scrollNotification.metrics.pixels <= mediaHeight(context) / 2.75;
+            _isAppBarExpanded = scrollNotification.metrics.pixels <=
+                mediaHeight(context) / 2.75;
           });
           return true;
         },
@@ -184,8 +207,8 @@ class _ProcedureDetailsPageState extends State<ProcedureDetailsPage> {
                     return [
                       PopupMenuDivider(),
                       PopupMenuItem(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 20.0, vertical: 8.0),
                         child: Row(
                           children: [
                             Icon(
@@ -211,46 +234,51 @@ class _ProcedureDetailsPageState extends State<ProcedureDetailsPage> {
               ],
             ),
             if (!_isAppBarExpanded)
-            SliverPersistentHeader(
-              pinned: true,
-              delegate: SliverAppBarDelegate(
-                minHeight: kToolbarHeight,
-                maxHeight: kToolbarHeight,
-                child: Animate(
-                  effects: [FadeEffect(), MoveEffect()],
-                  child: Material(
-                    elevation: 4.0,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.surfaceContainerHigh,
-                      ),
-                      padding: EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(LucideIcons.headphones),
-                          ),
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(LucideIcons.map),
-                          ),
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(LucideIcons.listTodo),
-                          ),
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(LucideIcons.hardHat, color: seedColor,),
-                          ),
-                        ],
+              SliverPersistentHeader(
+                pinned: true,
+                delegate: SliverAppBarDelegate(
+                  minHeight: kToolbarHeight,
+                  maxHeight: kToolbarHeight,
+                  child: Animate(
+                    effects: [FadeEffect(), MoveEffect()],
+                    child: Material(
+                      elevation: 4.0,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .surfaceContainerHigh,
+                        ),
+                        padding: EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(LucideIcons.headphones),
+                            ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(LucideIcons.map),
+                            ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(LucideIcons.listTodo),
+                            ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                LucideIcons.hardHat,
+                                color: seedColor,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
             SliverList(
               delegate: SliverChildListDelegate(
                 [
@@ -290,7 +318,8 @@ class _ProcedureDetailsPageState extends State<ProcedureDetailsPage> {
                                   ),
                                   Gap(8.0),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         "Sub-divisional office (SDO)",
@@ -330,16 +359,294 @@ class _ProcedureDetailsPageState extends State<ProcedureDetailsPage> {
                             ReadMoreText(
                               trimLines: 2,
                               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
-                                  "Praesent scelerisque lorem sit amet elit volutpat, "
-                                  "nec vulputate sapien mollis. Phasellus ullamcorper "
-                                  "vulputate sapien, vel hendrerit enim pellentesque a. "
-                                  "Vestibulum ante ipsum primis in faucibus orci luctus "
-                                  "et ultrices posuere cubilia curae; Praesent suscipit "
-                                  "orci ac lectus hendrerit, a convallis libero pellentesque.",
+                              "Praesent scelerisque lorem sit amet elit volutpat, "
+                              "nec vulputate sapien mollis. Phasellus ullamcorper "
+                              "vulputate sapien, vel hendrerit enim pellentesque a. "
+                              "Vestibulum ante ipsum primis in faucibus orci luctus "
+                              "et ultrices posuere cubilia curae; Praesent suscipit "
+                              "orci ac lectus hendrerit, a convallis libero pellentesque.",
                             ),
                           ],
                         ),
-                      )
+                      ),
+                      Gap(16.0),
+                      // Price
+                      Container(
+                        padding: allPadding * 1.5,
+                        decoration: _cardDecoration,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Place(s) where you can achieve this",
+                              style: AppTextStyles.small.copyWith(
+                                color: disabledColor,
+                              ),
+                            ),
+                            Gap(8.0),
+                            Text(
+                              addThousandSeparator(
+                                  widget.procedure.price.toString()),
+                              style: AppTextStyles.body,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Gap(16.0),
+                      // Documents
+                      Container(
+                        padding: allPadding * 1.5,
+                        decoration: _cardDecoration,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Documents to provide (x${widget.procedure.documents.length})",
+                              style: AppTextStyles.small.copyWith(
+                                color: disabledColor,
+                              ),
+                            ),
+                            Gap(8.0),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 16.0),
+                              child: Column(
+                                children: List.generate(
+                                  widget.procedure.documents.length,
+                                  (index) {
+                                    final Document document =
+                                        widget.procedure.documents[index];
+
+                                    return Row(
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 2.5,
+                                          backgroundColor: seedColor,
+                                        ),
+                                        Gap(8.0),
+                                        Expanded(
+                                          child: TertiaryButton.child(
+                                            onPressed: () {},
+                                            child: Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: Text(
+                                                document.name,
+                                                style:
+                                                    AppTextStyles.body.copyWith(
+                                                  color: seedColor,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    );
+                                  },
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Gap(16.0),
+                      // Estimated time to complete
+                      Container(
+                        padding: allPadding * 1.5,
+                        decoration: _cardDecoration,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Estimated time to spend",
+                              style: AppTextStyles.small.copyWith(
+                                color: disabledColor,
+                              ),
+                            ),
+                            Gap(8.0),
+                            Text(
+                              convertToReadableTimeExtended(
+                                  widget.procedure.estimatedTimeToComplete),
+                              style: AppTextStyles.body,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Gap(16.0),
+                      // Category and tags
+                      Container(
+                        padding: allPadding * 1.5,
+                        decoration: _cardDecoration,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Category and tags",
+                              style: AppTextStyles.small.copyWith(
+                                color: disabledColor,
+                              ),
+                            ),
+                            Gap(8.0),
+                            Text(
+                              widget.procedure.category.name,
+                              style: AppTextStyles.body,
+                            ),
+                            Gap(8.0),
+                            Wrap(
+                              spacing: 8.0,
+                              runSpacing: 8.0,
+                              children: List.generate(
+                                  widget.procedure.tags.length, (index) {
+                                final tag = widget.procedure.tags[index];
+
+                                return Container(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 8.0,
+                                    vertical: 4.0,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: scaffoldBgColor.withOpacity(0.1),
+                                    borderRadius: borderRadius,
+                                  ),
+                                  child: Text(
+                                    tag.name,
+                                    style: AppTextStyles.small.copyWith(
+                                      color: seedColor,
+                                    ),
+                                  ),
+                                );
+                              }),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Gap(16.0),
+                      // Reactions and ratings
+                      Container(
+                        padding: allPadding * 1.5,
+                        decoration: _cardDecoration,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Rate this procedure",
+                              style: AppTextStyles.small.copyWith(
+                                color: disabledColor,
+                              ),
+                            ),
+                            Gap(8.0),
+                            Text(
+                              "How satisfied are you with this procedure?",
+                              style: AppTextStyles.body,
+                            ),
+                            Gap(8.0),
+                            GetBuilder<ReactionsController>(
+                                builder: (reactionsController) {
+                              return Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: List.generate(
+                                  _reactions.length,
+                                  (index) {
+                                    final reaction = _reactions[index];
+                                    final hasReaction = reactionsController
+                                        .hasReaction(widget.procedure.id);
+                                    final currentReaction = reactionsController
+                                        .getReaction(widget.procedure.id);
+
+                                    // return reactions as custom radio buttons
+                                    return Material(
+                                      color: Colors.transparent,
+                                      child: InkWell(
+                                        borderRadius: borderRadius * 4,
+                                        onTap: () {
+                                          reactionsController.addReaction(
+                                            widget.procedure.id,
+                                            reaction,
+                                          );
+                                        },
+                                        child: AnimatedContainer(
+                                          duration: duration,
+                                          decoration: BoxDecoration(
+                                            color: hasReaction &&
+                                                    currentReaction == reaction
+                                                ? seedColor.withOpacity(0.1)
+                                                : scaffoldBgColor
+                                                    .withOpacity(0.1),
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
+                                              color: hasReaction &&
+                                                      currentReaction ==
+                                                          reaction
+                                                  ? seedColor
+                                                  : scaffoldBgColor
+                                                      .withOpacity(0.1),
+                                            ),
+                                          ),
+                                          child: Image.asset(
+                                            reaction,
+                                            width: 40.0,
+                                            height: 40.0,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              );
+                            }),
+                          ],
+                        ),
+                      ),
+                      Gap(24.0),
+                      // Other relevant info
+                      ListHeader(title: "Other relevant information"),
+                      Gap(16.0),
+                      ListView.separated(
+                        padding: EdgeInsets.zero,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: otherInfoLabels.length,
+                        separatorBuilder: (context, index) => Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 4.0),
+                          child: Divider(),
+                        ),
+                        itemBuilder: (context, index) {
+                          final String label = otherInfoLabels[index];
+
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  label,
+                                  style: AppTextStyles.body.copyWith(
+                                    color: disabledColor,
+                                  ),
+                                ),
+                                Text(
+                                  (() {
+                                    switch (label) {
+                                      case "Bookmarks":
+                                        return "56";
+                                      case "Rating":
+                                        return "3.7 / 5";
+                                      case "Added on":
+                                        return getFormattedDate(
+                                            widget.procedure.createdAt);
+                                      case "Last updated":
+                                        return getFormattedDate(
+                                            widget.procedure.lastUpdatedAt);
+                                      default:
+                                        return "";
+                                    }
+                                  })(),
+                                  style: AppTextStyles.body,
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
                     ],
                   )
                 ],
@@ -508,11 +815,11 @@ class ReadMoreText extends StatefulWidget {
   final TextStyle? linkStyle;
 
   ReadMoreText(
-      this.text, {
-        this.textStyle,
-        this.linkStyle,
-        this.trimLines = 2,
-      });
+    this.text, {
+    this.textStyle,
+    this.linkStyle,
+    this.trimLines = 2,
+  });
 
   @override
   _ReadMoreTextState createState() => _ReadMoreTextState();
@@ -559,38 +866,38 @@ class _ReadMoreTextState extends State<ReadMoreText> {
         Text.rich(
           _readMore
               ? TextSpan(
-            children: [
-              TextSpan(
-                text: _getTrimmedText(widget.text, textPainter),
-                style: defaultTextStyle,
-              ),
-              TextSpan(
-                text: "... Read more",
-                style: linkTextStyle,
-                recognizer: TapGestureRecognizer()
-                  ..onTap = () {
-                    setState(() {
-                      _readMore = !_readMore;
-                    });
-                  },
-              ),
-            ],
-          )
+                  children: [
+                    TextSpan(
+                      text: _getTrimmedText(widget.text, textPainter),
+                      style: defaultTextStyle,
+                    ),
+                    TextSpan(
+                      text: "... Read more",
+                      style: linkTextStyle,
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          setState(() {
+                            _readMore = !_readMore;
+                          });
+                        },
+                    ),
+                  ],
+                )
               : TextSpan(
-            children: [
-              textSpan,
-              TextSpan(
-                text: " Read less",
-                style: linkTextStyle,
-                recognizer: TapGestureRecognizer()
-                  ..onTap = () {
-                    setState(() {
-                      _readMore = !_readMore;
-                    });
-                  },
-              ),
-            ],
-          ),
+                  children: [
+                    textSpan,
+                    TextSpan(
+                      text: " Read less",
+                      style: linkTextStyle,
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          setState(() {
+                            _readMore = !_readMore;
+                          });
+                        },
+                    ),
+                  ],
+                ),
         ),
       ],
     );
