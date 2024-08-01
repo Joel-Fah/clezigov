@@ -1,3 +1,4 @@
+import 'package:clezigov/utils/utility_functions.dart';
 import 'package:clezigov/views/screens/auth/forgot%20password/email_verification.dart';
 import 'package:clezigov/views/screens/auth/forgot%20password/forgot_password.dart';
 import 'package:clezigov/views/screens/auth/forgot%20password/reset_password.dart';
@@ -12,8 +13,6 @@ import 'package:clezigov/views/screens/onboarding.dart';
 import 'package:clezigov/views/screens/settings/appearance.dart';
 import 'package:clezigov/views/screens/settings/community_activity.dart';
 import 'package:clezigov/views/screens/settings/notifications.dart';
-import 'package:clezigov/views/widgets/home_feeds/community_feed.dart';
-import 'package:clezigov/views/widgets/home_feeds/procedures_feed.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/foundation.dart';
@@ -29,66 +28,69 @@ final GoRouter router = GoRouter(
     GoRoute(
       parentNavigatorKey: rootNavigatorKey,
       path: OnboardPage.routeName,
-      name: 'onboard',
+      name: removeBeginningSlash(OnboardPage.routeName),
       builder: (context, state) => const OnboardPage(),
     ),
     GoRoute(
       parentNavigatorKey: rootNavigatorKey,
       path: LoginPage.routeName,
-      name: 'login',
+      name: removeBeginningSlash(LoginPage.routeName),
       builder: (context, state) => const LoginPage(),
     ),
     // Forgot password route
     GoRoute(
       parentNavigatorKey: rootNavigatorKey,
       path: ForgotPasswordPage.routeName,
-      name: 'forgot-password',
+      name: removeBeginningSlash(ForgotPasswordPage.routeName),
       builder: (context, state) => const ForgotPasswordPage(),
     ),
     GoRoute(
       parentNavigatorKey: rootNavigatorKey,
       path: EmailVerificationPage.routeName,
-      name: 'email-verification',
-      builder: (context, state) => const EmailVerificationPage(
-        email: 'joelfah2003@gmail.com',
-      ),
+      name: removeBeginningSlash(EmailVerificationPage.routeName),
+      builder: (context, state) {
+        Map<String, dynamic> extra = state.extra as Map<String, dynamic>;
+        return EmailVerificationPage(
+        email: extra['email'],
+      );
+      },
     ),
     GoRoute(
       parentNavigatorKey: rootNavigatorKey,
       path: ResetPasswordPage.routeName,
-      name: 'reset-password',
+      name: removeBeginningSlash(ResetPasswordPage.routeName),
       builder: (context, state) => const ResetPasswordPage(),
     ),
     // Registration routes
     GoRoute(
       parentNavigatorKey: rootNavigatorKey,
       path: UserRegistrationPage.routeName,
-      name: 'user-registration',
+      name: removeBeginningSlash(UserRegistrationPage.routeName),
       builder: (context, state) => const UserRegistrationPage(),
     ),
     GoRoute(
       parentNavigatorKey: rootNavigatorKey,
       path: AccountSetup.routeName,
-      name: 'accountSetup',
+      name: removeBeginningSlash(AccountSetup.routeName),
       builder: (context, state) => const AccountSetup(),
     ),
     GoRoute(
       parentNavigatorKey: rootNavigatorKey,
       path: PointsOfInterestsPage.routeName,
-      name: 'pointsOfInterest',
+      name: removeBeginningSlash(PointsOfInterestsPage.routeName),
       builder: (context, state) => const PointsOfInterestsPage(),
     ),
     // Home page routes
     GoRoute(
       parentNavigatorKey: rootNavigatorKey,
       path: HomePage.routeName,
-      name: 'home',
+      name: "home",
       builder: (context, state) => const HomePage(),
     ),
     GoRoute(
       parentNavigatorKey: rootNavigatorKey,
       path: ProfileDetailsPage.routeName,
-      name: 'profile-details',
+      name: removeBeginningSlash(ProfileDetailsPage.routeName),
       builder: (context, state) {
         Map<String, dynamic> extra = state.extra as Map<String, dynamic>;
         return ProfileDetailsPage(
@@ -100,35 +102,36 @@ final GoRouter router = GoRouter(
     GoRoute(
       parentNavigatorKey: rootNavigatorKey,
       path: VerifyAccountPage.routeName,
-      name: 'verify-account',
+      name: removeBeginningSlash(VerifyAccountPage.routeName),
       builder: (context, state) => const VerifyAccountPage(),
     ),
     GoRoute(
       parentNavigatorKey: rootNavigatorKey,
       path: AppearancePage.routeName,
-      name: 'appearance',
+      name: removeBeginningSlash(AppearancePage.routeName),
       builder: (context, state) => const AppearancePage(),
     ),
     GoRoute(
       parentNavigatorKey: rootNavigatorKey,
       path: NotificationsPage.routeName,
-      name: 'notifications',
+      name: removeBeginningSlash(NotificationsPage.routeName),
       builder: (context, state) => const NotificationsPage(),
     ),
     GoRoute(
       parentNavigatorKey: rootNavigatorKey,
       path: CommunityActivityPage.routeName,
-      name: 'community-activity',
+      name: removeBeginningSlash(CommunityActivityPage.routeName),
       builder: (context, state) => const CommunityActivityPage(),
     ),
     GoRoute(
       parentNavigatorKey: rootNavigatorKey,
-      path: ProcedureDetailsPage.routeName,
-      name: 'procedure-details',
+      path: "${ProcedureDetailsPage.routeName}/:id",
+      name: removeBeginningSlash(ProcedureDetailsPage.routeName),
       builder: (context, state) {
-        Map<String, dynamic> extra = state.extra as Map<String, dynamic>;
+        // Map<String, dynamic> extra = state.extra as Map<String, dynamic>;
         return ProcedureDetailsPage(
-          procedure: extra['procedure'],
+          key: state.pageKey,
+          procedureId: state.pathParameters['id']!,
         );
       },
     ),

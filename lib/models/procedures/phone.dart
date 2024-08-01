@@ -1,8 +1,8 @@
 class Phone {
-  final String id, phoneNumber;
-  final bool isWhatsapp;
-  final DateTime createdAt;
-  final DateTime lastUpdatedAt;
+  String id, phoneNumber;
+  bool isWhatsapp;
+  DateTime createdAt;
+  DateTime lastUpdatedAt;
 
   Phone({
     required this.id,

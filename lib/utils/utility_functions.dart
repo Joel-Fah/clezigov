@@ -124,3 +124,8 @@ String getMonthAndYear(DateTime date) {
 String getFormattedDate(DateTime date) {
   return DateFormat('E. d MMM y').format(date);
 }
+
+// a function to remove beginning slash from a string
+String removeBeginningSlash(String path) {
+  return path.startsWith('/') ? path.substring(1) : path;
+}

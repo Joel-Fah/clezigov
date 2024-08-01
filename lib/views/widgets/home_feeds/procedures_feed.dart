@@ -217,11 +217,9 @@ class ProceduresFeed extends StatelessWidget {
 
               return InkWell(
                 onTap: () {
-                  context.push(
-                    ProcedureDetailsPage.routeName,
-                    extra: {
-                      "procedure": procedure,
-                    },
+                  context.pushNamed(
+                    removeBeginningSlash(ProcedureDetailsPage.routeName),
+                    pathParameters: {'id': procedure.id},
                   );
                 },
                 overlayColor: WidgetStateProperty.all(Color(0xFFEBEAE9)),

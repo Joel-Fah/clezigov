@@ -1,11 +1,11 @@
 class Document {
-  final String id;
-  final String name;
-  final String description;
-  final String path;
-  final String type;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  String id;
+  String name;
+  String description;
+  String path;
+  String type;
+  DateTime createdAt;
+  DateTime updatedAt;
 
   Document({
     required this.id,

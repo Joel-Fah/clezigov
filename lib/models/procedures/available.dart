@@ -1,9 +1,9 @@
 class Available {
-  final String id;
-  final DateTime date;
-  final DateTime fromTime;
-  final DateTime toTime;
-  final bool isAvailable;
+  String id;
+  DateTime date;
+  DateTime fromTime;
+  DateTime toTime;
+  bool isAvailable;
 
   Available({
     required this.id,

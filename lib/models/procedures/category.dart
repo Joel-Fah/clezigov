@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 class Category {
-  final String id;
-  final String name;
-  final DateTime createdAt;
-  final DateTime lastUpdatedAt;
+  String id;
+  String name;
+  DateTime createdAt;
+  DateTime lastUpdatedAt;
 
   Category({
     required this.id,

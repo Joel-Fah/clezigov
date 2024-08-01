@@ -7,19 +7,19 @@ import 'package:clezigov/models/procedures/tag.dart';
 enum ProcedureStatus { active, deprecated }
 
 class Procedure {
-  final String id;
-  final String title;
-  final String description;
-  final List<ProcedureImage> images;
-  final List<Tag> tags;
-  final Category category;
-  final String estimatedTimeToComplete;
-  final double price;
-  final List<Available> availability;
-  final List<Document> documents;
-  final ProcedureStatus status;
-  final DateTime createdAt;
-  final DateTime lastUpdatedAt;
+  String id;
+  String title;
+  String description;
+  List<ProcedureImage> images;
+  List<Tag> tags;
+  Category category;
+  String estimatedTimeToComplete;
+  double price;
+  List<Available> availability;
+  List<Document> documents;
+  ProcedureStatus status;
+  DateTime createdAt;
+  DateTime lastUpdatedAt;
 
   Procedure({
     required this.id,

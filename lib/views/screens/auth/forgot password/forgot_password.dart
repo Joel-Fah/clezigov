@@ -2,6 +2,7 @@ import 'package:clezigov/utils/constants.dart';
 import 'package:clezigov/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 import '../../../widgets/form_fields/simple_text_field.dart';
@@ -90,7 +91,10 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     onPressed: isEmailFilled ? () {
                       // Go to email verification page
                       if (_forgotPasswordFormKey.currentState!.validate()) {
-                        context.goPush(EmailVerificationPage.routeName);
+                        context.push(
+                          EmailVerificationPage.routeName,
+                          extra: {"email": _email},
+                        );
                       }
                     } : null,
                     label: "Verify email",

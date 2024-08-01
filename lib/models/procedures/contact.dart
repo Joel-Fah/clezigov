@@ -3,12 +3,12 @@ import 'dart:math';
 import 'package:clezigov/models/procedures/phone.dart';
 
 class Contact {
-  final String id;
-  final List<Phone> phoneNumbers;
-  final String email;
-  final String? address;
-  final DateTime createdAt;
-  final DateTime lastUpdatedAt;
+  String id;
+  List<Phone> phoneNumbers;
+  String email;
+  String? address;
+  DateTime createdAt;
+  DateTime lastUpdatedAt;
 
   Contact({
     required this.id,

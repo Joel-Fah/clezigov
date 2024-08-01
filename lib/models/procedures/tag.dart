@@ -1,7 +1,8 @@
 class Tag {
-  final String id;
-  final String name;
-  final DateTime createdAt, lastUpdatedAt;
+  String id;
+  String name;
+  DateTime createdAt;
+  DateTime lastUpdatedAt;
 
   Tag({
     required this.id,

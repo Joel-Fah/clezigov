@@ -59,6 +59,7 @@ dependencies:
   wavy_slider: ^1.0.0
   palette_generator: ^0.3.3+4
   flutter_animate: ^4.5.0
+  fluttertoast: ^8.2.5
 
 dev_dependencies:
   flutter_test:

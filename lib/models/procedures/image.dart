@@ -1,8 +1,8 @@
 class ProcedureImage {
-  final String id;
-  final String path;
-  final DateTime createdAt;
-  final DateTime lastUpdatedAt;
+  String id;
+  String path;
+  DateTime createdAt;
+  DateTime lastUpdatedAt;
 
   ProcedureImage({
     required this.id,
