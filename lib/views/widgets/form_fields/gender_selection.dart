@@ -1,7 +1,7 @@
 import 'package:clezigov/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:lucide_icons/lucide_icons.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 enum Gender { male, female }
 
@@ -55,7 +55,7 @@ class _GenderSelectionFormFieldState extends State<GenderSelectionFormField> {
                 children: [
                   selectedGender == Gender.male
                       ? Icon(
-                    LucideIcons.checkCircle2,
+                    HugeIcons.strokeRoundedCheckmarkCircle02,
                     color: scaffoldBgColor,
                   )
                       : SizedBox.shrink(),
@@ -100,7 +100,7 @@ class _GenderSelectionFormFieldState extends State<GenderSelectionFormField> {
                 children: [
                   selectedGender == Gender.female
                       ? Icon(
-                    LucideIcons.checkCircle2,
+                    HugeIcons.strokeRoundedCheckmarkCircle02,
                     color: scaffoldBgColor,
                   )
                       : SizedBox.shrink(),

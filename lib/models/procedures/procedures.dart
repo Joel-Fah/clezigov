@@ -1,5 +1,6 @@
 import 'package:clezigov/models/procedures/available.dart';
 import 'package:clezigov/models/procedures/category.dart';
+import 'package:clezigov/models/procedures/contact.dart';
 import 'package:clezigov/models/procedures/document.dart';
 import 'package:clezigov/models/procedures/image.dart';
 import 'package:clezigov/models/procedures/tag.dart';
@@ -17,6 +18,7 @@ class Procedure {
   double price;
   List<Available> availability;
   List<Document> documents;
+  List<Contact> contacts;
   ProcedureStatus status;
   DateTime createdAt;
   DateTime lastUpdatedAt;
@@ -32,6 +34,7 @@ class Procedure {
     required this.price,
     required this.availability,
     required this.documents,
+    required this.contacts,
     required this.status,
     required this.createdAt,
     required this.lastUpdatedAt,
@@ -51,6 +54,7 @@ class Procedure {
       'availability':
           availability.map((available) => available.toJson()).toList(),
       'documents': documents.map((document) => document.toJson()).toList(),
+      'contacts': contacts.map((contact) => contact.toJson()).toList(),
       'status': status,
       'createdAt': createdAt.toIso8601String(),
       'lastUpdatedAt': lastUpdatedAt.toIso8601String(),
@@ -76,6 +80,8 @@ class Procedure {
       documents: (json['documents'] as List)
           .map((document) => Document.fromJson(document))
           .toList(),
+      contacts: (json['contacts'] as List)
+                .map((contact) => Contact.fromJson(contact)).toList(),
       status: json['status'],
       createdAt: DateTime.parse(json['createdAt']),
       lastUpdatedAt: DateTime.parse(json['lastUpdatedAt']),
@@ -103,6 +109,7 @@ final List<Procedure> procedures = [
     price: 100.0,
     availability: availabilities,
     documents: documents,
+    contacts: contacts.sublist(0, 2),
     status: ProcedureStatus.active,
     createdAt: DateTime.now(),
     lastUpdatedAt: DateTime.now(),
@@ -119,6 +126,7 @@ final List<Procedure> procedures = [
     price: 3500.0,
     availability: availabilities,
     documents: documents,
+    contacts: contacts.sublist(1, 2),
     status: ProcedureStatus.active,
     createdAt: DateTime.now(),
     lastUpdatedAt: DateTime.now(),
@@ -135,6 +143,7 @@ final List<Procedure> procedures = [
     price: 2000.0,
     availability: availabilities,
     documents: documents,
+    contacts: contacts.sublist(0, 1),
     status: ProcedureStatus.deprecated,
     createdAt: DateTime.now(),
     lastUpdatedAt: DateTime.now(),
@@ -151,6 +160,7 @@ final List<Procedure> procedures = [
     price: 500.0,
     availability: availabilities,
     documents: documents,
+    contacts: contacts,
     status: ProcedureStatus.active,
     createdAt: DateTime.now(),
     lastUpdatedAt: DateTime.now(),
@@ -167,6 +177,7 @@ final List<Procedure> procedures = [
     price: 1000.0,
     availability: availabilities,
     documents: documents,
+    contacts: contacts,
     status: ProcedureStatus.active,
     createdAt: DateTime.now(),
     lastUpdatedAt: DateTime.now(),

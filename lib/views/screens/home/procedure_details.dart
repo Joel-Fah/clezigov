@@ -8,17 +8,16 @@ import 'package:clezigov/utils/utility_functions.dart';
 import 'package:clezigov/views/screens/home/procedure_action_card.dart';
 import 'package:clezigov/views/screens/home/read_more_text.dart';
 import 'package:clezigov/views/screens/home/sliver_appbar_delegate.dart';
+import 'package:clezigov/views/widgets/home_feeds/procedures/contacts_modal.dart';
 import 'package:clezigov/views/widgets/home_feeds/procedures_feed.dart';
 import 'package:clezigov/views/widgets/loading_builder.dart';
-import 'package:clezigov/views/widgets/text_button.dart';
-import 'package:clezigov/views/widgets/tilt_icon.dart';
+import 'package:clezigov/views/widgets/buttons/text_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
-import 'package:lucide_icons/lucide_icons.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 import '../../../models/procedures/document.dart';
 import '../../../utils/constants.dart';
@@ -34,13 +33,15 @@ class ProcedureDetailsPage extends StatefulWidget {
   State<ProcedureDetailsPage> createState() => _ProcedureDetailsPageState();
 }
 
-class _ProcedureDetailsPageState extends State<ProcedureDetailsPage> {
+class _ProcedureDetailsPageState extends State<ProcedureDetailsPage> with SingleTickerProviderStateMixin {
   bool _isAppBarExpanded = true;
-  final ProceduresController proceduresController = Get.find<ProceduresController>();
+  final ProceduresController proceduresController =
+      Get.find<ProceduresController>();
 
   @override
   Widget build(BuildContext context) {
-    Procedure procedure = proceduresController.getProcedureById(widget.procedureId);
+    Procedure procedure =
+        proceduresController.getProcedureById(widget.procedureId);
 
     final BoxDecoration _cardDecoration = BoxDecoration(
       color: Colors.white,
@@ -156,8 +157,8 @@ class _ProcedureDetailsPageState extends State<ProcedureDetailsPage> {
                               children: [
                                 Expanded(
                                   child: ProcedureActionCard(
-                                    onTap: () {},
-                                    icon: LucideIcons.headphones,
+                                    onTap: () => showContactsModal(context, procedure),
+                                    icon: HugeIcons.strokeRoundedCustomerService01,
                                     title: "Contacts",
                                   ),
                                 ),
@@ -165,7 +166,7 @@ class _ProcedureDetailsPageState extends State<ProcedureDetailsPage> {
                                 Expanded(
                                   child: ProcedureActionCard(
                                     onTap: () {},
-                                    icon: LucideIcons.map,
+                                    icon: HugeIcons.strokeRoundedRoute02,
                                     title: "Directions",
                                   ),
                                 ),
@@ -173,7 +174,8 @@ class _ProcedureDetailsPageState extends State<ProcedureDetailsPage> {
                                 Expanded(
                                   child: ProcedureActionCard(
                                     onTap: () {},
-                                    icon: LucideIcons.listTodo,
+                                    icon: HugeIcons
+                                        .strokeRoundedLeftToRightListTriangle,
                                     title: "ToDo",
                                   ),
                                 ),
@@ -181,7 +183,7 @@ class _ProcedureDetailsPageState extends State<ProcedureDetailsPage> {
                                 Expanded(
                                   child: ProcedureActionCard(
                                     onTap: () {},
-                                    icon: LucideIcons.hardHat,
+                                    icon: HugeIcons.strokeRoundedLabor,
                                     title: "Agent",
                                     backgroundColor: seedColor,
                                   ),
@@ -204,11 +206,11 @@ class _ProcedureDetailsPageState extends State<ProcedureDetailsPage> {
               ),
               actions: [
                 IconButton(
-                  icon: Icon(LucideIcons.bookmark),
+                  icon: Icon(HugeIcons.strokeRoundedBookmark02),
                   onPressed: () {},
                 ),
                 PopupMenuButton<String>(
-                  icon: Icon(LucideIcons.moreVertical),
+                  icon: Icon(HugeIcons.strokeRoundedMoreVertical),
                   tooltip: 'More',
                   clipBehavior: Clip.hardEdge,
                   itemBuilder: (context) {
@@ -216,11 +218,13 @@ class _ProcedureDetailsPageState extends State<ProcedureDetailsPage> {
                       PopupMenuDivider(),
                       PopupMenuItem(
                         padding: EdgeInsets.symmetric(
-                            horizontal: 20.0, vertical: 8.0),
+                          horizontal: 20.0,
+                          vertical: 8.0,
+                        ),
                         child: Row(
                           children: [
                             Icon(
-                              LucideIcons.flagTriangleLeft,
+                              HugeIcons.strokeRoundedFlag01,
                               size: 20.0,
                               color: dangerColor,
                             ),
@@ -262,45 +266,22 @@ class _ProcedureDetailsPageState extends State<ProcedureDetailsPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             IconButton(
-                              onPressed: () {
-                                showModalBottomSheet(
-                                  context: context,
-                                  isDismissible: true,
-                                  isScrollControlled: true,
-                                  builder: (context) {
-                                    return BackdropFilter(
-                                      filter: blurFilter,
-                                      child: Stack(
-                                        children: [
-                                          ProceduresContactsList(procedure: procedure,),
-                                          Positioned(
-                                            top: -10.0,
-                                            right: 10.0,
-                                            child: IconButton(
-                                              onPressed: () => context.pop(),
-                                              icon: Icon(LucideIcons.x),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                );
-                              },
-                              icon: Icon(LucideIcons.headphones),
+                              onPressed: () => showContactsModal(context, procedure),
+                              icon: Icon(HugeIcons.strokeRoundedCustomerService01),
                             ),
                             IconButton(
                               onPressed: () {},
-                              icon: Icon(LucideIcons.map),
+                              icon: Icon(HugeIcons.strokeRoundedRoute02),
                             ),
                             IconButton(
                               onPressed: () {},
-                              icon: Icon(LucideIcons.listTodo),
+                              icon: Icon(HugeIcons
+                                  .strokeRoundedLeftToRightListTriangle),
                             ),
                             IconButton(
                               onPressed: () {},
                               icon: Icon(
-                                LucideIcons.hardHat,
+                                HugeIcons.strokeRoundedLabor,
                                 color: seedColor,
                               ),
                             ),
@@ -410,15 +391,14 @@ class _ProcedureDetailsPageState extends State<ProcedureDetailsPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Place(s) where you can achieve this",
+                              "Service cost",
                               style: AppTextStyles.small.copyWith(
                                 color: disabledColor,
                               ),
                             ),
                             Gap(8.0),
                             Text(
-                              addThousandSeparator(
-                                  procedure.price.toString()),
+                              "${addThousandSeparator(procedure.price.toString())} FCFA",
                               style: AppTextStyles.body,
                             ),
                           ],
@@ -458,15 +438,18 @@ class _ProcedureDetailsPageState extends State<ProcedureDetailsPage> {
                                         Expanded(
                                           child: TertiaryButton.child(
                                             onPressed: () {},
-                                            child: Align(
-                                              alignment: Alignment.centerLeft,
-                                              child: Text(
-                                                document.name,
-                                                style:
-                                                    AppTextStyles.body.copyWith(
-                                                  color: seedColor,
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Text(
+                                                  document.name,
+                                                  style:
+                                                      AppTextStyles.body.copyWith(
+                                                    color: seedColor,
+                                                  ),
                                                 ),
-                                              ),
+                                                Icon(HugeIcons.strokeRoundedSquareArrowExpand01)
+                                              ],
                                             ),
                                           ),
                                         )
@@ -525,8 +508,8 @@ class _ProcedureDetailsPageState extends State<ProcedureDetailsPage> {
                             Wrap(
                               spacing: 8.0,
                               runSpacing: 8.0,
-                              children: List.generate(
-                                  procedure.tags.length, (index) {
+                              children:
+                                  List.generate(procedure.tags.length, (index) {
                                 final tag = procedure.tags[index];
 
                                 return Container(
@@ -590,10 +573,14 @@ class _ProcedureDetailsPageState extends State<ProcedureDetailsPage> {
                                       child: InkWell(
                                         borderRadius: borderRadius * 4,
                                         onTap: () {
-                                          reactionsController.addReaction(
-                                            procedure.id,
-                                            reaction,
-                                          );
+                                          if (hasReaction &&
+                                              currentReaction == reaction) {
+                                            reactionsController
+                                                .removeReaction(procedure.id);
+                                          } else {
+                                            reactionsController.addReaction(
+                                                procedure.id, reaction);
+                                          }
                                         },
                                         child: AnimatedContainer(
                                           duration: duration,
@@ -689,48 +676,6 @@ class _ProcedureDetailsPageState extends State<ProcedureDetailsPage> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class ProceduresContactsList extends StatelessWidget {
-  const ProceduresContactsList({
-    super.key, required this.procedure,
-  });
-  final Procedure procedure;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      shrinkWrap: true,
-      children: [
-        TiltIcon(
-          icon: LucideIcons.headphones,
-        ),
-        Gap(8.0),
-        Text(
-          "Get in touch with the\ncustomer support",
-          style: AppTextStyles.h2,
-          textAlign: TextAlign.center,
-        ),
-        Gap(20.0),
-        ListHeader(title: "Call"),
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [shadow],
-            borderRadius: borderRadius * 2,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("Phone number for calls"),
-              Gap(8.0),
-              Text("")
-            ],
-          ),
-        )
-      ],
     );
   }
 }

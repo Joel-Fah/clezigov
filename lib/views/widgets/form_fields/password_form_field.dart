@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:lucide_icons/lucide_icons.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 import '../../../utils/constants.dart';
 
@@ -16,7 +16,8 @@ class PasswordTextFormField extends StatefulWidget {
     required this.prefixIcon,
     this.suffixIcon,
     this.onChanged,
-    this.validator, this.onPressed,
+    this.validator,
+    this.onPressed,
   });
 
   final bool? obscureText;
@@ -40,9 +41,8 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
 
   @override
   void initState() {
-    _obscureText = widget.obscureText ?? true;
-    // TODO: implement initState
     super.initState();
+    _obscureText = widget.obscureText ?? true;
   }
 
   @override
@@ -66,62 +66,32 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
           ),
           fillColor: Colors.white,
           filled: true,
-          contentPadding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0,),
+          contentPadding: EdgeInsets.symmetric(
+            vertical: 16.0,
+            horizontal: 16.0,
+          ),
           hintText: widget.hintText,
           prefixIcon: widget.prefixIcon,
           suffixIcon: IconButton(
             icon: Icon(
-              _obscureText! ? LucideIcons.eyeOff : LucideIcons.eye,
+              _obscureText!
+                  ? HugeIcons.strokeRoundedView
+                  : HugeIcons.strokeRoundedViewOffSlash,
               // color: seedColor,
             ),
-            onPressed: widget.onPressed ?? () {
-              setState(() {
-                _obscureText = !_obscureText!;
-              });
-            },
+            onPressed: widget.onPressed ??
+                () {
+                  setState(() {
+                    _obscureText = !_obscureText!;
+                  });
+                },
           ),
-          border: OutlineInputBorder(
-            borderRadius: borderRadius * 2,
-            borderSide: BorderSide(
-              color: Colors.transparent,
-              width: 1.5,
-            ),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: borderRadius * 2,
-            borderSide: BorderSide(
-              color: seedColor,
-              width: 1.5,
-            ),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderRadius: borderRadius * 2,
-            borderSide: BorderSide(
-              color: dangerColor,
-              width: 1.5,
-            ),
-          ),
-          focusedErrorBorder: OutlineInputBorder(
-            borderRadius: borderRadius * 2,
-            borderSide: BorderSide(
-              color: dangerColor,
-              width: 1.5,
-            ),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: borderRadius * 2,
-            borderSide: BorderSide(
-              color: Colors.transparent,
-              width: 1.5,
-            ),
-          ),
-          disabledBorder: OutlineInputBorder(
-            borderRadius: borderRadius * 2,
-            borderSide: BorderSide(
-              color: Colors.transparent,
-              width: 1.5,
-            ),
-          ),
+          border: AppInputBorders.border,
+          focusedBorder: AppInputBorders.focusedBorder,
+          errorBorder: AppInputBorders.errorBorder,
+          focusedErrorBorder: AppInputBorders.focusedErrorBorder,
+          enabledBorder: AppInputBorders.enabledBorder,
+          disabledBorder: AppInputBorders.disabledBorder,
         ),
         onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
         onChanged: widget.onChanged,

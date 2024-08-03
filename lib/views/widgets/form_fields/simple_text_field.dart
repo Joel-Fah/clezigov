@@ -46,52 +46,19 @@ class SimpleTextFormField extends StatelessWidget {
           ),
           fillColor: Colors.white,
           filled: true,
-          contentPadding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0,),
+          contentPadding: EdgeInsets.symmetric(
+            vertical: 16.0,
+            horizontal: 16.0,
+          ),
           hintText: hintText,
           prefixIcon: prefixIcon,
           suffixIcon: suffixIcon,
-          border: OutlineInputBorder(
-            borderRadius: borderRadius * 2,
-            borderSide: BorderSide(
-              color: Colors.transparent,
-              width: 1.5,
-            ),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: borderRadius * 2,
-            borderSide: BorderSide(
-              color: seedColor,
-              width: 1.5,
-            ),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderRadius: borderRadius * 2,
-            borderSide: BorderSide(
-              color: dangerColor,
-              width: 1.5,
-            ),
-          ),
-          focusedErrorBorder: OutlineInputBorder(
-            borderRadius: borderRadius * 2,
-            borderSide: BorderSide(
-              color: dangerColor,
-              width: 1.5,
-            ),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: borderRadius * 2,
-            borderSide: BorderSide(
-              color: Colors.transparent,
-              width: 1.5,
-            ),
-          ),
-          disabledBorder: OutlineInputBorder(
-            borderRadius: borderRadius * 2,
-            borderSide: BorderSide(
-              color: Colors.transparent,
-              width: 1.5,
-            ),
-          ),
+          border: AppInputBorders.border,
+          focusedBorder: AppInputBorders.focusedBorder,
+          errorBorder: AppInputBorders.errorBorder,
+          focusedErrorBorder: AppInputBorders.focusedErrorBorder,
+          enabledBorder: AppInputBorders.enabledBorder,
+          disabledBorder: AppInputBorders.disabledBorder,
         ),
         onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
         onChanged: onChanged,

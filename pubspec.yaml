@@ -60,6 +60,7 @@ dependencies:
   palette_generator: ^0.3.3+4
   flutter_animate: ^4.5.0
   fluttertoast: ^8.2.5
+  hugeicons: ^0.0.7
 
 dev_dependencies:
   flutter_test:

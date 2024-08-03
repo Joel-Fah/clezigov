@@ -1,6 +1,8 @@
 class Phone {
   String id, phoneNumber;
   bool isWhatsapp;
+  bool isCalling;
+  bool isMessaging;
   DateTime createdAt;
   DateTime lastUpdatedAt;
 
@@ -10,6 +12,8 @@ class Phone {
     required this.isWhatsapp,
     required this.createdAt,
     required this.lastUpdatedAt,
+    required this.isCalling,
+    required this.isMessaging,
   });
 
   // toJson
@@ -29,6 +33,8 @@ class Phone {
       id: json['id'],
       phoneNumber: json['phoneNumber'],
       isWhatsapp: json['isWhatsapp'],
+      isCalling: json['isCalling'],
+      isMessaging: json['isMessaging'],
       createdAt: DateTime.parse(json['createdAt']),
       lastUpdatedAt: DateTime.parse(json['lastUpdatedAt']),
     );
@@ -47,6 +53,8 @@ final List<Phone> phoneNumbers = [
     id: '1',
     phoneNumber: '+237 6 56 74 74 74',
     isWhatsapp: true,
+    isCalling: true,
+    isMessaging: true,
     createdAt: DateTime.now(),
     lastUpdatedAt: DateTime.now(),
   ),
@@ -54,6 +62,8 @@ final List<Phone> phoneNumbers = [
     id: '2',
     phoneNumber: '+237 6 74 89 12 75',
     isWhatsapp: false,
+    isCalling: true,
+    isMessaging: false,
     createdAt: DateTime.now(),
     lastUpdatedAt: DateTime.now(),
   ),
@@ -61,6 +71,8 @@ final List<Phone> phoneNumbers = [
     id: '3',
     phoneNumber: '+237 6 23 79 74 76',
     isWhatsapp: true,
+    isCalling: false,
+    isMessaging: true,
     createdAt: DateTime.now(),
     lastUpdatedAt: DateTime.now(),
   ),
@@ -68,6 +80,8 @@ final List<Phone> phoneNumbers = [
     id: '4',
     phoneNumber: '+237 6 12 45 65 77',
     isWhatsapp: true,
+    isCalling: true,
+    isMessaging: true,
     createdAt: DateTime.now(),
     lastUpdatedAt: DateTime.now(),
   ),
@@ -75,6 +89,8 @@ final List<Phone> phoneNumbers = [
     id: '5',
     phoneNumber: '+237 6 74 00 23 45',
     isWhatsapp: false,
+    isCalling: true,
+    isMessaging: false,
     createdAt: DateTime.now(),
     lastUpdatedAt: DateTime.now(),
   ),

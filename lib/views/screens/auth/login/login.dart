@@ -1,7 +1,5 @@
 import 'package:clezigov/utils/constants.dart';
-import 'package:clezigov/views/widgets/notification_snackbar.dart';
-import 'package:clezigov/views/widgets/primary_button.dart';
-import 'package:clezigov/views/widgets/tilt_icon.dart';
+import 'package:clezigov/views/widgets/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
@@ -10,7 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 import '../../../widgets/alert_dialog.dart';
-import '../../../widgets/secondary_button.dart';
+import '../../../widgets/buttons/secondary_button.dart';
 import 'login_form.dart';
 
 class LoginPage extends StatelessWidget {
@@ -116,22 +114,19 @@ class LoginPage extends StatelessWidget {
                                 isScrollControlled: true,
                                 isDismissible: false,
                                 builder: (context) {
-                                  return BackdropFilter(
-                                    filter: blurFilter,
-                                    child: Stack(
-                                      alignment: Alignment.topRight,
-                                      children: [
-                                        LoginModal(),
-                                        Positioned(
-                                          top: -10.0,
-                                          right: 10.0,
-                                          child: IconButton(
-                                            onPressed: () => context.pop(),
-                                            icon: Icon(LucideIcons.x),
-                                          ),
+                                  return Stack(
+                                    alignment: Alignment.topRight,
+                                    children: [
+                                      LoginModal(),
+                                      Positioned(
+                                        top: -10.0,
+                                        right: 10.0,
+                                        child: IconButton(
+                                          onPressed: () => context.pop(),
+                                          icon: Icon(LucideIcons.x),
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   );
                                 },
                               )..whenComplete(

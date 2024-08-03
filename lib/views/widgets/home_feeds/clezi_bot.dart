@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-import 'package:lucide_icons/lucide_icons.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:wavy_slider/wavy_slider.dart';
 
 import '../../../utils/constants.dart';
@@ -53,7 +53,7 @@ class CleziBot extends StatelessWidget {
                 highlightColor: seedColorPalette.shade100,
                 padding: allPadding * 2,
                 icon: Icon(
-                  LucideIcons.search,
+                  HugeIcons.strokeRoundedSearch01,
                   color: seedColor,
                 ),
               ),

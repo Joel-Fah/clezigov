@@ -1,12 +1,11 @@
 import 'package:clezigov/utils/constants.dart';
-import 'package:clezigov/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:lucide_icons/lucide_icons.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 import '../../../widgets/form_fields/simple_text_field.dart';
-import '../../../widgets/primary_button.dart';
+import '../../../widgets/buttons/primary_button.dart';
 import 'email_verification.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
@@ -27,7 +26,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _emailController.addListener((){
       setState(() {
@@ -39,7 +37,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   @override
   void dispose() {
     _emailController.dispose();
-    // TODO: implement dispose
     super.dispose();
   }
 
@@ -71,7 +68,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   SimpleTextFormField(
                     controller: _emailController,
                     hintText: "Email address",
-                    prefixIcon: Icon(LucideIcons.atSign),
+                    prefixIcon: Icon(HugeIcons.strokeRoundedMail02),
                     onChanged: (value) => _email = value,
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) {

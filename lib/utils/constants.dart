@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:lucide_icons/lucide_icons.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 // Nohemi font family
 const String nohemiFont = 'Nohemi';
@@ -39,10 +39,10 @@ MaterialColor seedColorPalette = MaterialColor(
 );
 
 // State Icons
-const IconData successIcon = LucideIcons.badgeCheck;
-const IconData dangerIcon = LucideIcons.xCircle;
-const IconData warningIcon = LucideIcons.alertTriangle;
-const IconData infoIcon = LucideIcons.info;
+const IconData successIcon = HugeIcons.strokeRoundedCheckmarkBadge01;
+const IconData dangerIcon = HugeIcons.strokeRoundedCancelCircle;
+const IconData warningIcon = HugeIcons.strokeRoundedAlert02;
+const IconData infoIcon = HugeIcons.strokeRoundedInformationCircle;
 
 // Border Radius
 BorderRadius borderRadius = BorderRadius.circular(8.0);
@@ -92,6 +92,7 @@ const Duration duration = Duration(milliseconds: 300);
 
 // Media sizes
 double mediaWidth(BuildContext context) => MediaQuery.sizeOf(context).width;
+
 double mediaHeight(BuildContext context) => MediaQuery.sizeOf(context).height;
 
 // Filters
@@ -152,3 +153,54 @@ BoxDecoration formFieldDecoration = BoxDecoration(
 // Validators
 // email regex that allows abc@domain.com, abc+def@domain.com, abc.def@sub.domain.com
 String emailRegex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
+
+// Input borders
+class AppInputBorders {
+  static OutlineInputBorder border = OutlineInputBorder(
+    borderRadius: borderRadius * 2,
+    borderSide: BorderSide(
+      color: Colors.transparent,
+      width: 1.5,
+    ),
+  );
+
+  static OutlineInputBorder focusedBorder = OutlineInputBorder(
+    borderRadius: borderRadius * 2,
+    borderSide: BorderSide(
+      color: seedColor,
+      width: 1.5,
+    ),
+  );
+
+  static OutlineInputBorder errorBorder = OutlineInputBorder(
+    borderRadius: borderRadius * 2,
+    borderSide: BorderSide(
+      color: dangerColor,
+      width: 1.5,
+    ),
+  );
+
+  static OutlineInputBorder focusedErrorBorder = OutlineInputBorder(
+    borderRadius: borderRadius * 2,
+    borderSide: BorderSide(
+      color: dangerColor,
+      width: 1.5,
+    ),
+  );
+
+  static OutlineInputBorder enabledBorder = OutlineInputBorder(
+    borderRadius: borderRadius * 2,
+    borderSide: BorderSide(
+      color: Colors.transparent,
+      width: 1.5,
+    ),
+  );
+
+  static OutlineInputBorder disabledBorder = OutlineInputBorder(
+    borderRadius: borderRadius * 2,
+    borderSide: BorderSide(
+      color: Colors.transparent,
+      width: 1.5,
+    ),
+  );
+}

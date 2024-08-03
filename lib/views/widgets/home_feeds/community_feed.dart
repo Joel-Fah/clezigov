@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:like_button/like_button.dart';
-import 'package:lucide_icons/lucide_icons.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../controllers/endorsements_controller.dart';
@@ -111,8 +111,8 @@ class _CommunityFeedState extends State<CommunityFeed>
               splashColor: seedColorPalette.shade100,
               highlightColor: seedColorPalette.shade100,
               padding: allPadding * 2,
-              icon: Icon(
-                LucideIcons.search,
+              icon: const Icon(
+                HugeIcons.strokeRoundedSearch01,
                 color: seedColor,
               ),
             ),
@@ -172,10 +172,7 @@ class SubmittedContributions extends StatelessWidget {
                       backgroundImage: AssetImage(pfp),
                     ),
                     Gap(8.0),
-                    Text(
-                      "@joel__fah}",
-                      style: AppTextStyles.small
-                    ),
+                    Text("@joel__fah}", style: AppTextStyles.small),
                     Gap(8.0),
                     CircleAvatar(
                       radius: 2.5,
@@ -190,6 +187,7 @@ class SubmittedContributions extends StatelessWidget {
                     ),
                   ],
                 ),
+                Gap(4.0),
                 Text(procedure.title, style: AppTextStyles.h4),
                 Gap(8.0),
                 Row(
@@ -202,7 +200,7 @@ class SubmittedContributions extends StatelessWidget {
                             child: Row(
                               children: [
                                 Icon(
-                                  LucideIcons.coins,
+                                  HugeIcons.strokeRoundedMoney03,
                                   color: disabledColor,
                                   size: 16.0,
                                 ),
@@ -224,7 +222,7 @@ class SubmittedContributions extends StatelessWidget {
                             child: Row(
                               children: [
                                 Icon(
-                                  LucideIcons.timer,
+                                  HugeIcons.strokeRoundedClock05,
                                   color: disabledColor,
                                   size: 16.0,
                                 ),
@@ -246,7 +244,7 @@ class SubmittedContributions extends StatelessWidget {
                             child: Row(
                               children: [
                                 Icon(
-                                  LucideIcons.fileText,
+                                  HugeIcons.strokeRoundedDocumentAttachment,
                                   color: disabledColor,
                                   size: 16.0,
                                 ),
@@ -268,65 +266,59 @@ class SubmittedContributions extends StatelessWidget {
                       children: [
                         GetBuilder<EndorsementsController>(
                             builder: (bookmarksController) {
-                              final int bookmarksCount = bookmarksController
-                                  .endorsements
-                                  .where(
-                                      (element) => element.id == procedure.id)
-                                  .length;
+                          final int bookmarksCount = bookmarksController
+                              .endorsements
+                              .where((element) => element.id == procedure.id)
+                              .length;
 
-                              final bool isBookmarked = bookmarksController
-                                  .endorsements
-                                  .contains(procedure);
+                          final bool isBookmarked = bookmarksController
+                              .endorsements
+                              .contains(procedure);
 
-                              return LikeButton(
-                                onTap: (isLiked) {
-                                  if (isLiked) {
-                                    bookmarksController
-                                        .removeBookmark(procedure);
-                                  } else {
-                                    bookmarksController
-                                        .addBookmark(procedure);
-                                  }
-                                  return Future.value(!isLiked);
-                                },
-                                likeBuilder: (isLiked) {
-                                  return Icon(
-                                    LucideIcons.hand,
-                                    color: isLiked ? seedColor : darkColor,
-                                    size: 16,
-                                  );
-                                },
-
-                                isLiked: isBookmarked,
-                                circleColor: CircleColor(
-                                  start: seedColor.withOpacity(0.16),
-                                  end: seedColor.withOpacity(0.16),
-                                ),
-                                bubblesColor: BubblesColor(
-                                  dotPrimaryColor: seedColor,
-                                  dotSecondaryColor: seedColorPalette.shade100,
-                                ),
-                                countBuilder: (count, isLiked, text) {
-                                  return Text(
-                                    count.toString(),
-                                    style: AppTextStyles.body.copyWith(
-                                      color:
-                                      isLiked ? seedColor : darkColor,
-                                    ),
-                                  );
-                                },
-                                countPostion: CountPostion.right,
-                                likeCount: bookmarksCount > 0
-                                    ? bookmarksCount
-                                    : null,
+                          return LikeButton(
+                            onTap: (isLiked) {
+                              if (isLiked) {
+                                bookmarksController.removeBookmark(procedure);
+                              } else {
+                                bookmarksController.addBookmark(procedure);
+                              }
+                              return Future.value(!isLiked);
+                            },
+                            likeBuilder: (isLiked) {
+                              return Icon(
+                                HugeIcons.strokeRoundedHold05,
+                                color: isLiked ? seedColor : darkColor,
+                                size: 16,
                               );
-                            }),
+                            },
+                            isLiked: isBookmarked,
+                            circleColor: CircleColor(
+                              start: seedColor.withOpacity(0.16),
+                              end: seedColor.withOpacity(0.16),
+                            ),
+                            bubblesColor: BubblesColor(
+                              dotPrimaryColor: seedColor,
+                              dotSecondaryColor: seedColorPalette.shade100,
+                            ),
+                            countBuilder: (count, isLiked, text) {
+                              return Text(
+                                count.toString(),
+                                style: AppTextStyles.body.copyWith(
+                                  color: isLiked ? seedColor : darkColor,
+                                ),
+                              );
+                            },
+                            countPostion: CountPostion.right,
+                            likeCount:
+                                bookmarksCount > 0 ? bookmarksCount : null,
+                          );
+                        }),
                         IconButton(
                           onPressed: () {
                             Share.share(procedure.title);
                           },
                           icon: Icon(
-                            LucideIcons.share2,
+                            HugeIcons.strokeRoundedShare08,
                             size: 16.0,
                           ),
                         )
@@ -367,7 +359,7 @@ class AllContributions extends StatelessWidget {
           Row(
             children: [
               Icon(
-                LucideIcons.target,
+                HugeIcons.strokeRoundedTouchInteraction04,
                 size: 20.0,
                 color: disabledColor,
               ),
@@ -414,7 +406,7 @@ class AllContributions extends StatelessWidget {
           Row(
             children: [
               Icon(
-                LucideIcons.hand,
+                HugeIcons.strokeRoundedHold05,
                 size: 20.0,
                 color: disabledColor,
               ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import '../../utils/constants.dart';
+import '../../../utils/constants.dart';
 
 class PrimaryButton extends StatelessWidget {
   PrimaryButton._({
@@ -80,8 +79,7 @@ class PrimaryButton extends StatelessWidget {
         child: child ??
             Text(
               label!,
-              style: TextStyle(
-                fontSize: 16.0,
+              style: AppTextStyles.body.copyWith(
                 color: labelColor ?? scaffoldBgColor,
                 fontWeight: FontWeight.w500,
               ),

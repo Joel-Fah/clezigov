@@ -2,17 +2,16 @@ import 'dart:async';
 
 import 'package:clezigov/utils/routes.dart';
 import 'package:clezigov/views/screens/auth/forgot%20password/forgot_password.dart';
-import 'package:clezigov/views/widgets/alert_dialog.dart';
 import 'package:clezigov/views/widgets/notification_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:lucide_icons/lucide_icons.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 import '../../../../utils/constants.dart';
 import '../../../widgets/form_fields/password_form_field.dart';
 import '../../../widgets/form_fields/simple_text_field.dart';
-import '../../../widgets/primary_button.dart';
+import '../../../widgets/buttons/primary_button.dart';
 import '../../../widgets/tilt_icon.dart';
 import '../register/user_registration.dart';
 
@@ -51,7 +50,7 @@ class _LoginModalState extends State<LoginModal> {
             padding: allPadding * 1.25,
             children: [
               TiltIcon(
-                icon: LucideIcons.mail,
+                icon: HugeIcons.strokeRoundedMailLock02,
               ),
               Gap(8.0),
               Text(
@@ -62,12 +61,12 @@ class _LoginModalState extends State<LoginModal> {
               Gap(24.0),
               SimpleTextFormField(
                 controller: _emailController,
-                hintText: "Username or email address",
-                prefixIcon: Icon(LucideIcons.atSign),
+                hintText: "Email address or username",
+                prefixIcon: Icon(HugeIcons.strokeRoundedMailAtSign02),
                 onChanged: (value) => username = value,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return "Username or email address is required";
+                    return "Email address or username is required";
                   }
                   return null;
                 },
@@ -76,7 +75,7 @@ class _LoginModalState extends State<LoginModal> {
               PasswordTextFormField(
                 controller: _passwordController,
                 hintText: "Password",
-                prefixIcon: Icon(LucideIcons.lock),
+                prefixIcon: Icon(HugeIcons.strokeRoundedLockPassword),
                 onChanged: (value) => password = value,
                 validator: (value) {
                   if (value!.isEmpty) {

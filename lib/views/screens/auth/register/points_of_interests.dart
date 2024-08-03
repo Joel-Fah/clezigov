@@ -1,15 +1,15 @@
 import 'package:clezigov/models/procedures/category.dart';
 import 'package:clezigov/utils/routes.dart';
-import 'package:clezigov/views/widgets/select_procedures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:lucide_icons/lucide_icons.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 import '../../../../controllers/select_categories_controller.dart';
 import '../../../../utils/constants.dart';
-import '../../../widgets/primary_button.dart';
+import '../../../widgets/buttons/primary_button.dart';
 import '../../home/home.dart';
 
 class PointsOfInterestsPage extends StatelessWidget {
@@ -20,7 +20,6 @@ class PointsOfInterestsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final selectedCategories = Get.find<InterestsController>();
-    bool isSelected = false;
 
     return Scaffold(
       appBar: AppBar(
@@ -42,7 +41,7 @@ class PointsOfInterestsPage extends StatelessWidget {
           Row(
             children: [
               Icon(
-                LucideIcons.info,
+                HugeIcons.strokeRoundedInformationCircle,
                 color: Theme
                     .of(context)
                     .disabledColor,
@@ -74,6 +73,7 @@ class PointsOfInterestsPage extends StatelessWidget {
                     builder: (interestsLogic) {
                       final bool isSelected =
                       interestsLogic.selectedInterests.contains(category);
+
                       return ChoiceChip(
                         label: Text(
                           category.name,
@@ -99,10 +99,6 @@ class PointsOfInterestsPage extends StatelessWidget {
                           isSelected
                               ? interestsLogic.removeFromInterest(category)
                               : interestsLogic.addToInterests(category);
-
-                          debugPrint(
-                              "Selected Interests: ${interestsLogic
-                                  .selectedInterests}");
                         },
                       );
                     });
@@ -123,37 +119,33 @@ class PointsOfInterestsPage extends StatelessWidget {
                       isScrollControlled: true,
                       isDismissible: false,
                       builder: (context) {
-                        return BackdropFilter(
-                          filter: blurFilter,
-                          child: ListView(
-                            shrinkWrap: true,
-                            padding: allPadding * 1.25,
-                            children: [
-                              SvgPicture.asset(userAvatars),
-                              Gap(8.0),
-                              Text(
-                                "Registration successful",
-                                style: AppTextStyles.h2.copyWith(
-                                  color: successColor,
-                                ),
-                                textAlign: TextAlign.center,
+                        return ListView(
+                          shrinkWrap: true,
+                          padding: allPadding * 1.25,
+                          children: [
+                            SvgPicture.asset(userAvatars),
+                            Gap(8.0),
+                            Text(
+                              "Registration successful",
+                              style: AppTextStyles.h2.copyWith(
+                                color: successColor,
                               ),
-                              Gap(8.0),
-                              Text(
-                                "You are officially a member of of the CleziGov community. Make sure to explore all the features and information you get here.",
-                                style: AppTextStyles.body,
-                                textAlign: TextAlign.center,
-                              ),
-                              Gap(24.0),
-                              PrimaryButton.label(
-                                onPressed: () {
-                                  // TODO: Go to home page
-                                  context.goPush(HomePage.routeName);
-                                },
-                                label: "Explore right away!",
-                              )
-                            ],
-                          ),
+                              textAlign: TextAlign.center,
+                            ),
+                            Gap(8.0),
+                            Text(
+                              "You are officially a member of of the CleziGov community. Make sure to explore all the features and information you get here.",
+                              style: AppTextStyles.body,
+                              textAlign: TextAlign.center,
+                            ),
+                            Gap(24.0),
+                            PrimaryButton.label(
+                              onPressed: () {
+                                context.go(HomePage.routeName);
+                              },
+                              label: "Explore right away!",
+                            )
+                          ],
                         );
                       },
                     );
@@ -166,7 +158,7 @@ class PointsOfInterestsPage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(LucideIcons.alertTriangle, color: warningColor, size: 16.0,),
+                      Icon(HugeIcons.strokeRoundedAlert02, color: warningColor, size: 16.0,),
                       Gap(8.0),
                       Text(
                         "You must select at least 3 points of interests",

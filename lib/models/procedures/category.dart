@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lucide_icons/lucide_icons.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 class Category {
   String id;
@@ -99,13 +99,13 @@ List<Category> categories = [
 ];
 
 List<Map<Category, IconData>> categoryIcons = [
-  {categories[0]: LucideIcons.scale},
-  {categories[1]: LucideIcons.heartPulse},
-  {categories[2]: LucideIcons.library},
-  {categories[3]: LucideIcons.sprout},
-  {categories[4]: LucideIcons.swissFranc},
-  {categories[5]: LucideIcons.globe2},
-  {categories[6]: LucideIcons.dumbbell},
-  {categories[7]: LucideIcons.hardHat},
-  {categories[8]: LucideIcons.atom},
+  {categories[0]: HugeIcons.strokeRoundedJusticeScale01},
+  {categories[1]: HugeIcons.strokeRoundedHealth},
+  {categories[2]: HugeIcons.strokeRoundedGlobalEducation},
+  {categories[3]: HugeIcons.strokeRoundedPlant03},
+  {categories[4]: HugeIcons.strokeRoundedCashback},
+  {categories[5]: HugeIcons.strokeRoundedGlobal},
+  {categories[6]: HugeIcons.strokeRoundedDumbbell02},
+  {categories[7]: HugeIcons.strokeRoundedLabor},
+  {categories[8]: HugeIcons.strokeRoundedTestTube01},
 ];

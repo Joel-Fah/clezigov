@@ -1,7 +1,6 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:clezigov/controllers/bookmarks_controller.dart';
 import 'package:clezigov/models/procedures/category.dart';
-import 'package:clezigov/utils/routes.dart';
 import 'package:clezigov/views/screens/home/procedure_details.dart';
 import 'package:clezigov/views/widgets/home_feeds/procedures/recommended.dart';
 import 'package:clezigov/views/widgets/tilt_icon.dart';
@@ -10,8 +9,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:like_button/like_button.dart';
-import 'package:lucide_icons/lucide_icons.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../models/procedures/procedures.dart';
@@ -27,9 +26,6 @@ class ProceduresFeed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final BookmarksController bookmarksController =
-        Get.find<BookmarksController>();
-
     final TextEditingController searchController = TextEditingController();
 
     return Scaffold(
@@ -66,8 +62,8 @@ class ProceduresFeed extends StatelessWidget {
               splashColor: seedColorPalette.shade100,
               highlightColor: seedColorPalette.shade100,
               padding: allPadding * 2,
-              icon: Icon(
-                LucideIcons.search,
+              icon: const Icon(
+                HugeIcons.strokeRoundedSearch01,
                 color: seedColor,
               ),
             ),
@@ -100,7 +96,7 @@ class ProceduresFeed extends StatelessWidget {
               itemCount: procedures.length,
               itemBuilder: (context, index) {
                 final Procedure procedure = procedures[index];
-                return RecommendedProcedure(procedure: procedure);
+                return RecommendedProcedure(procedureId: procedure.id);
               },
             ),
           ),
@@ -145,59 +141,62 @@ class ProceduresFeed extends StatelessWidget {
                     ),
                   );
                 },
-              )..add(GestureDetector(
-                  onTap: () {
-                    // Bottom sheet for categories
-                    showModalBottomSheet(
-                      context: context,
-                      isScrollControlled: true,
-                      isDismissible: true,
-                      constraints: BoxConstraints(
-                        maxHeight: mediaHeight(context) / 1.5,
-                      ),
-                      builder: (context) {
-                        return Stack(
-                          children: [
-                            CategoriesList(searchController: searchController),
-                            Positioned(
-                              top: -10.0,
-                              right: 10.0,
-                              child: IconButton(
-                                onPressed: () => context.pop(),
-                                icon: Icon(LucideIcons.x),
-                              ),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  },
-                  child: Container(
-                    padding: allPadding * 2,
-                    decoration: BoxDecoration(
-                      color: backgroundColor,
-                      borderRadius: borderRadius * 2.75,
-                      boxShadow: [shadow],
-                    ),
-                    constraints: BoxConstraints(
-                      minWidth: 112.0,
-                    ),
-                    child: Column(
-                      children: [
-                        TiltIcon(
-                          icon: LucideIcons.arrowUpRight,
-                          iconSize: 24.0,
+              )..add(
+                  GestureDetector(
+                    onTap: () {
+                      // Bottom sheet for categories
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        isDismissible: true,
+                        constraints: BoxConstraints(
+                          maxHeight: mediaHeight(context) / 1.5,
                         ),
-                        Gap(8.0),
-                        Text(
-                          "More...",
-                          style: AppTextStyles.body
-                              .copyWith(color: scaffoldBgColor),
-                        )
-                      ],
+                        builder: (context) {
+                          return Stack(
+                            children: [
+                              CategoriesList(
+                                  searchController: searchController),
+                              Positioned(
+                                top: -10.0,
+                                right: 10.0,
+                                child: IconButton(
+                                  onPressed: () => context.pop(),
+                                  icon: Icon(HugeIcons.strokeRoundedCancel01),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    child: Container(
+                      padding: allPadding * 2,
+                      decoration: BoxDecoration(
+                        color: backgroundColor,
+                        borderRadius: borderRadius * 2.75,
+                        boxShadow: [shadow],
+                      ),
+                      constraints: BoxConstraints(
+                        minWidth: 112.0,
+                      ),
+                      child: Column(
+                        children: [
+                          TiltIcon(
+                            icon: HugeIcons.strokeRoundedArrowUpRight02,
+                            iconSize: 24.0,
+                          ),
+                          Gap(8.0),
+                          Text(
+                            "More...",
+                            style: AppTextStyles.body
+                                .copyWith(color: scaffoldBgColor),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                )),
+                ),
             ),
           ),
           Gap(16.0),
@@ -256,7 +255,7 @@ class ProceduresFeed extends StatelessWidget {
                                   child: Row(
                                     children: [
                                       Icon(
-                                        LucideIcons.coins,
+                                        HugeIcons.strokeRoundedMoney03,
                                         color: disabledColor,
                                         size: 16.0,
                                       ),
@@ -278,7 +277,7 @@ class ProceduresFeed extends StatelessWidget {
                                   child: Row(
                                     children: [
                                       Icon(
-                                        LucideIcons.timer,
+                                        HugeIcons.strokeRoundedClock05,
                                         color: disabledColor,
                                         size: 16.0,
                                       ),
@@ -300,7 +299,8 @@ class ProceduresFeed extends StatelessWidget {
                                   child: Row(
                                     children: [
                                       Icon(
-                                        LucideIcons.fileText,
+                                        HugeIcons
+                                            .strokeRoundedDocumentAttachment,
                                         color: disabledColor,
                                         size: 16.0,
                                       ),
@@ -345,7 +345,7 @@ class ProceduresFeed extends StatelessWidget {
                                   },
                                   likeBuilder: (isLiked) {
                                     return Icon(
-                                      LucideIcons.bookmark,
+                                      HugeIcons.strokeRoundedBookmark02,
                                       color: isLiked ? warningColor : darkColor,
                                       size: 16,
                                     );
@@ -375,7 +375,7 @@ class ProceduresFeed extends StatelessWidget {
                                   Share.share(procedure.title);
                                 },
                                 icon: Icon(
-                                  LucideIcons.share2,
+                                  HugeIcons.strokeRoundedShare08,
                                   size: 16.0,
                                 ),
                               )
@@ -410,8 +410,6 @@ class CategoriesList extends StatefulWidget {
 class _CategoriesListState extends State<CategoriesList> {
   @override
   Widget build(BuildContext context) {
-    // function to filter categories base on name
-    // and return the search results
     final List<Category> allCategories = categories;
 
     return Column(
@@ -438,11 +436,11 @@ class _CategoriesListState extends State<CategoriesList> {
                   maxHeight: 56.0,
                 ),
                 hintText: "Search for a category..",
-                prefixIcon: Icon(LucideIcons.search),
+                prefixIcon: Icon(HugeIcons.strokeRoundedSearchList01),
                 // show suffix button if search field is not empty
                 suffixIcon: widget.searchController.text.isNotEmpty
                     ? IconButton(
-                        icon: Icon(LucideIcons.x),
+                        icon: Icon(HugeIcons.strokeRoundedCancel01),
                         onPressed: () {
                           setState(() {
                             widget.searchController.clear();

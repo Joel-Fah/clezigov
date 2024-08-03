@@ -1,6 +1,6 @@
 import 'package:clezigov/utils/constants.dart';
 import 'package:clezigov/views/widgets/form_fields/simple_text_field.dart';
-import 'package:clezigov/views/widgets/primary_button.dart';
+import 'package:clezigov/views/widgets/buttons/primary_button.dart';
 import 'package:clezigov/views/widgets/tilt_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';

@@ -1,12 +1,13 @@
 import 'package:clezigov/utils/routes.dart';
 import 'package:clezigov/views/screens/auth/forgot%20password/reset_password.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
-import 'package:lucide_icons/lucide_icons.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 import '../../../../utils/constants.dart';
 import '../../../widgets/form_fields/simple_text_field.dart';
-import '../../../widgets/primary_button.dart';
+import '../../../widgets/buttons/primary_button.dart';
 
 class EmailVerificationPage extends StatefulWidget {
   const EmailVerificationPage({super.key, required this.email});
@@ -77,7 +78,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
                   SimpleTextFormField(
                     controller: _codeVerificationController,
                     hintText: "Enter verification code",
-                    prefixIcon: Icon(LucideIcons.rectangleHorizontal),
+                    prefixIcon: Icon(HugeIcons.strokeRoundedPinCode),
                     onChanged: (value) => _code = value,
                   ),
                   Gap(16.0),

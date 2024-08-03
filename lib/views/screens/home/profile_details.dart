@@ -5,7 +5,7 @@ import 'package:clezigov/views/widgets/home_feeds/procedures_feed.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
-import 'package:lucide_icons/lucide_icons.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 import '../../../utils/constants.dart';
 import '../../widgets/home_feeds/profile/profile_image_blur_painter.dart';
@@ -26,7 +26,7 @@ class ProfileDetailsPage extends StatelessWidget {
         title: const Text('Profile Information'),
         actions: [
           PopupMenuButton<String>(
-            icon: Icon(LucideIcons.moreVertical),
+            icon: Icon(HugeIcons.strokeRoundedMoreVertical),
             tooltip: 'More options',
             clipBehavior: Clip.hardEdge,
             itemBuilder: (context) {
@@ -36,11 +36,16 @@ class ProfileDetailsPage extends StatelessWidget {
                       EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
                   child: Row(
                     children: [
-                      Icon(LucideIcons.pencil, size: 20.0,),
+                      Icon(
+                        HugeIcons.strokeRoundedEdit02,
+                        size: 20.0,
+                      ),
                       Gap(8.0),
                       Text(
                         "Edit profile",
-                        style: AppTextStyles.body.copyWith(fontSize: 14.0,),
+                        style: AppTextStyles.body.copyWith(
+                          fontSize: 14.0,
+                        ),
                       ),
                     ],
                   ),
@@ -51,11 +56,16 @@ class ProfileDetailsPage extends StatelessWidget {
                       EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
                   child: Row(
                     children: [
-                      Icon(LucideIcons.info, size: 20.0,),
+                      Icon(
+                        HugeIcons.strokeRoundedInformationCircle,
+                        size: 20.0,
+                      ),
                       Gap(8.0),
                       Text(
                         "Help",
-                        style: AppTextStyles.body.copyWith(fontSize: 14.0,),
+                        style: AppTextStyles.body.copyWith(
+                          fontSize: 14.0,
+                        ),
                       ),
                     ],
                   ),
@@ -67,7 +77,11 @@ class ProfileDetailsPage extends StatelessWidget {
                       EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
                   child: Row(
                     children: [
-                      Icon(LucideIcons.flagTriangleLeft, size: 20.0, color: dangerColor,),
+                      Icon(
+                        HugeIcons.strokeRoundedFlag01,
+                        size: 20.0,
+                        color: dangerColor,
+                      ),
                       Gap(8.0),
                       Text(
                         "Report",
@@ -146,7 +160,7 @@ class ProfileDetailsPage extends StatelessWidget {
                             child: Row(
                               children: [
                                 Icon(
-                                  LucideIcons.badgeCheck,
+                                  HugeIcons.strokeRoundedCheckmarkBadge01,
                                   color: scaffoldBgColor,
                                   size: 16.0,
                                 ),
@@ -168,7 +182,7 @@ class ProfileDetailsPage extends StatelessWidget {
                               color: imageColor,
                             ),
                             child: Icon(
-                              LucideIcons.imagePlus,
+                              HugeIcons.strokeRoundedImageAdd01,
                               size: 16.0,
                               color: scaffoldBgColor,
                             ),

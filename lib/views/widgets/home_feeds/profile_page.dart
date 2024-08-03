@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:lucide_icons/lucide_icons.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 import '../../../utils/constants.dart';
 import '../../screens/home/profile_details.dart';
@@ -66,7 +66,7 @@ class ProfilePage extends StatelessWidget {
               highlightColor: seedColorPalette.shade100,
               padding: allPadding * 2,
               icon: Icon(
-                LucideIcons.pieChart,
+                HugeIcons.strokeRoundedPieChart,
                 color: seedColor,
               ),
             ),
@@ -132,7 +132,7 @@ class ProfilePage extends StatelessWidget {
                         child: Row(
                           children: [
                             Icon(
-                              LucideIcons.badgeCheck,
+                              HugeIcons.strokeRoundedCheckmarkBadge01,
                               color: scaffoldBgColor,
                               size: 16.0,
                             ),
@@ -168,7 +168,7 @@ class ProfilePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
-                      LucideIcons.atSign,
+                      HugeIcons.strokeRoundedAttachment,
                       size: 16.0,
                       color: imageColor,
                     ),
@@ -238,12 +238,12 @@ class ProfilePage extends StatelessWidget {
                           borderRadius: borderRadius * 2,
                         ),
                         leading: Icon(
-                          LucideIcons.contact2,
+                          HugeIcons.strokeRoundedId,
                           color: imageColor,
                         ),
                         title: Text("Profile Information"),
                         trailing: Icon(
-                          LucideIcons.chevronRight,
+                          HugeIcons.strokeRoundedArrowRight01,
                           color: imageColor,
                         ),
                       ),
@@ -266,12 +266,12 @@ class ProfilePage extends StatelessWidget {
                           borderRadius: borderRadius * 2,
                         ),
                         leading: Icon(
-                          LucideIcons.mailCheck,
+                          HugeIcons.strokeRoundedUserCheck01,
                           color: imageColor,
                         ),
                         title: Text("Verify account"),
                         trailing: Icon(
-                          LucideIcons.chevronRight,
+                          HugeIcons.strokeRoundedArrowRight01,
                           color: imageColor,
                         ),
                       ),
@@ -292,12 +292,12 @@ class ProfilePage extends StatelessWidget {
                           borderRadius: borderRadius * 2,
                         ),
                         leading: Icon(
-                          LucideIcons.bookmark,
+                          HugeIcons.strokeRoundedAllBookmark,
                           color: imageColor,
                         ),
                         title: Text("Bookmarks"),
                         trailing: Icon(
-                          LucideIcons.chevronRight,
+                          HugeIcons.strokeRoundedArrowRight01,
                           color: imageColor,
                         ),
                       ),
@@ -320,12 +320,12 @@ class ProfilePage extends StatelessWidget {
                           borderRadius: borderRadius * 2,
                         ),
                         leading: Icon(
-                          LucideIcons.pieChart,
+                          HugeIcons.strokeRoundedActivity03,
                           color: imageColor,
                         ),
                         title: Text("Community activity"),
                         trailing: Icon(
-                          LucideIcons.chevronRight,
+                          HugeIcons.strokeRoundedArrowRight01,
                           color: imageColor,
                         ),
                       ),
@@ -361,12 +361,12 @@ class ProfilePage extends StatelessWidget {
                         borderRadius: borderRadius * 2,
                       ),
                       leading: Icon(
-                        LucideIcons.sunMoon,
+                        HugeIcons.strokeRoundedIdea01,
                         color: imageColor,
                       ),
                       title: Text("Appearance"),
                       trailing: Icon(
-                        LucideIcons.chevronRight,
+                        HugeIcons.strokeRoundedArrowRight01,
                         color: imageColor,
                       ),
                     ),
@@ -389,12 +389,12 @@ class ProfilePage extends StatelessWidget {
                         borderRadius: borderRadius * 2,
                       ),
                       leading: Icon(
-                        LucideIcons.bell,
+                        HugeIcons.strokeRoundedNotification03,
                         color: imageColor,
                       ),
                       title: Text("Notifications"),
                       trailing: Icon(
-                        LucideIcons.chevronRight,
+                        HugeIcons.strokeRoundedArrowRight01,
                         color: imageColor,
                       ),
                     ),
@@ -415,12 +415,12 @@ class ProfilePage extends StatelessWidget {
                         borderRadius: borderRadius * 2,
                       ),
                       leading: Icon(
-                        LucideIcons.shield,
+                        HugeIcons.strokeRoundedShield01,
                         color: imageColor,
                       ),
                       title: Text("Privacy"),
                       trailing: Icon(
-                        LucideIcons.chevronRight,
+                        HugeIcons.strokeRoundedArrowRight01,
                         color: imageColor,
                       ),
                     ),
@@ -449,10 +449,10 @@ class ProfilePage extends StatelessWidget {
                       overlayColor:
                           WidgetStateProperty.all(seedColorPalette.shade100),
                       child: ListTile(
-                        leading: Icon(LucideIcons.badgeAlert),
+                        leading: Icon(HugeIcons.strokeRoundedAlertDiamond),
                         title: Text("Legal"),
                         trailing: Icon(
-                          LucideIcons.arrowUpRight,
+                          HugeIcons.strokeRoundedArrowUpRight02,
                           color: seedColor,
                         ),
                       ),
@@ -483,7 +483,7 @@ class ProfilePage extends StatelessWidget {
                           dangerColor.withOpacity(0.16)),
                       child: ListTile(
                         leading: Icon(
-                          LucideIcons.logOut,
+                          HugeIcons.strokeRoundedLogout03,
                           color: dangerColor,
                         ),
                         title: Text("Log out"),

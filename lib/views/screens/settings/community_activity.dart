@@ -14,7 +14,6 @@ class CommunityActivityPage extends StatefulWidget {
 
 class _CommunityActivityPageState extends State<CommunityActivityPage>
     with SingleTickerProviderStateMixin {
-  // tab bar controller
   late TabController _tabController;
 
   List<String> tabNames = [

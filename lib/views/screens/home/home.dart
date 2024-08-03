@@ -3,14 +3,15 @@ import 'dart:ui';
 
 import 'package:clezigov/views/widgets/alert_dialog.dart';
 import 'package:clezigov/views/widgets/notification_snackbar.dart';
-import 'package:clezigov/views/widgets/primary_button.dart';
+import 'package:clezigov/views/widgets/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:lucide_icons/lucide_icons.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:palette_generator/palette_generator.dart';
 import 'package:pie_menu/pie_menu.dart';
 
@@ -129,16 +130,18 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     ];
 
     final List<Widget> tabIcons = [
-      Icon(LucideIcons.scrollText),
-      Icon(LucideIcons.radio),
-      Icon(LucideIcons.bot),
+      Icon(HugeIcons.strokeRoundedScroll),
+      Icon(HugeIcons.strokeRoundedMessageMultiple01),
+      Icon(HugeIcons.strokeRoundedChatBot),
       AnimatedContainer(
         duration: duration,
         decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(
-                color: currentPage == 3 ? scaffoldBgColor : Colors.transparent,
-                width: 1.5)),
+          shape: BoxShape.circle,
+          border: Border.all(
+            color: currentPage == 3 ? scaffoldBgColor : Colors.transparent,
+            width: 1.5,
+          ),
+        ),
         child: CircleAvatar(
           radius: 16.0,
           backgroundColor: seedColorPalette.shade700,
@@ -227,7 +230,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     Future.delayed(duration * 1.5, () {
                       showDefaultDialog(
                         context: context,
-                        icon: LucideIcons.bot,
+                        icon: HugeIcons.strokeRoundedChatBot,
                         title: "Before you proceed...",
                         message: "Clezi is a bot that can help you with any "
                             "questions you have. Please do not share any personal "
@@ -318,47 +321,24 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         vertical: 16.0,
                         horizontal: 16.0,
                       ),
-                      border: OutlineInputBorder(
+                      border: AppInputBorders.border.copyWith(
                         borderRadius: borderRadius * 2.75,
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1.5,
-                        ),
                       ),
-                      focusedBorder: OutlineInputBorder(
+                      focusedBorder: AppInputBorders.focusedBorder.copyWith(
                         borderRadius: borderRadius * 2.75,
-                        borderSide: BorderSide(
-                          color: seedColor,
-                          width: 1.5,
-                        ),
                       ),
-                      errorBorder: OutlineInputBorder(
+                      errorBorder: AppInputBorders.errorBorder.copyWith(
                         borderRadius: borderRadius * 2.75,
-                        borderSide: BorderSide(
-                          color: dangerColor,
-                          width: 1.5,
-                        ),
                       ),
-                      focusedErrorBorder: OutlineInputBorder(
+                      focusedErrorBorder:
+                          AppInputBorders.focusedErrorBorder.copyWith(
                         borderRadius: borderRadius * 2.75,
-                        borderSide: BorderSide(
-                          color: dangerColor,
-                          width: 1.5,
-                        ),
                       ),
-                      enabledBorder: OutlineInputBorder(
+                      enabledBorder: AppInputBorders.enabledBorder.copyWith(
                         borderRadius: borderRadius * 2.75,
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1.5,
-                        ),
                       ),
-                      disabledBorder: OutlineInputBorder(
+                      disabledBorder: AppInputBorders.disabledBorder.copyWith(
                         borderRadius: borderRadius * 2.75,
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1.5,
-                        ),
                       ),
                     ),
                   ),
@@ -378,7 +358,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     icon: Transform.rotate(
                       angle: cleziFocusNode.hasFocus ? (45.0 * pi / 180.0) : 0,
                       child: Icon(
-                        LucideIcons.send,
+                        HugeIcons.strokeRoundedSent,
                         color: isCleziMessageFilled ? seedColor : disabledColor,
                       ),
                     ),
@@ -412,6 +392,18 @@ class TabBuilder extends StatelessWidget {
       // Community tab
       if (index == 1) {
         return PieMenu(
+          onPressed: () {
+            // show flutter toast
+            Fluttertoast.showToast(
+              msg: "Long press for options",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: disabledColor.withOpacity(0.8),
+              textColor: scaffoldBgColor,
+              fontSize: 16.0,
+            );
+          },
           onToggle: (menuOpen) {
             if (menuOpen) {
               HapticFeedback.lightImpact();
@@ -428,7 +420,7 @@ class TabBuilder extends StatelessWidget {
                   message: "Submit procedure selected successfully",
                 );
               },
-              child: const Icon(LucideIcons.send),
+              child: const Icon(HugeIcons.strokeRoundedSent),
             ),
             PieAction(
               tooltip: const Text('Request procedure'),
@@ -440,7 +432,7 @@ class TabBuilder extends StatelessWidget {
                   message: "Request procedure selected successfully",
                 );
               },
-              child: const Icon(LucideIcons.lightbulb),
+              child: const Icon(HugeIcons.strokeRoundedIdea),
             ),
           ],
           child: Animate(
@@ -489,7 +481,6 @@ class TabBuilder extends StatelessWidget {
         child: Row(
           children: [
             icon,
-            // if (index == currentIndex)
             Gap(8.0),
             Text(
               title,

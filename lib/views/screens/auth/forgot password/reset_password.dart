@@ -4,9 +4,9 @@ import 'package:clezigov/views/widgets/form_fields/password_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:lucide_icons/lucide_icons.dart';
+import 'package:hugeicons/hugeicons.dart';
 
-import '../../../widgets/primary_button.dart';
+import '../../../widgets/buttons/primary_button.dart';
 
 class ResetPasswordPage extends StatefulWidget {
   const ResetPasswordPage({super.key});
@@ -85,7 +85,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   PasswordTextFormField(
                     controller: _newPasswordController,
                     hintText: "New password",
-                    prefixIcon: Icon(LucideIcons.keySquare),
+                    prefixIcon: Icon(HugeIcons.strokeRoundedKey02),
                     keyboardType: TextInputType.visiblePassword,
                     onChanged: (value) => _newPassword = value,
                   ),
@@ -93,7 +93,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   PasswordTextFormField(
                     controller: _confirmNewPasswordController,
                     hintText: "Confirm new password",
-                    prefixIcon: Icon(LucideIcons.lock),
+                    prefixIcon: Icon(HugeIcons.strokeRoundedLockKey),
                     keyboardType: TextInputType.visiblePassword,
                     onChanged: (value) => _confirmNewPassword = value,
                   ),

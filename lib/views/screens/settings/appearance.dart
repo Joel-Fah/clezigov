@@ -5,7 +5,7 @@ import 'package:clezigov/views/widgets/home_feeds/profile/profile_image_blur_pai
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
-import 'package:lucide_icons/lucide_icons.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 class AppearancePage extends StatelessWidget {
   const AppearancePage({super.key});
@@ -164,7 +164,7 @@ class ThemeCard extends StatelessWidget {
                   child: Row(
                     children: [
                       Icon(
-                        LucideIcons.checkCircle2,
+                        HugeIcons.strokeRoundedCheckmarkCircle02,
                         size: 16.0,
                         color: disabledColor,
                       ),

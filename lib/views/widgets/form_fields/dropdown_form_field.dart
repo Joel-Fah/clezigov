@@ -2,8 +2,8 @@ import 'package:clezigov/utils/constants.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:lucide_icons/lucide_icons.dart';
 
 class DefaultDropdownFormField extends StatefulWidget {
   const DefaultDropdownFormField({
@@ -42,154 +42,126 @@ class _DefaultDropdownFormFieldState extends State<DefaultDropdownFormField> {
       child: DropdownSearch<String>(
         dropdownButtonProps: DropdownButtonProps(
           tooltip: "Expand",
-          icon: Icon(LucideIcons.chevronsUpDown),
+          icon: Icon(HugeIcons.strokeRoundedUnfoldMore),
         ),
         popupProps: PopupProps.modalBottomSheet(
-            showSelectedItems: true,
-            showSearchBox: true,
-            searchDelay: duration * 3,
-            loadingBuilder: (context, searchEntry) {
-              return Center(
-                child: LoadingAnimationWidget.flickr(
-                  leftDotColor: seedColorPalette.shade200,
-                  rightDotColor: seedColor,
-                  size: 50.0,
-                ),
-              );
-            },
-            itemBuilder: (context, item, isSelected) {
-              return Container(
-                decoration: BoxDecoration(
+          showSelectedItems: true,
+          showSearchBox: true,
+          searchDelay: duration * 3,
+          loadingBuilder: (context, searchEntry) {
+            return Center(
+              child: LoadingAnimationWidget.flickr(
+                leftDotColor: seedColorPalette.shade200,
+                rightDotColor: seedColor,
+                size: 50.0,
+              ),
+            );
+          },
+          itemBuilder: (context, item, isSelected) {
+            return Container(
+              decoration: BoxDecoration(
+                borderRadius: borderRadius * 2,
+                color: isSelected
+                    ? seedColor.withOpacity(0.08)
+                    : Colors.transparent,
+              ),
+              child: ListTile(
+                shape: RoundedRectangleBorder(
                   borderRadius: borderRadius * 2,
-                  color: isSelected
-                      ? seedColor.withOpacity(0.08)
-                      : Colors.transparent,
                 ),
-                child: ListTile(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: borderRadius * 2,
+                title: Text(
+                  item,
+                  style: AppTextStyles.body.copyWith(
+                    color: isSelected ? seedColor : null,
+                    fontWeight: isSelected ? FontWeight.bold : null,
                   ),
-                  title: Text(
-                    item,
-                    style: AppTextStyles.body.copyWith(
-                      color: isSelected ? seedColor : null,
-                      fontWeight: isSelected ? FontWeight.bold : null,
-                    ),
-                  ),
-                  selected: isSelected,
-                  trailing: isSelected
-                      ? Icon(
-                          LucideIcons.check,
-                          color: seedColor,
-                        )
-                      : null,
                 ),
-              );
-            },
-            title: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: widget.searchTitleWidget ??
-                  Text(widget.searchTitle!, style: AppTextStyles.h3),
-            ),
-            listViewProps: ListViewProps(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              physics: AlwaysScrollableScrollPhysics(),
-              shrinkWrap: true,
-            ),
-            modalBottomSheetProps: ModalBottomSheetProps(
-              enableDrag: true,
-              isScrollControlled: true,
-            ),
-            emptyBuilder: (context, searchEntry) {
-              return Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      LucideIcons.search,
-                      color: Theme.of(context).disabledColor.withOpacity(0.24),
-                      size: 80.0,
-                    ),
-                    Gap(24.0),
-                    Text.rich(
-                      TextSpan(children: [
-                        TextSpan(text: "No entry for \""),
-                        TextSpan(
-                          text: searchEntry,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        TextSpan(
-                          text: "\" found.",
-                        ),
-                      ]),
-                      style: AppTextStyles.body.copyWith(
-                        color: Theme.of(context).disabledColor,
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-            searchFieldProps: TextFieldProps(
-              controller: widget.searchController,
-              decoration: InputDecoration(
-                hintText: "Start typing...",
-                prefixIcon: Icon(LucideIcons.search),
-                suffixIcon: widget.searchController.text.isNotEmpty
-                    ? IconButton(
-                        icon: Icon(LucideIcons.x),
-                        onPressed: () {
-                          setState(() {
-                            widget.searchController.clear();
-                          });
-                        },
+                selected: isSelected,
+                trailing: isSelected
+                    ? Icon(
+                        HugeIcons.strokeRoundedTick02,
+                        color: seedColor,
                       )
                     : null,
-                fillColor: Colors.white,
-                filled: true,
-                contentPadding: EdgeInsets.symmetric(
-                  vertical: 16.0,
-                  horizontal: 16.0,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: borderRadius * 2,
-                  borderSide: BorderSide(
-                    color: Colors.transparent,
-                    width: 1.5,
-                  ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: borderRadius * 2,
-                  borderSide: BorderSide(
-                    color: Colors.transparent,
-                    width: 1.5,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: borderRadius * 2,
-                  borderSide: BorderSide(
-                    color: seedColor,
-                    width: 1.5,
-                  ),
-                ),
-                errorBorder: OutlineInputBorder(
-                  borderRadius: borderRadius * 2,
-                  borderSide: BorderSide(
-                    color: dangerColor,
-                    width: 1.5,
-                  ),
-                ),
-                focusedErrorBorder: OutlineInputBorder(
-                  borderRadius: borderRadius * 2,
-                  borderSide: BorderSide(
-                    color: dangerColor,
-                    width: 1.5,
-                  ),
-                ),
               ),
-            )),
+            );
+          },
+          title: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: widget.searchTitleWidget ??
+                Text(widget.searchTitle!, style: AppTextStyles.h3),
+          ),
+          listViewProps: ListViewProps(
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            physics: AlwaysScrollableScrollPhysics(),
+            shrinkWrap: true,
+          ),
+          modalBottomSheetProps: ModalBottomSheetProps(
+            enableDrag: true,
+            isScrollControlled: true,
+          ),
+          emptyBuilder: (context, searchEntry) {
+            return Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    HugeIcons.strokeRoundedSearch01,
+                    color: Theme.of(context).disabledColor.withOpacity(0.24),
+                    size: 80.0,
+                  ),
+                  Gap(24.0),
+                  Text.rich(
+                    TextSpan(children: [
+                      TextSpan(text: "No entry for \""),
+                      TextSpan(
+                        text: searchEntry,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      TextSpan(
+                        text: "\" found.",
+                      ),
+                    ]),
+                    style: AppTextStyles.body.copyWith(
+                      color: Theme.of(context).disabledColor,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+          searchFieldProps: TextFieldProps(
+            controller: widget.searchController,
+            decoration: InputDecoration(
+              hintText: "Start typing...",
+              prefixIcon: Icon(HugeIcons.strokeRoundedSearchList01),
+              suffixIcon: widget.searchController.text.isNotEmpty
+                  ? IconButton(
+                      icon: Icon(HugeIcons.strokeRoundedCancel01),
+                      onPressed: () {
+                        setState(() {
+                          widget.searchController.clear();
+                        });
+                      },
+                    )
+                  : null,
+              fillColor: Colors.white,
+              filled: true,
+              contentPadding: EdgeInsets.symmetric(
+                vertical: 16.0,
+                horizontal: 16.0,
+              ),
+              border: AppInputBorders.border,
+              focusedBorder: AppInputBorders.focusedBorder,
+              errorBorder: AppInputBorders.errorBorder,
+              focusedErrorBorder: AppInputBorders.focusedErrorBorder,
+              enabledBorder: AppInputBorders.enabledBorder,
+              disabledBorder: AppInputBorders.disabledBorder,
+            ),
+          ),
+        ),
         items: widget.items,
         dropdownDecoratorProps: DropDownDecoratorProps(
           baseStyle: AppTextStyles.body,
@@ -206,48 +178,12 @@ class _DefaultDropdownFormFieldState extends State<DefaultDropdownFormField> {
               horizontal: 16.0,
             ),
             prefixIcon: widget.prefixIcon,
-            border: OutlineInputBorder(
-              borderRadius: borderRadius * 2,
-              borderSide: BorderSide(
-                color: Colors.transparent,
-                width: 1.5,
-              ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: borderRadius * 2,
-              borderSide: BorderSide(
-                color: seedColor,
-                width: 1.5,
-              ),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: borderRadius * 2,
-              borderSide: BorderSide(
-                color: dangerColor,
-                width: 1.5,
-              ),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: borderRadius * 2,
-              borderSide: BorderSide(
-                color: dangerColor,
-                width: 1.5,
-              ),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: borderRadius * 2,
-              borderSide: BorderSide(
-                color: Colors.transparent,
-                width: 1.5,
-              ),
-            ),
-            disabledBorder: OutlineInputBorder(
-              borderRadius: borderRadius * 2,
-              borderSide: BorderSide(
-                color: Colors.transparent,
-                width: 1.5,
-              ),
-            ),
+            border: AppInputBorders.border,
+            focusedBorder: AppInputBorders.focusedBorder,
+            errorBorder: AppInputBorders.errorBorder,
+            focusedErrorBorder: AppInputBorders.focusedErrorBorder,
+            enabledBorder: AppInputBorders.enabledBorder,
+            disabledBorder: AppInputBorders.disabledBorder,
           ),
         ),
         onChanged: widget.onChanged,

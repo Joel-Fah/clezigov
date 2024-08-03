@@ -4,7 +4,7 @@ import 'package:clezigov/views/widgets/form_fields/dropdown_form_field.dart';
 import 'package:clezigov/views/widgets/home_feeds/procedures_feed.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:lucide_icons/lucide_icons.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 import '../../../../utils/constants.dart';
 
@@ -83,7 +83,7 @@ class StatisticsView extends StatelessWidget {
                   child: Transform.rotate(
                     angle: 10 * pi / 180,
                     child: Icon(
-                      LucideIcons.badgeCheck,
+                      HugeIcons.strokeRoundedCheckmarkBadge01,
                       color: seedColor.withOpacity(0.5),
                       size: 192,
                     ),
@@ -106,7 +106,7 @@ class StatisticsView extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 16.0),
                 child: DefaultDropdownFormField(
                   hintText: "Month",
-                  prefixIcon: Icon(LucideIcons.calendar),
+                  prefixIcon: Icon(HugeIcons.strokeRoundedCalendar03),
                   items: months,
                   searchController: searchController,
                   searchTitle: "Select month",
@@ -167,7 +167,7 @@ class StatisticsView extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Icon(
-                      LucideIcons.arrowUpRight,
+                      HugeIcons.strokeRoundedArrowUpRight01,
                       size: 16.0,
                     ),
                   )
@@ -207,7 +207,7 @@ class StatisticsView extends StatelessWidget {
                               Row(
                                 children: [
                                   Icon(
-                                    LucideIcons.checkCircle2,
+                                    HugeIcons.strokeRoundedCheckmarkCircle02,
                                     color: successColor,
                                   ),
                                   Gap(8.0),
@@ -225,7 +225,7 @@ class StatisticsView extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Icon(
-                            LucideIcons.arrowUpRight,
+                            HugeIcons.strokeRoundedArrowUpRight01,
                             size: 16.0,
                           ),
                         )
@@ -264,7 +264,7 @@ class StatisticsView extends StatelessWidget {
                               Row(
                                 children: [
                                   Icon(
-                                    LucideIcons.xCircle,
+                                    dangerIcon,
                                     color: dangerColor,
                                   ),
                                   Gap(8.0),
@@ -282,7 +282,7 @@ class StatisticsView extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Icon(
-                            LucideIcons.arrowUpRight,
+                            HugeIcons.strokeRoundedArrowUpRight01,
                             size: 16.0,
                           ),
                         )
@@ -321,7 +321,7 @@ class StatisticsView extends StatelessWidget {
                         Row(
                           children: [
                             Icon(
-                              LucideIcons.circleDashed,
+                              HugeIcons.strokeRoundedDashedLine02,
                               color: disabledColor,
                             ),
                             Gap(8.0),
@@ -339,7 +339,7 @@ class StatisticsView extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Icon(
-                      LucideIcons.arrowUpRight,
+                      HugeIcons.strokeRoundedArrowUpRight01,
                       size: 16.0,
                     ),
                   )

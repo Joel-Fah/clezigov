@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:clezigov/views/widgets/primary_button.dart';
+import 'package:clezigov/views/widgets/buttons/primary_button.dart';
 import 'package:clezigov/views/widgets/tilt_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

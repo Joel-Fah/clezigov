@@ -1,18 +1,18 @@
 import 'package:clezigov/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:lucide_icons/lucide_icons.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 enum Language { english, french }
 
 class LanguageSelection extends StatefulWidget {
-  const LanguageSelection({Key? key, required this.onChanged}) : super(key: key);
+  const LanguageSelection({Key? key, required this.onChanged})
+      : super(key: key);
 
   final Function(Language? value) onChanged;
 
   @override
-  _LanguageSelectionState createState() =>
-      _LanguageSelectionState();
+  _LanguageSelectionState createState() => _LanguageSelectionState();
 }
 
 class _LanguageSelectionState extends State<LanguageSelection> {
@@ -64,9 +64,9 @@ class _LanguageSelectionState extends State<LanguageSelection> {
                 ),
                 selectedGender == Language.english
                     ? Icon(
-                  LucideIcons.checkCircle2,
-                  color: seedColor,
-                )
+                        HugeIcons.strokeRoundedCheckmarkCircle02,
+                        color: seedColor,
+                      )
                     : SizedBox.shrink(),
                 // sm-n986u
               ],
@@ -108,9 +108,9 @@ class _LanguageSelectionState extends State<LanguageSelection> {
                 ),
                 selectedGender == Language.french
                     ? Icon(
-                  LucideIcons.checkCircle2,
-                  color: seedColor,
-                )
+                        HugeIcons.strokeRoundedCheckmarkCircle02,
+                        color: seedColor,
+                      )
                     : SizedBox.shrink(),
               ],
             ),

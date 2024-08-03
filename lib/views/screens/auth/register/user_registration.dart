@@ -3,9 +3,10 @@ import 'package:clezigov/utils/routes.dart';
 import 'package:clezigov/views/screens/auth/register/account_setup.dart';
 import 'package:clezigov/views/widgets/form_fields/gender_selection.dart';
 import 'package:clezigov/views/widgets/form_fields/simple_text_field.dart';
-import 'package:clezigov/views/widgets/primary_button.dart';
+import 'package:clezigov/views/widgets/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 import '../../../../models/cities.dart';
@@ -105,7 +106,7 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
               Row(
                 children: [
                   Icon(
-                    LucideIcons.info,
+                    HugeIcons.strokeRoundedInformationCircle,
                     color: Theme.of(context).disabledColor,
                     size: 16.0,
                   ),
@@ -124,14 +125,14 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
               SimpleTextFormField(
                 controller: _nameController,
                 hintText: "How should we call you?",
-                prefixIcon: Icon(LucideIcons.user2),
+                prefixIcon: Icon(HugeIcons.strokeRoundedUser),
                 textCapitalization: TextCapitalization.words,
               ),
               Gap(16.0),
               DefaultDropdownFormField(
                 searchController: _searchCityController,
                 hintText: 'Residence city',
-                prefixIcon: Icon(LucideIcons.home),
+                prefixIcon: Icon(HugeIcons.strokeRoundedHome12),
                 items: cities.map((city) => city.name).toList(),
                 searchTitle: 'Select your city',
                 onChanged: (String? value) {
@@ -150,7 +151,7 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
               DefaultDropdownFormField(
                 searchController: _searchOccupationController,
                 hintText: 'Occupation',
-                prefixIcon: Icon(LucideIcons.contact2),
+                prefixIcon: Icon(HugeIcons.strokeRoundedId),
                 items:
                     occupations.map((occupation) => occupation.name).toList(),
                 searchTitle: 'Select your occupation',

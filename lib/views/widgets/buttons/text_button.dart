@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import '../../utils/constants.dart';
+import '../../../utils/constants.dart';
 
 class TertiaryButton extends StatelessWidget {
   TertiaryButton._({
@@ -62,8 +61,7 @@ class TertiaryButton extends StatelessWidget {
         child: child ??
             Text(
               label!,
-              style: TextStyle(
-                fontSize: 16.0,
+              style: AppTextStyles.body.copyWith(
                 color: labelColor ?? seedColor,
                 fontWeight: FontWeight.w500,
               ),
