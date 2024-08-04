@@ -7,7 +7,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:lucide_icons/lucide_icons.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 class VerifyAccountPage extends StatelessWidget {
   const VerifyAccountPage({super.key});
@@ -76,22 +76,19 @@ class VerifyAccountPage extends StatelessWidget {
                 isDismissible: false,
                 isScrollControlled: true,
                 builder: (context) {
-                  return BackdropFilter(
-                    filter: blurFilter,
-                    child: Stack(
-                      alignment: Alignment.topRight,
-                      children: [
-                        AccountVerificationModal(),
-                        Positioned(
-                          top: -10.0,
-                          right: 10.0,
-                          child: IconButton(
-                            onPressed: () => context.pop(),
-                            icon: Icon(LucideIcons.x),
-                          ),
+                  return Stack(
+                    alignment: Alignment.topRight,
+                    children: [
+                      AccountVerificationModal(),
+                      Positioned(
+                        top: -10.0,
+                        right: 10.0,
+                        child: IconButton(
+                          onPressed: () => context.pop(),
+                          icon: Icon(HugeIcons.strokeRoundedCancel01),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   );
                 },
               );
@@ -114,7 +111,8 @@ class AccountVerificationModal extends StatefulWidget {
   const AccountVerificationModal({super.key});
 
   @override
-  State<AccountVerificationModal> createState() => _AccountVerificationModalState();
+  State<AccountVerificationModal> createState() =>
+      _AccountVerificationModalState();
 }
 
 class _AccountVerificationModalState extends State<AccountVerificationModal> {
@@ -126,7 +124,6 @@ class _AccountVerificationModalState extends State<AccountVerificationModal> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     controller.addListener(() {
       setState(() {
@@ -138,9 +135,9 @@ class _AccountVerificationModalState extends State<AccountVerificationModal> {
   @override
   void dispose() {
     controller.dispose();
-    // TODO: implement dispose
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -152,7 +149,7 @@ class _AccountVerificationModalState extends State<AccountVerificationModal> {
         shrinkWrap: true,
         children: [
           TiltIcon(
-            icon: LucideIcons.rectangleHorizontal,
+            icon: HugeIcons.strokeRoundedPinCode,
           ),
           Gap(8.0),
           Text(
@@ -175,7 +172,7 @@ class _AccountVerificationModalState extends State<AccountVerificationModal> {
                 ),
                 TextSpan(
                   text:
-                  ". Head over to your inbox, get the code and insert it here.",
+                      ". Head over to your inbox, get the code and insert it here.",
                 ),
               ],
             ),
@@ -189,9 +186,8 @@ class _AccountVerificationModalState extends State<AccountVerificationModal> {
                 SimpleTextFormField(
                   controller: controller,
                   hintText: "Enter verification code",
-                  prefixIcon: Icon(LucideIcons.keySquare),
-                  onChanged: (value) =>
-                  verificationCode = value,
+                  prefixIcon: Icon(HugeIcons.strokeRoundedKey02),
+                  onChanged: (value) => verificationCode = value,
                 ),
                 Gap(20.0),
                 PrimaryButton.label(

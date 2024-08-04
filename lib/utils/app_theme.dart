@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 import 'constants.dart';
 
@@ -12,6 +13,16 @@ class AppTheme {
     textTheme: GoogleFonts.dmSansTextTheme().apply(
       bodyColor: darkColor,
       displayColor: darkColor,
+    ),
+    actionIconTheme: ActionIconThemeData(
+      backButtonIconBuilder: (context) {
+        switch (Theme.of(context).platform) {
+          case TargetPlatform.android:
+            return const Icon(HugeIcons.strokeRoundedArrowLeft02);
+          default:
+            return const Icon(HugeIcons.strokeRoundedArrowLeft01);
+        }
+      },
     ),
     fontFamily: GoogleFonts.dmSans(
             color: darkColor, fontSize: 16.0, height: 24.0 / 16.0)

@@ -17,10 +17,12 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 import '../../../models/procedures/document.dart';
 import '../../../utils/constants.dart';
+import '../../widgets/home_feeds/procedures/directions_modal.dart';
 import 'invisible_expanded_header.dart';
 
 class ProcedureDetailsPage extends StatefulWidget {
@@ -33,7 +35,8 @@ class ProcedureDetailsPage extends StatefulWidget {
   State<ProcedureDetailsPage> createState() => _ProcedureDetailsPageState();
 }
 
-class _ProcedureDetailsPageState extends State<ProcedureDetailsPage> with SingleTickerProviderStateMixin {
+class _ProcedureDetailsPageState extends State<ProcedureDetailsPage>
+    with SingleTickerProviderStateMixin {
   bool _isAppBarExpanded = true;
   final ProceduresController proceduresController =
       Get.find<ProceduresController>();
@@ -157,15 +160,38 @@ class _ProcedureDetailsPageState extends State<ProcedureDetailsPage> with Single
                               children: [
                                 Expanded(
                                   child: ProcedureActionCard(
-                                    onTap: () => showContactsModal(context, procedure),
-                                    icon: HugeIcons.strokeRoundedCustomerService01,
+                                    onTap: () =>
+                                        showContactsModal(context, procedure),
+                                    icon: HugeIcons
+                                        .strokeRoundedCustomerService01,
                                     title: "Contacts",
                                   ),
                                 ),
                                 Gap(8.0),
                                 Expanded(
                                   child: ProcedureActionCard(
-                                    onTap: () {},
+                                    onTap: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return Animate(
+                                            effects: [
+                                              FadeEffect(),
+                                              MoveEffect()
+                                            ],
+                                            child: BackdropFilter(
+                                              filter: blurFilter,
+                                              child: LoadingBuilder(),
+                                            ),
+                                          );
+                                        },
+                                      );
+
+                                      Future.delayed(duration * 5, () {
+                                        context.pop();
+                                        showDirectionsModal(context);
+                                      });
+                                    },
                                     icon: HugeIcons.strokeRoundedRoute02,
                                     title: "Directions",
                                   ),
@@ -266,8 +292,10 @@ class _ProcedureDetailsPageState extends State<ProcedureDetailsPage> with Single
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             IconButton(
-                              onPressed: () => showContactsModal(context, procedure),
-                              icon: Icon(HugeIcons.strokeRoundedCustomerService01),
+                              onPressed: () =>
+                                  showContactsModal(context, procedure),
+                              icon: Icon(
+                                  HugeIcons.strokeRoundedCustomerService01),
                             ),
                             IconButton(
                               onPressed: () {},
@@ -439,16 +467,19 @@ class _ProcedureDetailsPageState extends State<ProcedureDetailsPage> with Single
                                           child: TertiaryButton.child(
                                             onPressed: () {},
                                             child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 Text(
                                                   document.name,
-                                                  style:
-                                                      AppTextStyles.body.copyWith(
+                                                  style: AppTextStyles.body
+                                                      .copyWith(
                                                     color: seedColor,
                                                   ),
                                                 ),
-                                                Icon(HugeIcons.strokeRoundedSquareArrowExpand01)
+                                                Icon(HugeIcons
+                                                    .strokeRoundedSquareArrowExpand01)
                                               ],
                                             ),
                                           ),

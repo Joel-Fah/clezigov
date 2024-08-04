@@ -22,6 +22,7 @@ class ProcedureActionCard extends StatelessWidget {
     return Material(
       color: Colors.transparent,
       clipBehavior: Clip.hardEdge,
+      borderRadius: borderRadius * 2,
       child: InkWell(
         onTap: onTap,
         borderRadius: borderRadius * 2,
