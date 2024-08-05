@@ -29,6 +29,7 @@ class ProceduresFeed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextEditingController searchController = TextEditingController();
+    bool isPortraitOrientation = MediaQuery.orientationOf(context) == Orientation.portrait;
 
     return Scaffold(
       appBar: AppBar(
@@ -86,10 +87,10 @@ class ProceduresFeed extends StatelessWidget {
           ),
           Animate(
             effects: [FadeEffect(), MoveEffect()],
-            child: Swiper(
+            child: isPortraitOrientation
+            ? Swiper(
               layout: SwiperLayout.CUSTOM,
-              customLayoutOption:
-                  CustomLayoutOption(startIndex: -1, stateCount: 3)
+              customLayoutOption: CustomLayoutOption(startIndex: -1, stateCount: 3)
                     ..addRotate([-45.0 / 180, 0.0, 45.0 / 180])
                     ..addTranslate([
                       Offset(-368.0, -40.0),
@@ -100,6 +101,19 @@ class ProceduresFeed extends StatelessWidget {
               duration: (duration.inMilliseconds * 2).toInt(),
               curve: Curves.decelerate,
               itemWidth: mediaWidth(context) - 70,
+              itemHeight: 180,
+              itemCount: procedures.length,
+              itemBuilder: (context, index) {
+                final Procedure procedure = procedures[index];
+                return RecommendedProcedure(procedureId: procedure.id);
+              },
+            )
+            : Swiper(
+              layout: SwiperLayout.STACK,
+              physics: const BouncingScrollPhysics(),
+              duration: (duration.inMilliseconds * 2).toInt(),
+              curve: Curves.decelerate,
+              itemWidth: mediaWidth(context) / 1.5,
               itemHeight: 180,
               itemCount: procedures.length,
               itemBuilder: (context, index) {
@@ -159,6 +173,9 @@ class ProceduresFeed extends StatelessWidget {
                         isDismissible: true,
                         constraints: BoxConstraints(
                           maxHeight: mediaHeight(context) / 1.5,
+                          maxWidth: MediaQuery.orientationOf(context) == Orientation.portrait
+                              ? mediaWidth(context)
+                              : mediaWidth(context) / 1.5,
                         ),
                         builder: (context) {
                           return Stack(

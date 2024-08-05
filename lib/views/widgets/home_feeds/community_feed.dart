@@ -34,7 +34,6 @@ class _CommunityFeedState extends State<CommunityFeed>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _tabController = TabController(
       length: CommunityFeedTabs.values.length,
@@ -342,103 +341,222 @@ class AllContributions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: allPadding * 2,
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          SvgPicture.asset(mailbox),
-          Gap(16.0),
-          Text(
-            "Can’t find this on how to do that?\nLet us know what bright ideas you’re having.",
-            style: AppTextStyles.h4.copyWith(
-              color: disabledColor,
+    return OrientationBuilder(
+      builder: (context, orientation) {
+        bool isPortraitOrientation = orientation == Orientation.portrait;
+        return Center(
+          child: Padding(
+            padding: allPadding * 2,
+            child: isPortraitOrientation
+            ? Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SvgPicture.asset(mailbox),
+                Gap(16.0),
+                Text(
+                  "Can’t find this on how to do that?\nLet us know what bright ideas you’re having.",
+                  style: AppTextStyles.h4.copyWith(
+                    color: disabledColor,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                Gap(16.0),
+                Row(
+                  children: [
+                    Icon(
+                      HugeIcons.strokeRoundedTouchInteraction04,
+                      size: 20.0,
+                      color: disabledColor,
+                    ),
+                    Gap(16.0),
+                    Expanded(
+                      child: Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                              text: "Long press",
+                              style: AppTextStyles.body.copyWith(
+                                fontSize: 14.0,
+                                color: disabledColor,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            TextSpan(text: " on the community tab to "),
+                            TextSpan(
+                              text: "submit a procedure",
+                              style: AppTextStyles.body.copyWith(
+                                fontSize: 14.0,
+                                color: disabledColor,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            TextSpan(text: " or "),
+                            TextSpan(
+                              text: "request for one.",
+                              style: AppTextStyles.body.copyWith(
+                                fontSize: 14.0,
+                                color: disabledColor,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        style: AppTextStyles.body.copyWith(
+                          fontSize: 14.0,
+                          color: disabledColor,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Gap(16.0),
+                Row(
+                  children: [
+                    Icon(
+                      HugeIcons.strokeRoundedHold05,
+                      size: 20.0,
+                      color: disabledColor,
+                    ),
+                    Gap(16.0),
+                    Expanded(
+                      child: Text.rich(
+                        TextSpan(children: [
+                          TextSpan(
+                              text:
+                                  "If your request already features within the community requests, we recommend to "),
+                          TextSpan(
+                            text: "endorse",
+                            style: AppTextStyles.body.copyWith(
+                              fontSize: 14.0,
+                              color: disabledColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          TextSpan(
+                              text:
+                                  " that request rather than submitting a new one."),
+                        ]),
+                        style: AppTextStyles.body.copyWith(
+                          fontSize: 14.0,
+                          color: disabledColor,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            )
+            : Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(flex: 2, child: SvgPicture.asset(mailbox)),
+                Gap(16.0),
+                Expanded(
+                  flex: 3,
+                  child: ListView(
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Can’t find this on how to do that?\nLet us know what bright ideas you’re having.",
+                          style: AppTextStyles.h4.copyWith(
+                            color: disabledColor,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                      ),
+                      Gap(16.0),
+                      Row(
+                        children: [
+                          Icon(
+                            HugeIcons.strokeRoundedTouchInteraction04,
+                            size: 20.0,
+                            color: disabledColor,
+                          ),
+                          Gap(16.0),
+                          Expanded(
+                            child: Text.rich(
+                              TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: "Long press",
+                                    style: AppTextStyles.body.copyWith(
+                                      fontSize: 14.0,
+                                      color: disabledColor,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  TextSpan(text: " on the community tab to "),
+                                  TextSpan(
+                                    text: "submit a procedure",
+                                    style: AppTextStyles.body.copyWith(
+                                      fontSize: 14.0,
+                                      color: disabledColor,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  TextSpan(text: " or "),
+                                  TextSpan(
+                                    text: "request for one.",
+                                    style: AppTextStyles.body.copyWith(
+                                      fontSize: 14.0,
+                                      color: disabledColor,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              style: AppTextStyles.body.copyWith(
+                                fontSize: 14.0,
+                                color: disabledColor,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      Gap(16.0),
+                      Row(
+                        children: [
+                          Icon(
+                            HugeIcons.strokeRoundedHold05,
+                            size: 20.0,
+                            color: disabledColor,
+                          ),
+                          Gap(16.0),
+                          Expanded(
+                            child: Text.rich(
+                              TextSpan(children: [
+                                TextSpan(
+                                    text:
+                                    "If your request already features within the community requests, we recommend to "),
+                                TextSpan(
+                                  text: "endorse",
+                                  style: AppTextStyles.body.copyWith(
+                                    fontSize: 14.0,
+                                    color: disabledColor,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                TextSpan(
+                                    text:
+                                    " that request rather than submitting a new one."),
+                              ]),
+                              style: AppTextStyles.body.copyWith(
+                                fontSize: 14.0,
+                                color: disabledColor,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            textAlign: TextAlign.center,
           ),
-          Gap(16.0),
-          Row(
-            children: [
-              Icon(
-                HugeIcons.strokeRoundedTouchInteraction04,
-                size: 20.0,
-                color: disabledColor,
-              ),
-              Gap(16.0),
-              Expanded(
-                child: Text.rich(
-                  TextSpan(children: [
-                    TextSpan(
-                      text: "Long press",
-                      style: AppTextStyles.body.copyWith(
-                        fontSize: 14.0,
-                        color: disabledColor,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    TextSpan(text: " on the community tab to "),
-                    TextSpan(
-                      text: "submit a procedure",
-                      style: AppTextStyles.body.copyWith(
-                        fontSize: 14.0,
-                        color: disabledColor,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    TextSpan(text: " or "),
-                    TextSpan(
-                      text: "request for one.",
-                      style: AppTextStyles.body.copyWith(
-                        fontSize: 14.0,
-                        color: disabledColor,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ]),
-                  style: AppTextStyles.body.copyWith(
-                    fontSize: 14.0,
-                    color: disabledColor,
-                  ),
-                ),
-              )
-            ],
-          ),
-          Gap(16.0),
-          Row(
-            children: [
-              Icon(
-                HugeIcons.strokeRoundedHold05,
-                size: 20.0,
-                color: disabledColor,
-              ),
-              Gap(16.0),
-              Expanded(
-                child: Text.rich(
-                  TextSpan(children: [
-                    TextSpan(
-                        text:
-                            "If your request already features within the community requests, we recommend to "),
-                    TextSpan(
-                      text: "endorse",
-                      style: AppTextStyles.body.copyWith(
-                        fontSize: 14.0,
-                        color: disabledColor,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    TextSpan(
-                        text:
-                            " that request rather than submitting a new one."),
-                  ]),
-                  style: AppTextStyles.body.copyWith(
-                    fontSize: 14.0,
-                    color: disabledColor,
-                  ),
-                ),
-              )
-            ],
-          ),
-        ]),
-      ),
+        );
+      }
     );
   }
 }

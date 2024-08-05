@@ -1,10 +1,12 @@
 import 'package:clezigov/utils/constants.dart';
 import 'package:clezigov/views/widgets/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 import '../../../widgets/alert_dialog.dart';
@@ -113,6 +115,11 @@ class LoginPage extends StatelessWidget {
                                 context: context,
                                 isScrollControlled: true,
                                 isDismissible: false,
+                                constraints: BoxConstraints(
+                                  maxWidth: MediaQuery.orientationOf(context) == Orientation.portrait
+                                      ? mediaWidth(context)
+                                      : mediaWidth(context) / 1.5,
+                                ),
                                 builder: (context) {
                                   return Stack(
                                     alignment: Alignment.topRight,
@@ -130,29 +137,31 @@ class LoginPage extends StatelessWidget {
                                   );
                                 },
                               )..whenComplete(
-                                () => Future.delayed(
-                                  duration * 2,
-                                  () => showDefaultDialog(
-                                    context: context,
-                                    iconWidget: SvgPicture.asset(userAvatars),
-                                    title: "Happy to have you among us!",
-                                    message: "You are officially a member of of the CleziGov community. Make sure to explore all the features and information you get here.",
-                                    actions: [
-                                      PrimaryButton.label(
-                                        onPressed: () {},
-                                        label: "Explore right away!",
-                                      ),
-                                      // Gap(8.0),
-                                      PrimaryButton.label(
-                                        onPressed: () {},
-                                        label: "Finish setting my profile",
-                                        labelColor: seedColor,
-                                        backgroundColor: seedColorPalette.shade50,
-                                      ),
-                                    ],
+                                  () => Future.delayed(
+                                    duration * 2,
+                                    () => showDefaultDialog(
+                                      context: context,
+                                      iconWidget: SvgPicture.asset(userAvatars),
+                                      title: "Happy to have you among us!",
+                                      message:
+                                          "You are officially a member of of the CleziGov community. Make sure to explore all the features and information you get here.",
+                                      actions: [
+                                        PrimaryButton.label(
+                                          onPressed: () {},
+                                          label: "Explore right away!",
+                                        ),
+                                        // Gap(8.0),
+                                        PrimaryButton.label(
+                                          onPressed: () {},
+                                          label: "Finish setting my profile",
+                                          labelColor: seedColor,
+                                          backgroundColor:
+                                              seedColorPalette.shade50,
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              );
+                                );
                             },
                             label: "Sign in with email/password",
                           )
@@ -165,11 +174,34 @@ class LoginPage extends StatelessWidget {
             ),
             Positioned(
               bottom: 20.0,
-              child: Text(
-                "v1.0.3",
-                style: AppTextStyles.small.copyWith(
-                  color: Theme.of(context).disabledColor,
-                ),
+              child: Column(
+                children: [
+                  Animate(
+                    effects: [
+                      ShimmerEffect(
+                        duration: duration * 0.025,
+                      ),
+                    ],
+                    onPlay: (controller) => controller.repeat(
+                      reverse: true,
+                      period: duration * 3,
+                    ),
+                    child: IconButton(
+                      tooltip: "Fingerprint login",
+                      onPressed: () {},
+                      iconSize: 72.0,
+                      color: seedColor,
+                      icon: Icon(HugeIcons.strokeRoundedFingerAccess),
+                    ),
+                  ),
+                  Gap(20.0),
+                  Text(
+                    appVersionNumber,
+                    style: AppTextStyles.small.copyWith(
+                      color: Theme.of(context).disabledColor,
+                    ),
+                  ),
+                ],
               ),
             )
           ],

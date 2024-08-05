@@ -13,6 +13,14 @@ void showDirectionsModal(BuildContext context) {
     context: context,
     isDismissible: true,
     isScrollControlled: true,
+    constraints: BoxConstraints(
+      maxHeight: MediaQuery.orientationOf(context) == Orientation.portrait
+          ? mediaHeight(context) / 1.5
+          : mediaHeight(context) - 20.0,
+      maxWidth: MediaQuery.orientationOf(context) == Orientation.portrait
+          ? mediaWidth(context)
+          : mediaWidth(context) / 1.5,
+    ),
     builder: (context) {
       return Stack(
         children: [
@@ -25,7 +33,7 @@ void showDirectionsModal(BuildContext context) {
               ),
               Gap(8.0),
               Text(
-                "Navigate to an office offering\nthis service around me ",
+                "Navigate to an office around\noffering this service.",
                 style: AppTextStyles.h2,
                 textAlign: TextAlign.center,
               ),

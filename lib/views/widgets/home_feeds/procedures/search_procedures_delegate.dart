@@ -42,6 +42,9 @@ class SearchProceduresDelegate extends SearchDelegate<String> {
                   isDismissible: true,
                   constraints: BoxConstraints(
                     maxHeight: mediaHeight(context) / 1.5,
+                      maxWidth: MediaQuery.orientationOf(context) == Orientation.portrait
+                          ? mediaWidth(context)
+                          : mediaWidth(context) / 1.5,
                   ),
                   builder: (context) {
                     return Stack(

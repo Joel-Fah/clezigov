@@ -118,6 +118,11 @@ class PointsOfInterestsPage extends StatelessWidget {
                       context: context,
                       isScrollControlled: true,
                       isDismissible: false,
+                      constraints: BoxConstraints(
+                        maxWidth: MediaQuery.orientationOf(context) == Orientation.portrait
+                            ? mediaWidth(context)
+                            : mediaWidth(context) / 1.5,
+                      ),
                       builder: (context) {
                         return ListView(
                           shrinkWrap: true,

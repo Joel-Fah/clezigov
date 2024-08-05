@@ -16,27 +16,36 @@ Future<dynamic> showDefaultDialog({
     context: context,
     barrierDismissible: false,
     builder: (context) {
-      return BackdropFilter(
-        filter: blurFilter,
-        child: Animate(
-          effects: [FadeEffect(), MoveEffect()],
-          child: AlertDialog(
-            icon: iconWidget ?? TiltIcon(
-              icon: icon,
-              backgroundColor: backgroundColor ?? seedColor,
+      return OrientationBuilder(
+        builder: (context, orientation) {
+          bool isLandscape = orientation == Orientation.landscape;
+
+          return BackdropFilter(
+            filter: blurFilter,
+            child: Animate(
+              effects: [FadeEffect(), MoveEffect()],
+              child: AlertDialog(
+                insetPadding: isLandscape
+                    ? EdgeInsets.symmetric(vertical: 24.0, horizontal: 100.0)
+                    : Theme.of(context).dialogTheme.insetPadding,
+                icon: iconWidget ?? TiltIcon(
+                  icon: icon,
+                  backgroundColor: backgroundColor ?? seedColor,
+                ),
+                title: Text(title),
+                titleTextStyle: AppTextStyles.h2.copyWith(color: darkColor),
+                content: content ?? Text(
+                  message,
+                  style: AppTextStyles.body.copyWith(color: darkColor),
+                ),
+                iconColor: backgroundColor ?? seedColor,
+                contentTextStyle: AppTextStyles.body.copyWith(color: darkColor),
+                actions: actions,
+                actionsOverflowButtonSpacing: 8.0,
+              ),
             ),
-            title: Text(title),
-            titleTextStyle: AppTextStyles.h2.copyWith(color: darkColor),
-            content: content ?? Text(
-              message,
-              style: AppTextStyles.body.copyWith(color: darkColor),
-            ),
-            iconColor: backgroundColor ?? seedColor,
-            contentTextStyle: AppTextStyles.body.copyWith(color: darkColor),
-            actions: actions,
-            actionsOverflowButtonSpacing: 8.0,
-          ),
-        ),
+          );
+        }
       );
     },
   );

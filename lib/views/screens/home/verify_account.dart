@@ -75,6 +75,11 @@ class VerifyAccountPage extends StatelessWidget {
                 context: context,
                 isDismissible: false,
                 isScrollControlled: true,
+                constraints: BoxConstraints(
+                  maxWidth: MediaQuery.orientationOf(context) == Orientation.portrait
+                      ? mediaWidth(context)
+                      : mediaWidth(context) / 1.5,
+                ),
                 builder: (context) {
                   return Stack(
                     alignment: Alignment.topRight,

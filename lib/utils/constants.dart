@@ -3,6 +3,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 
+// App version
+const String appVersionNumber = "1.0.0";
+
 // Nohemi font family
 const String nohemiFont = 'Nohemi';
 

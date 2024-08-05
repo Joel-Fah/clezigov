@@ -91,7 +91,6 @@ class _ProceduresContactsListState extends State<ProceduresContactsList>
               ListView.separated(
                 padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0,),
                 shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
                 itemCount: procedure.contacts.length,
                 separatorBuilder: (context, index) => Gap(8.0),
                 itemBuilder: (context, index) {

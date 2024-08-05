@@ -118,6 +118,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    bool isPortraitOrientation =
+        MediaQuery.orientationOf(context) == Orientation.portrait;
+
     // Page widgets
     final List<Widget> _kTabPages = <Widget>[
       ProceduresFeed(),
@@ -191,77 +194,92 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         ),
         bottomNavigationBar: PreferredSize(
           preferredSize: Size.fromHeight(88.0),
-          child: AnimatedContainer(
-            duration: duration,
-            curve: Curves.decelerate,
-            height: tabBarHeight - _offsetAnimation.value,
-            constraints: BoxConstraints(
-              maxWidth: mediaWidth(context) - 50.0,
-            ),
-            margin: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 16.0),
-            clipBehavior: Clip.antiAlias,
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.7),
-              borderRadius: BorderRadius.circular(_borderRadiusAnimation.value),
-              boxShadow: [
-                BoxShadow(
-                  color: seedColorPalette.shade100.withOpacity(0.5),
-                  blurRadius: 8.0,
-                  offset: Offset(0, 4.0),
-                ),
-              ],
-            ),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 16.0, sigmaY: 16.0),
-              child: TabBar(
-                controller: tabController,
-                isScrollable: true,
-                physics: const BouncingScrollPhysics(),
-                splashBorderRadius: borderRadius * 5,
-                overlayColor:
-                    WidgetStateProperty.all<Color>(seedColorPalette.shade100),
-                splashFactory: InkRipple.splashFactory,
-                onTap: (index) {
-                  setState(() {
-                    currentPage = index;
-                  });
-
-                  if (index == 2) {
-                    Future.delayed(duration * 1.5, () {
-                      showDefaultDialog(
-                        context: context,
-                        icon: HugeIcons.strokeRoundedChatBot,
-                        title: "Before you proceed...",
-                        message: "Clezi is a bot that can help you with any "
-                            "questions you have. Please do not share any personal "
-                            "information with Clezi.",
-                        actions: [
-                          PrimaryButton.label(
-                            onPressed: () {
-                              context.pop();
-                            },
-                            label: "Agree and continue",
-                          )
-                        ],
-                      );
+          child: UnconstrainedBox(
+            child: AnimatedContainer(
+              duration: duration,
+              curve: Curves.decelerate,
+              height: isPortraitOrientation
+                  ? tabBarHeight - _offsetAnimation.value
+                  : 56 - _offsetAnimation.value,
+              constraints: BoxConstraints(
+                // maxWidth: mediaWidth(context) - 50.0,
+                maxWidth: isPortraitOrientation
+                    ? mediaWidth(context) - 50.0
+                    : mediaWidth(context) / 1.5,
+              ),
+              margin: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 16.0),
+              clipBehavior: Clip.antiAlias,
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.7),
+                borderRadius:
+                    BorderRadius.circular(_borderRadiusAnimation.value),
+                boxShadow: [
+                  BoxShadow(
+                    color: seedColorPalette.shade100.withOpacity(0.5),
+                    blurRadius: 8.0,
+                    offset: Offset(0, 4.0),
+                  ),
+                ],
+              ),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 16.0, sigmaY: 16.0),
+                child: TabBar(
+                  controller: tabController,
+                  isScrollable: true,
+                  physics: const BouncingScrollPhysics(),
+                  splashBorderRadius: borderRadius * 5,
+                  overlayColor:
+                      WidgetStateProperty.all<Color>(seedColorPalette.shade100),
+                  splashFactory: InkRipple.splashFactory,
+                  indicator: isPortraitOrientation
+                  ? Theme.of(context).tabBarTheme.indicator
+                  : BoxDecoration(
+                    color: seedColor,
+                    borderRadius: borderRadius * 4,
+                  ),
+                  onTap: (index) {
+                    setState(() {
+                      currentPage = index;
                     });
-                  }
-                },
-                tabs: List.generate(
-                  _kTabPages.length,
-                  (index) {
-                    final icon = tabIcons[index];
-                    final title = tabNames[index];
-                    return TabBuilder(
-                      index: index,
-                      currentIndex: currentPage,
-                      icon: icon,
-                      title: title,
-                    );
+
+                    if (index == 2) {
+                      Future.delayed(duration * 1.5, () {
+                        showDefaultDialog(
+                          context: context,
+                          icon: HugeIcons.strokeRoundedChatBot,
+                          title: "Before you proceed...",
+                          message: "Clezi is a bot that can help you with any "
+                              "questions you have. Please do not share any personal "
+                              "information with Clezi.",
+                          actions: [
+                            PrimaryButton.label(
+                              onPressed: () {
+                                context.pop();
+                              },
+                              label: "Agree and continue",
+                            )
+                          ],
+                        );
+                      });
+                    }
                   },
+                  tabs: List.generate(
+                    _kTabPages.length,
+                    (index) {
+                      final icon = tabIcons[index];
+                      final title = tabNames[index];
+                      return TabBuilder(
+                        index: index,
+                        currentIndex: currentPage,
+                        icon: icon,
+                        title: title,
+                      );
+                    },
+                  ),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 24.0, vertical: 4.0),
+                  dividerHeight: 0.0,
                 ),
-                padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 4.0),
-                dividerHeight: 0.0,
               ),
             ),
           ),
@@ -270,102 +288,112 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             currentPage == 2 ? FloatingActionButtonLocation.centerFloat : null,
         floatingActionButton: Visibility(
           visible: currentPage == 2,
-          child: Animate(
-            effects: [
-              FadeEffect(delay: duration),
-              MoveEffect(),
-            ],
-            child: AnimatedContainer(
-              duration: duration,
-              width: cleziFocusNode.hasFocus
-                  ? mediaWidth(context) - 50.0
-                  : mediaWidth(context) - 80.0,
-              constraints: BoxConstraints(
-                maxWidth: cleziFocusNode.hasFocus
-                    ? mediaWidth(context) - 50.0
-                    : mediaWidth(context) - 80.0,
-              ),
-              decoration: formFieldDecoration.copyWith(
-                  borderRadius: borderRadius * 2.75),
-              child: Stack(
-                alignment: Alignment.bottomRight,
-                children: [
-                  TextField(
-                    controller: cleziController,
-                    focusNode: cleziFocusNode,
-                    onTap: () {
-                      setState(() {
-                        cleziFocusNode.requestFocus();
-                      });
-                    },
-                    onTapOutside: (event) {
-                      setState(() {
-                        cleziFocusNode.unfocus();
-                      });
-                    },
-                    maxLines: 5,
-                    minLines: 1,
-                    textInputAction: TextInputAction.send,
-                    textCapitalization: TextCapitalization.sentences,
-                    style: AppTextStyles.body,
-                    decoration: InputDecoration(
-                      hintText: "Ask Clezi...",
-                      suffixIcon: SizedBox(),
-                      constraints: BoxConstraints(
-                        minHeight: 48.0,
-                        // maxHeight: 56.0,
-                      ),
-                      fillColor: Colors.white,
-                      filled: true,
-                      contentPadding: EdgeInsets.symmetric(
-                        vertical: 16.0,
-                        horizontal: 16.0,
-                      ),
-                      border: AppInputBorders.border.copyWith(
-                        borderRadius: borderRadius * 2.75,
-                      ),
-                      focusedBorder: AppInputBorders.focusedBorder.copyWith(
-                        borderRadius: borderRadius * 2.75,
-                      ),
-                      errorBorder: AppInputBorders.errorBorder.copyWith(
-                        borderRadius: borderRadius * 2.75,
-                      ),
-                      focusedErrorBorder:
-                          AppInputBorders.focusedErrorBorder.copyWith(
-                        borderRadius: borderRadius * 2.75,
-                      ),
-                      enabledBorder: AppInputBorders.enabledBorder.copyWith(
-                        borderRadius: borderRadius * 2.75,
-                      ),
-                      disabledBorder: AppInputBorders.disabledBorder.copyWith(
-                        borderRadius: borderRadius * 2.75,
-                      ),
-                    ),
-                  ),
-                  IconButton(
-                    padding: allPadding * 2,
-                    onPressed: isCleziMessageFilled
-                        ? () {
-                            showNotificationSnackBar(
-                              context: context,
-                              backgroundColor: successColor,
-                              icon: successIcon,
-                              message: "Message sent successfully",
-                            );
-                            cleziController.clear();
-                          }
-                        : null,
-                    icon: Transform.rotate(
-                      angle: cleziFocusNode.hasFocus ? (45.0 * pi / 180.0) : 0,
-                      child: Icon(
-                        HugeIcons.strokeRoundedSent,
-                        color: isCleziMessageFilled ? seedColor : disabledColor,
-                      ),
-                    ),
-                  ),
+          child: OrientationBuilder(
+            builder: (context, orientation) {
+              bool isLandscape = orientation == Orientation.landscape;
+
+              return Animate(
+                effects: [
+                  FadeEffect(delay: duration),
+                  MoveEffect(),
                 ],
-              ),
-            ),
+                child: AnimatedContainer(
+                  duration: duration,
+                  width: cleziFocusNode.hasFocus
+                      ? mediaWidth(context) - 50.0
+                      : mediaWidth(context) - 80.0,
+                  constraints: BoxConstraints(
+                    maxWidth: isLandscape
+                        ? cleziFocusNode.hasFocus
+                          ? (mediaWidth(context) / 1.5) - 50.0
+                          : (mediaWidth(context) / 1.5) - 80.0
+                        : cleziFocusNode.hasFocus
+                          ? mediaWidth(context) - 50.0
+                          : mediaWidth(context) - 80.0,
+                  ),
+                  decoration: formFieldDecoration.copyWith(
+                      borderRadius: borderRadius * 2.75),
+                  child: Stack(
+                    alignment: Alignment.bottomRight,
+                    children: [
+                      TextField(
+                        controller: cleziController,
+                        focusNode: cleziFocusNode,
+                        onTap: () {
+                          setState(() {
+                            cleziFocusNode.requestFocus();
+                          });
+                        },
+                        onTapOutside: (event) {
+                          setState(() {
+                            cleziFocusNode.unfocus();
+                          });
+                        },
+                        maxLines: 5,
+                        minLines: 1,
+                        textInputAction: TextInputAction.send,
+                        textCapitalization: TextCapitalization.sentences,
+                        style: AppTextStyles.body,
+                        decoration: InputDecoration(
+                          hintText: "Ask Clezi...",
+                          suffixIcon: SizedBox(),
+                          constraints: BoxConstraints(
+                            minHeight: 48.0,
+                            // maxHeight: 56.0,
+                          ),
+                          fillColor: Colors.white,
+                          filled: true,
+                          contentPadding: EdgeInsets.symmetric(
+                            vertical: 16.0,
+                            horizontal: 16.0,
+                          ),
+                          border: AppInputBorders.border.copyWith(
+                            borderRadius: borderRadius * 2.75,
+                          ),
+                          focusedBorder: AppInputBorders.focusedBorder.copyWith(
+                            borderRadius: borderRadius * 2.75,
+                          ),
+                          errorBorder: AppInputBorders.errorBorder.copyWith(
+                            borderRadius: borderRadius * 2.75,
+                          ),
+                          focusedErrorBorder:
+                              AppInputBorders.focusedErrorBorder.copyWith(
+                            borderRadius: borderRadius * 2.75,
+                          ),
+                          enabledBorder: AppInputBorders.enabledBorder.copyWith(
+                            borderRadius: borderRadius * 2.75,
+                          ),
+                          disabledBorder: AppInputBorders.disabledBorder.copyWith(
+                            borderRadius: borderRadius * 2.75,
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        padding: allPadding * 2,
+                        onPressed: isCleziMessageFilled
+                            ? () {
+                                showNotificationSnackBar(
+                                  context: context,
+                                  backgroundColor: successColor,
+                                  icon: successIcon,
+                                  message: "Message sent successfully",
+                                );
+                                cleziController.clear();
+                              }
+                            : null,
+                        icon: Transform.rotate(
+                          angle: cleziFocusNode.hasFocus ? (45.0 * pi / 180.0) : 0,
+                          child: Icon(
+                            HugeIcons.strokeRoundedSent,
+                            color: isCleziMessageFilled ? seedColor : disabledColor,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }
           ),
         ),
       ),

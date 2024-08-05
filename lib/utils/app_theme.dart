@@ -77,12 +77,13 @@ class AppTheme {
     ),
     dialogBackgroundColor: scaffoldBgColor,
     dialogTheme: DialogTheme(
-        backgroundColor: scaffoldBgColor,
-        titleTextStyle: AppTextStyles.h2,
-        insetPadding: EdgeInsets.symmetric(horizontal: 20.0),
-        shape: RoundedRectangleBorder(
-          borderRadius: borderRadius * 3.5,
-        )),
+      backgroundColor: scaffoldBgColor,
+      titleTextStyle: AppTextStyles.h2,
+      insetPadding: EdgeInsets.symmetric(horizontal: 20.0),
+      shape: RoundedRectangleBorder(
+        borderRadius: borderRadius * 3.5,
+      ),
+    ),
     bottomSheetTheme: BottomSheetThemeData(
       backgroundColor: scaffoldBgColor,
       shape: RoundedRectangleBorder(

@@ -11,7 +11,14 @@ void showContactsModal(BuildContext context, Procedure procedure) {
     context: context,
     isDismissible: true,
     isScrollControlled: true,
-    constraints: BoxConstraints(maxHeight: mediaHeight(context) / 1.5),
+    constraints: BoxConstraints(
+      maxHeight: MediaQuery.orientationOf(context) == Orientation.portrait
+          ? mediaHeight(context) / 1.5
+          : mediaHeight(context) - 20.0,
+      maxWidth: MediaQuery.orientationOf(context) == Orientation.portrait
+          ? mediaWidth(context)
+          : mediaWidth(context) / 1.5,
+    ),
     builder: (context) {
       return Stack(
         children: [
