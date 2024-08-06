@@ -73,6 +73,7 @@ const String crescentMoon3d = "assets/images/crescent_moon_3d.png";
 const String lightBulb3d = "assets/images/light_bulb_3d.png";
 const String sun3d = "assets/images/sun_3d.png";
 const String emptyQuery = "assets/images/empty_query.svg";
+const String agentRequest = "assets/images/agent_request.svg";
 
 // Reactions
 const String angryFace = "assets/images/angry_face.svg";

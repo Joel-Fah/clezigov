@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clezigov/controllers/procedures_controller.dart';
 import 'package:clezigov/controllers/reactions_controller.dart';
 import 'package:clezigov/models/procedures/procedures.dart';
+import 'package:clezigov/utils/routes.dart';
 import 'package:clezigov/utils/utility_functions.dart';
 import 'package:clezigov/views/screens/home/procedure_action_card.dart';
 import 'package:clezigov/views/screens/home/read_more_text.dart';
@@ -22,6 +23,7 @@ import 'package:hugeicons/hugeicons.dart';
 
 import '../../../models/procedures/document.dart';
 import '../../../utils/constants.dart';
+import '../../widgets/home_feeds/procedures/agent_request.dart';
 import '../../widgets/home_feeds/procedures/directions_modal.dart';
 import 'invisible_expanded_header.dart';
 
@@ -208,7 +210,9 @@ class _ProcedureDetailsPageState extends State<ProcedureDetailsPage>
                                 Gap(8.0),
                                 Expanded(
                                   child: ProcedureActionCard(
-                                    onTap: () {},
+                                    onTap: () {
+                                      context.goPush(AgentPage.routeName);
+                                    },
                                     icon: HugeIcons.strokeRoundedLabor,
                                     title: "Agent",
                                     backgroundColor: seedColor,
@@ -700,7 +704,7 @@ class _ProcedureDetailsPageState extends State<ProcedureDetailsPage>
                         },
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
