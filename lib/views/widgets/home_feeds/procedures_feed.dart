@@ -29,7 +29,8 @@ class ProceduresFeed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextEditingController searchController = TextEditingController();
-    bool isPortraitOrientation = MediaQuery.orientationOf(context) == Orientation.portrait;
+    bool isPortraitOrientation =
+        MediaQuery.orientationOf(context) == Orientation.portrait;
 
     return Scaffold(
       appBar: AppBar(
@@ -65,7 +66,10 @@ class ProceduresFeed extends StatelessWidget {
               onPressed: () {
                 showSearch(
                   context: context,
-                  delegate: SearchProceduresDelegate(procedures: procedures),
+                  delegate: SearchProceduresDelegate(
+                    procedures: procedures,
+                    hintText: "Search for a procedure...",
+                  ),
                 );
               },
               splashColor: seedColorPalette.shade100,
@@ -88,39 +92,40 @@ class ProceduresFeed extends StatelessWidget {
           Animate(
             effects: [FadeEffect(), MoveEffect()],
             child: isPortraitOrientation
-            ? Swiper(
-              layout: SwiperLayout.CUSTOM,
-              customLayoutOption: CustomLayoutOption(startIndex: -1, stateCount: 3)
-                    ..addRotate([-45.0 / 180, 0.0, 45.0 / 180])
-                    ..addTranslate([
-                      Offset(-368.0, -40.0),
-                      Offset(0.0, 0.0),
-                      Offset(368.0, -40.0),
-                    ]),
-              physics: const BouncingScrollPhysics(),
-              duration: (duration.inMilliseconds * 2).toInt(),
-              curve: Curves.decelerate,
-              itemWidth: mediaWidth(context) - 70,
-              itemHeight: 180,
-              itemCount: procedures.length,
-              itemBuilder: (context, index) {
-                final Procedure procedure = procedures[index];
-                return RecommendedProcedure(procedureId: procedure.id);
-              },
-            )
-            : Swiper(
-              layout: SwiperLayout.STACK,
-              physics: const BouncingScrollPhysics(),
-              duration: (duration.inMilliseconds * 2).toInt(),
-              curve: Curves.decelerate,
-              itemWidth: mediaWidth(context) / 1.5,
-              itemHeight: 180,
-              itemCount: procedures.length,
-              itemBuilder: (context, index) {
-                final Procedure procedure = procedures[index];
-                return RecommendedProcedure(procedureId: procedure.id);
-              },
-            ),
+                ? Swiper(
+                    layout: SwiperLayout.CUSTOM,
+                    customLayoutOption:
+                        CustomLayoutOption(startIndex: -1, stateCount: 3)
+                          ..addRotate([-45.0 / 180, 0.0, 45.0 / 180])
+                          ..addTranslate([
+                            Offset(-368.0, -40.0),
+                            Offset(0.0, 0.0),
+                            Offset(368.0, -40.0),
+                          ]),
+                    physics: const BouncingScrollPhysics(),
+                    duration: (duration.inMilliseconds * 2).toInt(),
+                    curve: Curves.decelerate,
+                    itemWidth: mediaWidth(context) - 70,
+                    itemHeight: 180,
+                    itemCount: procedures.length,
+                    itemBuilder: (context, index) {
+                      final Procedure procedure = procedures[index];
+                      return RecommendedProcedure(procedureId: procedure.id);
+                    },
+                  )
+                : Swiper(
+                    layout: SwiperLayout.STACK,
+                    physics: const BouncingScrollPhysics(),
+                    duration: (duration.inMilliseconds * 2).toInt(),
+                    curve: Curves.decelerate,
+                    itemWidth: mediaWidth(context) / 1.5,
+                    itemHeight: 180,
+                    itemCount: procedures.length,
+                    itemBuilder: (context, index) {
+                      final Procedure procedure = procedures[index];
+                      return RecommendedProcedure(procedureId: procedure.id);
+                    },
+                  ),
           ),
           Gap(16.0),
           ListHeader(
@@ -173,7 +178,8 @@ class ProceduresFeed extends StatelessWidget {
                         isDismissible: true,
                         constraints: BoxConstraints(
                           maxHeight: mediaHeight(context) / 1.5,
-                          maxWidth: MediaQuery.orientationOf(context) == Orientation.portrait
+                          maxWidth: MediaQuery.orientationOf(context) ==
+                                  Orientation.portrait
                               ? mediaWidth(context)
                               : mediaWidth(context) / 1.5,
                         ),

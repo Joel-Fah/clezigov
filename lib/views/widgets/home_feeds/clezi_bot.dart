@@ -80,31 +80,47 @@ class CleziBot extends StatelessWidget {
               ),
             ),
             Gap(24.0),
-            Row(
-              children: [
-                Expanded(
-                  child: SquigglePattern(),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Text(
-                    "Today",
-                    style: AppTextStyles.small.copyWith(
-                      color: disabledColor,
+            OrientationBuilder(
+              builder: (context, orientation) {
+                bool isLandscape = orientation == Orientation.landscape;
+
+                return !isLandscape
+                ? Row(
+                  children: [
+                    Expanded(
+                      child: SquigglePattern(),
                     ),
-                  ),
-                ),
-                Expanded(
-                  child: WavySlider(
-                    onChanged: (value) {},
-                    color: disabledColor,
-                    strokeWidth: 1.5,
-                    value: 1,
-                    waveWidth: 8,
-                    waveHeight: 4,
-                  ),
-                ),
-              ],
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text(
+                        "Today",
+                        style: AppTextStyles.small.copyWith(
+                          color: disabledColor,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: SquigglePattern()
+                    ),
+                  ],
+                )
+                : Row(
+                  mainAxisAlignment: MainAxisAlignment.center ,
+                  children: [
+                    SquigglePattern(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text(
+                        "Today",
+                        style: AppTextStyles.small.copyWith(
+                          color: disabledColor,
+                        ),
+                      ),
+                    ),
+                    SquigglePattern(),
+                  ],
+                );
+              }
             )
           ],
         ),

@@ -14,6 +14,8 @@ import 'package:get/get.dart';
 import 'controllers/endorsements_controller.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   // Set color of status bar to scaffold bg
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
@@ -28,9 +30,9 @@ void main() {
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
-  ]);
-
-  runApp(const MyApp());
+  ]).then(
+    (_) => runApp(const MyApp()),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -38,6 +40,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     // GetX Controllers
     Get.put(InterestsController());
     Get.put(BookmarksController());

@@ -1,9 +1,9 @@
 import 'package:clezigov/models/procedures/procedures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hugeicons/hugeicons.dart';
 
@@ -15,9 +15,30 @@ import '../procedures_feed.dart';
 
 class SearchProceduresDelegate extends SearchDelegate<String> {
   final List<Procedure> procedures;
+  final String hintText;
   final searchController = TextEditingController();
 
-  SearchProceduresDelegate({required this.procedures});
+  SearchProceduresDelegate({
+    required this.procedures,
+    required this.hintText,
+  }) : super(
+    searchFieldLabel: hintText,
+  );
+
+  @override
+  ThemeData appBarTheme(BuildContext context) {
+    return super.appBarTheme(context).copyWith(
+          appBarTheme: AppBarTheme(
+            backgroundColor: scaffoldBgColor,
+            systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: scaffoldBgColor,
+              statusBarIconBrightness: Brightness.dark,
+              systemNavigationBarColor: scaffoldBgColor,
+              systemNavigationBarIconBrightness: Brightness.dark,
+            ),
+          ),
+        );
+  }
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -42,9 +63,10 @@ class SearchProceduresDelegate extends SearchDelegate<String> {
                   isDismissible: true,
                   constraints: BoxConstraints(
                     maxHeight: mediaHeight(context) / 1.5,
-                      maxWidth: MediaQuery.orientationOf(context) == Orientation.portrait
-                          ? mediaWidth(context)
-                          : mediaWidth(context) / 1.5,
+                    maxWidth: MediaQuery.orientationOf(context) ==
+                            Orientation.portrait
+                        ? mediaWidth(context)
+                        : mediaWidth(context) / 1.5,
                   ),
                   builder: (context) {
                     return Stack(

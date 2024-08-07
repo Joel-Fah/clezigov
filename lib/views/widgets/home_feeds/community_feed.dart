@@ -449,7 +449,7 @@ class AllContributions extends StatelessWidget {
             : Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(flex: 2, child: SvgPicture.asset(mailbox)),
+                Expanded(flex: 2, child: SvgPicture.asset(mailbox, height: 250,),),
                 Gap(16.0),
                 Expanded(
                   flex: 3,

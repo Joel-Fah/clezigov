@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 
@@ -30,6 +31,12 @@ class AppTheme {
     brightness: Brightness.light,
     appBarTheme: AppBarTheme(
       backgroundColor: scaffoldBgColor,
+      systemOverlayStyle: SystemUiOverlayStyle(
+        statusBarColor: scaffoldBgColor,
+        statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarColor: scaffoldBgColor,
+        systemNavigationBarIconBrightness: Brightness.dark,
+      ),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
